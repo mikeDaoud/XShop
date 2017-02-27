@@ -18,5 +18,9 @@ package com.jetsmad.xshop.util.database;
 
 
 public class UserDAO {
+
+    UserDAO(DBController aThis) {
+   
+    }
     
 }

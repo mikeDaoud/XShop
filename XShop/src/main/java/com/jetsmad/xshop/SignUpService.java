@@ -43,6 +43,8 @@ public class SignUpService extends HttpServlet {
             out.println("<h1>Servlet SignUpService at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            
+            
         }
     }
 

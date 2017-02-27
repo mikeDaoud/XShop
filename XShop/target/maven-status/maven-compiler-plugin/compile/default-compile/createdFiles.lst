@@ -1,7 +1,2 @@
 com/jetsmad/xshop/SignInService.class
-com/jetsmad/xshop/support/database/OrderDAO.class
 com/jetsmad/xshop/SignUpService.class
-com/jetsmad/xshop/support/dto/User.class
-com/jetsmad/xshop/support/database/UserDAO.class
-com/jetsmad/xshop/support/database/ProductDAO.class
-com/jetsmad/xshop/support/dto/Product.class
