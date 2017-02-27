@@ -5,6 +5,8 @@
  */
 package com.jetsmad.xshop;
 
+import com.jetsmad.xshop.util.beans.User;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,15 +37,31 @@ public class SignUpService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignUpService</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignUpService at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            User user = new User();
+            DBController dbc = new DBController();
+            if(dbc.checkEmail(request.getParameter("email")).equals("notFound")){
+                user.setName(request.getParameter("name"));
+                user.setEmail(request.getParameter("email"));
+                user.setdOB(request.getParameter("dOB"));
+                user.setPassword(request.getParameter("password"));
+                user.setAddress(request.getParameter("address"));
+                user.setJob(request.getParameter("job"));
+                user.setInterests(request.getParameterValues("interest"));
+                dbc.addUser(user);
+                HttpSession session = request.getSession(false);
+		if (session == null){
+                    session.setAttribute("signIn", request.getParameter("email"));
+                    //TODO:redirect to profil page
+                    
+                }else{
+                    session.setAttribute("signIn", request.getParameter("email"));
+                    //TODO:redirect to card page
+                    
+		}
+            }else{
+                //TODO:redirect to signup page with message to change email becouse it used before
+                
+            }
             
             
         }

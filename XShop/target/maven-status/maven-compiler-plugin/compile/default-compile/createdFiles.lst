@@ -1,2 +1,10 @@
-com/jetsmad/xshop/SignInService.class
-com/jetsmad/xshop/SignUpService.class
+com\jetsmad\xshop\util\database\ProductDAO.class
+com\jetsmad\xshop\util\database\DBController.class
+com\jetsmad\xshop\util\beans\User.class
+com\jetsmad\xshop\util\database\OrderDAO.class
+com\jetsmad\xshop\SignUpService.class
+com\jetsmad\xshop\util\database\UserDAO.class
+com\jetsmad\xshop\util\AdminServices.class
+com\jetsmad\xshop\util\beans\Product.class
+com\jetsmad\xshop\util\beans\Admin.class
+com\jetsmad\xshop\SignInService.class

@@ -5,6 +5,7 @@
  */
 package com.jetsmad.xshop;
 
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,15 +36,26 @@ public class SignInService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignInService</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignInService at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            DBController dbc = new DBController();
+            String checkPass = dbc.checkPass(email);
+            if(password.equals(checkPass))
+            {
+		HttpSession session = request.getSession(false);
+		if (session == null){
+                    session.setAttribute("signIn", email);
+                    //TODO:redirect to profil page
+                    
+                }else{
+                    session.setAttribute("signIn", email);
+                    //TODO:redirect to card page
+                    
+		}
+            }else{ 
+		//TODO:redirect to signIn page with message to check email or password becouse one of them is wrong
+                
+            }
         }
     }
 
