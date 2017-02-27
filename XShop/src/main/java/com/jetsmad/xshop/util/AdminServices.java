@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop;
+package com.jetsmad.xshop.util;
 
 /**
  *
  * @author michael
  */
-public class Product {
+
+/*
+* Class that contains all the methods that performs different services for the
+* Admin
+*/
+public class AdminServices {
     
 }

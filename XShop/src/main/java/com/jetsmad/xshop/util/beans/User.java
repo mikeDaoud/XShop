@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop;
+package com.jetsmad.xshop.util.beans;
 
 /**
  *
  * @author michael
  */
-public class OrderDAO {
+
+/*
+* A Java Bean for each user carrying the user's details
+*/
+
+public class User {
     
 }

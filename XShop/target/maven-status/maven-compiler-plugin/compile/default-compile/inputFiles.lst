@@ -1,4 +1,7 @@
-/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/EmptyClass.java
+/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/support/database/UserDAO.java
+/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/support/database/OrderDAO.java
+/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/support/dto/User.java
+/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/support/database/ProductDAO.java
+/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/support/dto/Product.java
 /Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/SignInService.java
 /Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/SignUpService.java
-/Users/michael/GitHub/XShop/XShop/src/main/java/com/jetsmad/xshop/User.java
