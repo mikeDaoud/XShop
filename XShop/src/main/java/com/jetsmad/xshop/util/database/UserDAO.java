@@ -59,8 +59,8 @@ public class UserDAO {
         }
     }
     
-    public String checkEmail(String email){
-        String res = "notFound";
+    public boolean checkEmail(String email){
+//        String res = "notFound";
         PreparedStatement pst;
         ResultSet rs;
         String query = "SELECT * FROM users WHERE email=?";
@@ -69,15 +69,19 @@ public class UserDAO {
             pst = controller.con.prepareStatement(query);
             pst.setString(1, email);
             rs = pst.executeQuery();
-            while(rs.next())
-            {
-		res = rs.getString(1);
+            if(rs.next()){
+                return false;
             }
+//            while(rs.next())
+//            {
+//		return
+//            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }finally{
             controller.disconnect();
-            return res;
+            
+            return true;
         }
     }
     

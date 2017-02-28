@@ -44,7 +44,7 @@ public class SignInService extends HttpServlet {
             {
 		HttpSession session = request.getSession(false);
 		if (session == null){
-                    session.setAttribute("signIn", email);
+                    session.setAttribute("user", email);
                     //TODO:redirect to profil page
                     
                 }else{

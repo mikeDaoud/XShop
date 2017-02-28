@@ -40,7 +40,7 @@ public class DBController {
         userdao.addUser(user);
     }
     
-    public String checkEmail(String email){
+    public boolean checkEmail(String email){
         return userdao.checkEmail(email);
     }
     

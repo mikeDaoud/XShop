@@ -39,7 +39,7 @@ public class SignUpService extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             User user = new User();
             DBController dbc = new DBController();
-            if(dbc.checkEmail(request.getParameter("email")).equals("notFound")){
+            if(dbc.checkEmail(request.getParameter("email"))){
                 user.setName(request.getParameter("name"));
                 user.setEmail(request.getParameter("email"));
                 user.setDob(request.getParameter("dOB"));
