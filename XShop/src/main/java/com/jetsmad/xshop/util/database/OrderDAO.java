@@ -18,7 +18,7 @@ package com.jetsmad.xshop.util.database;
 public class OrderDAO {
 
     OrderDAO(DBController aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
     
 }

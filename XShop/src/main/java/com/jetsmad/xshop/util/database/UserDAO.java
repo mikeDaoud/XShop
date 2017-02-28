@@ -23,18 +23,16 @@ import java.util.logging.Logger;
 * Class that acts as a Data Access Object to perform different functionalities
 * related to listed users. adding, deleting, updating and retrieving 
 * user related data
-*/
-
-
+ */
 public class UserDAO {
 
     DBController controller;
-    
+
     UserDAO(DBController aThis) {
         controller = aThis;
     }
-    
-    public void addUser(User user){
+
+    public void addUser(User user) {
         PreparedStatement pst;
         String query = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -48,20 +46,25 @@ public class UserDAO {
             pst.setString(6, user.getAddress());
             pst.setString(7, user.getJob());
             pst.executeUpdate();
-            for(String interest:user.getInterests()){
-                String queryString = "INSERT INTO interests VALUES (?, ?)";
-                pst = controller.con.prepareStatement(queryString);
-                pst.setString(1, user.getId());
-                pst.setString(2, interest);
+
+            if (user.getInterests() != null) {
+                for (String interest : user.getInterests()) {
+                    String queryString = "INSERT INTO interests VALUES (?, ?)";
+                    PreparedStatement pstmnt = controller.con.prepareStatement(queryString);
+                    pstmnt.setString(1, user.getId());
+                    pstmnt.setString(2, interest);
+                    pstmnt.executeUpdate();
+                }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             controller.disconnect();
         }
     }
-    
-    public boolean checkEmail(String email){
+
+    public boolean checkEmail(String email) {
         boolean res = true;
         PreparedStatement pst;
         ResultSet rs;
@@ -71,40 +74,39 @@ public class UserDAO {
             pst = controller.con.prepareStatement(query);
             pst.setString(1, email);
             rs = pst.executeQuery();
-            if(rs.next()){
-                res =  false;
+            if (rs.next()) {
+                res = false;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             controller.disconnect();
             return res;
         }
     }
-    
-    public String checkPass(String email){
+
+    public String checkPass(String email) {
         String res = "notFound";
         PreparedStatement pst;
         ResultSet rs;
-        String  query = "SELECT password FROM users WHERE email=?";
+        String query = "SELECT password FROM users WHERE email=?";
         try {
             controller.connectToDB();
             pst = controller.con.prepareStatement(query);
             pst.setString(1, email);
             rs = pst.executeQuery();
-            while(rs.next())
-            {
-		res = rs.getString(1);
+            while (rs.next()) {
+                res = rs.getString(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             controller.disconnect();
             return res;
         }
     }
-    
-    public User getUser(String email){
+
+    public User getUser(String email) {
         User user = null;
         PreparedStatement pst;
         ResultSet rs;
@@ -114,7 +116,7 @@ public class UserDAO {
             pst = controller.con.prepareStatement(query);
             pst.setString(1, email);
             rs = pst.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 user = new User();
                 user.setId(rs.getString(1));
                 user.setName(rs.getString(2));
@@ -125,19 +127,19 @@ public class UserDAO {
                 user.setJob(rs.getString(7));
                 PreparedStatement pstInt;
                 ResultSet rsInt;
-                String queryInt = "SELECT interest FROM interests WHERE user_id=?";
+                String queryInt = "SELECT interest FROM interests WHERE users_id=?";
                 pstInt = controller.con.prepareStatement(queryInt);
                 pstInt.setString(1, rs.getString(1));
                 rsInt = pstInt.executeQuery();
                 ArrayList<String> arrayList = new ArrayList<>();
-                while(rsInt.next()){
+                while (rsInt.next()) {
                     arrayList.add(rsInt.getString(1));
                 }
                 user.setInterests((String[]) arrayList.toArray());
-            }            
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }finally{
+        } finally {
             controller.disconnect();
             return user;
         }

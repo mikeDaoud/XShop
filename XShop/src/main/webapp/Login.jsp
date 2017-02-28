@@ -37,34 +37,41 @@
                     <!-- ***** create new account ***** -->
                     <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-1" >
                         <h2>Create an account</h2>
-                        <hr>
+                       
+                        <small>* required fields</small>
                         <form action="signup" method="post">
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input name="name" type="text" class="form-control" id="name">
+                                <label for="name">Name *</label>
+                                <input name="name" type="text" class="form-control" id="name" placeholder="Ahmed Mohamed" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input name="email" type="text" class="form-control" id="email">
+                                <label for="email">Email *</label>
+                                <input name="email" type="email" class="form-control" id="email" placeholder="ahmed_mohamed@gmail.com" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input name="password" type="password" class="form-control" id="password">
+                                <label for="password">Password *</label>
+                                <input name="password" type="password" class="form-control" id="password" placeholder="a memorable password" required>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Confirm Password *</label>
+                                <input name="repeatedPassword" type="password" class="form-control" id="repeatedPassword" placeholder="repeat the password" required>
+                            </div>
+                            
                             <div class="form-group" >
                                 <label for="job">Job</label>
-                                <input name="job" type="text" class="form-control" id="job">
+                                <input name="job" type="text" class="form-control" id="job" placeholder="Teacher">
                             </div>
                             <div class="form-group" >
                                 <label for="address">Address</label>
-                                <input name="address" type="text" class="form-control" id="address">
+                                <input name="address" type="text" class="form-control" id="address" placeholder="El zohoor city, Heliopolis">
                             </div>
                             <div class="form-group" >
                                 <label for="date">Date of Birth</label>
                                 <input name="dOB" type="date" class="form-control" id="date">
                             </div>
                             <!-- <div class="form-group"> -->
-                            <legend>What is your inerests ?</legend>
+                            <legend>What are your interests ?</legend>
 
                             <div class="col-md-6">
                                 <input type="checkbox" name="interest" value="clothes" /> Clothes<br/>
@@ -94,11 +101,11 @@
                         <form action="signin" method="post">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input name="email" type="text" class="form-control" id="email">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="your_mail@gmail.com">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input name="password" type="password" class="form-control" id="password">
+                                <input name="password" type="password" class="form-control" id="password" placeholder="your password">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Log in</button>

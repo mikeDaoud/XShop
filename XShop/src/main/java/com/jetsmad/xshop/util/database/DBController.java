@@ -33,7 +33,7 @@ public class DBController {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //here mydb is database name, root is username and  password
-            con = DriverManager.getConnection("jdbc:mysql://localhost/xshop?user=root&password=marko");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/xshop?user=root&password=123");
             System.out.println("hii");
             
         } catch (ClassNotFoundException | SQLException e) {

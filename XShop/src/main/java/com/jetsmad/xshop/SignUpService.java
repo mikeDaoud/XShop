@@ -42,7 +42,7 @@ public class SignUpService extends HttpServlet {
             User user = new User();
             DBController dbc = new DBController();
             if(dbc.checkEmail(request.getParameter("email"))){
-                user.setId(UUID.randomUUID().toString());
+                user.setId(UUID.randomUUID().toString().substring(10));
                 user.setName(request.getParameter("name"));
                 user.setEmail(request.getParameter("email"));
                 user.setDob(request.getParameter("dOB"));
@@ -65,7 +65,7 @@ public class SignUpService extends HttpServlet {
 		}
             }else{
                 //TODO:redirect to signup page with message to change email becouse it used before
-                
+                out.println("repeated email");
             }
             
             

@@ -44,6 +44,7 @@ public class SignInService extends HttpServlet {
             String checkPass = dbc.checkPass(email);
             if(password.equals(checkPass))
             {
+                
                 User user = dbc.getUser(email);
 		HttpSession session = request.getSession(false);
 		if (session == null){
@@ -51,15 +52,15 @@ public class SignInService extends HttpServlet {
                     session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to profil page
                     
+                    
                 }else{
                     session.setAttribute(SessionAttrs.USER_ID, user.getId());
                     session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to card page
-                    
 		}
             }else{ 
 		//TODO:redirect to signIn page with message to check email or password becouse one of them is wrong
-                
+                out.println("fail login");
             }
         }
     }
