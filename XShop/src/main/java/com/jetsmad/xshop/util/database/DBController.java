@@ -48,6 +48,10 @@ public class DBController {
         return userdao.checkPass(email);
     }
     
+    public User getUser(String email){
+        return userdao.getUser(email);
+    }
+    
     // Marko start
     
         //Calling methods from ProductDAO class
