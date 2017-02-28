@@ -5,10 +5,12 @@
  */
 package com.jetsmad.xshop;
 
+import com.jetsmad.xshop.util.beans.SessionAttrs;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,6 +42,7 @@ public class SignUpService extends HttpServlet {
             User user = new User();
             DBController dbc = new DBController();
             if(dbc.checkEmail(request.getParameter("email"))){
+                user.setId(UUID.randomUUID().toString());
                 user.setName(request.getParameter("name"));
                 user.setEmail(request.getParameter("email"));
                 user.setDob(request.getParameter("dOB"));
@@ -50,11 +53,13 @@ public class SignUpService extends HttpServlet {
                 dbc.addUser(user);
                 HttpSession session = request.getSession(false);
 		if (session == null){
-                    session.setAttribute("signIn", request.getParameter("email"));
+                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
+                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to profil page
                     
                 }else{
-                    session.setAttribute("signIn", request.getParameter("email"));
+                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
+                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to card page
                     
 		}
