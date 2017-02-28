@@ -5,10 +5,12 @@
  */
 package com.jetsmad.xshop.util.database;
 
+import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.beans.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -72,7 +74,33 @@ public class DBController {
     
     // Marko start
     
-        //Calling methods from ProductDAO class
+    public boolean insertProduct(Product prdct) {
+        return productdao.insertProduct(prdct);
+    }
+
+    public Product getProduct(String id) {
+        return productdao.getProduct(id);
+    }
+
+    public ArrayList<Product> getAllProducts() {
+        return productdao.getAllProducts();
+    }
+
+    public ArrayList<Product> getCategoryProducts(String category) {
+        return productdao.getCategoryProducts(category);
+    }
+
+    public ArrayList<Product> getPriceLimitProducts(int upper, int lower) {
+        return productdao.getPriceLimitProducts(upper, lower);
+    }
+
+    public ArrayList<Product> searchProductsByName(String name) {
+        return productdao.searchProductsByName(name);
+    }
+
+    public boolean updateProduct(Product prdct) {
+       return productdao.updateProduct(prdct);
+    }
         
     //Marko end
     
