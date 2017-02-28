@@ -7,6 +7,16 @@ and open the template in the editor.
 
 <web-app>
     
+    <servlet>
+        <servlet-name>admin</servlet-name>
+        <jsp-file>/jsp/admin.jsp</jsp-file> <!-- Your JSP. Must begin with '/' -->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin</url-pattern> <!-- Any URL you want here -->
+    </servlet-mapping>
+    
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
