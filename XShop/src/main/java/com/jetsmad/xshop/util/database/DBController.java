@@ -7,6 +7,8 @@ package com.jetsmad.xshop.util.database;
 
 import com.jetsmad.xshop.util.beans.User;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,19 +27,38 @@ public class DBController {
     }
     
     public void connectToDB(){
-        //TBE
+        // Marko start
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            //here mydb is database name, root is username and  password
+            con = DriverManager.getConnection("jdbc:mysql://localhost/xshop?user=root&password=marko");
+            System.out.println("hii");
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+
+        }
+        //Marko end
     }
     
     public void disconnect(){
-        //TBE
+        // Marko start
+        try {
+           
+            con.close();
+            System.out.println("byee");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Marko end
     }
     
-    //Mostafa begin
     public void addUser(User user){
         userdao.addUser(user);
     }
     
-    public String checkEmail(String email){
+    public boolean checkEmail(String email){
         return userdao.checkEmail(email);
     }
     
@@ -45,15 +66,14 @@ public class DBController {
         return userdao.checkPass(email);
     }
     
-    //Mostafa End
+    public User getUser(String email){
+        return userdao.getUser(email);
+    }
     
+    // Marko start
     
-    //Markko start
-    
-    //Marko End
-    
-    //Michael Start
-    
-    //Michael End
+        //Calling methods from ProductDAO class
+        
+    //Marko end
     
 }

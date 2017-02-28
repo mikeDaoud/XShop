@@ -5,6 +5,8 @@
  */
 package com.jetsmad.xshop;
 
+import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,13 +44,16 @@ public class SignInService extends HttpServlet {
             String checkPass = dbc.checkPass(email);
             if(password.equals(checkPass))
             {
+                User user = dbc.getUser(email);
 		HttpSession session = request.getSession(false);
 		if (session == null){
-                    session.setAttribute("signIn", email);
+                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
+                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to profil page
                     
                 }else{
-                    session.setAttribute("signIn", email);
+                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
+                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to card page
                     
 		}
