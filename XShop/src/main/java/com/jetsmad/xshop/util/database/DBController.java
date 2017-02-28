@@ -25,14 +25,17 @@ public class DBController {
     }
     
     public void connectToDB(){
-        //TBE
+        // Marko start
+        
+        //Marko end
     }
     
     public void disconnect(){
-        //TBE
+        // Marko start
+        
+        //Marko end
     }
     
-    //Mostafa begin
     public void addUser(User user){
         userdao.addUser(user);
     }
@@ -45,15 +48,10 @@ public class DBController {
         return userdao.checkPass(email);
     }
     
-    //Mostafa End
+    // Marko start
     
-    
-    //Markko start
-    
-    //Marko End
-    
-    //Michael Start
-    
-    //Michael End
+        //Calling methods from ProductDAO class
+        
+    //Marko end
     
 }

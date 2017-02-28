@@ -28,35 +28,32 @@ import java.util.logging.Logger;
 public class UserDAO {
 
     DBController controller;
-    String notQuery;
-    String query;
-    PreparedStatement pst;
-    ResultSet rs;
     
     UserDAO(DBController aThis) {
         controller = aThis;
     }
     
     public void addUser(User user){
-        notQuery = "INSERT INTO users (name, email, dob, password, address, job) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst;
+        String query = "INSERT INTO users (name, email, dob, password, address, job) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             controller.connectToDB();
-            pst = controller.con.prepareStatement(notQuery);
+            pst = controller.con.prepareStatement(query);
             pst.setString(1, user.getName());
             pst.setString(2, user.getEmail());
-            pst.setString(3, user.getdOB());
+            pst.setString(3, user.getDob());
             pst.setString(4, user.getPassword());
             pst.setString(5, user.getAddress());
             pst.setString(6, user.getJob());
             pst.executeUpdate();
             for(String interest:user.getInterests()){
-                notQuery = "INSERT INTO interests VALUES (?, ?)";
-                pst = controller.con.prepareStatement(notQuery);
+                String queryString = "INSERT INTO interests VALUES (?, ?)";
+                pst = controller.con.prepareStatement(queryString);
                 pst.setString(1, user.getId());
                 pst.setString(2, interest);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }finally{
             controller.disconnect();
         }
@@ -64,7 +61,9 @@ public class UserDAO {
     
     public String checkEmail(String email){
         String res = "notFound";
-        query = "SELECT * FROM users WHERE email=?";
+        PreparedStatement pst;
+        ResultSet rs;
+        String query = "SELECT * FROM users WHERE email=?";
         try {
             controller.connectToDB();
             pst = controller.con.prepareStatement(query);
@@ -75,7 +74,7 @@ public class UserDAO {
 		res = rs.getString(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }finally{
             controller.disconnect();
             return res;
@@ -84,7 +83,9 @@ public class UserDAO {
     
     public String checkPass(String email){
         String res = "notFound";
-        query = "SELECT password FROM users WHERE email=?";
+        PreparedStatement pst;
+        ResultSet rs;
+        String  query = "SELECT password FROM users WHERE email=?";
         try {
             controller.connectToDB();
             pst = controller.con.prepareStatement(query);

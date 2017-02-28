@@ -42,7 +42,7 @@ public class SignUpService extends HttpServlet {
             if(dbc.checkEmail(request.getParameter("email")).equals("notFound")){
                 user.setName(request.getParameter("name"));
                 user.setEmail(request.getParameter("email"));
-                user.setdOB(request.getParameter("dOB"));
+                user.setDob(request.getParameter("dOB"));
                 user.setPassword(request.getParameter("password"));
                 user.setAddress(request.getParameter("address"));
                 user.setJob(request.getParameter("job"));

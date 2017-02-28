@@ -19,13 +19,24 @@ public class User {
     private String id;
     private String name;
     private String email;
-    private String dOB;
+    private String dob;
     private String password;
     private String address;
     private String job;
     private String[] interests;
 
     public User() {
+    }
+
+    public User(String id, String name, String email, String dob, String password, String address, String job, String[] interests) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.password = password;
+        this.address = address;
+        this.job = job;
+        this.interests = interests;
     }
 
     public String getId() {
@@ -52,12 +63,12 @@ public class User {
         this.email = email;
     }
 
-    public String getdOB() {
-        return dOB;
+    public String getDob() {
+        return dob;
     }
 
-    public void setdOB(String dOB) {
-        this.dOB = dOB;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getPassword() {
@@ -91,5 +102,6 @@ public class User {
     public void setInterests(String[] interests) {
         this.interests = interests;
     }
+    
     
 }
