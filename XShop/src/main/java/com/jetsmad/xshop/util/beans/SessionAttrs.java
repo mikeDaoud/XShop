@@ -10,6 +10,8 @@ package com.jetsmad.xshop.util.beans;
  * @author mosta
  */
 public final class SessionAttrs {
-    public static  final String USER_ID = "userId";
-    public static  final String USER_NAME = "userName";
+    public static final String USER_ID = "userId";
+    public static final String USER_NAME = "userName";
+    public static final String PRODUCTS_LIST = "products";
+    
 }

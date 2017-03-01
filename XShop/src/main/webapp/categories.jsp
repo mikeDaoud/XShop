@@ -4,14 +4,15 @@
     Author     : michael
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.jetsmad.xshop.util.database.DBController"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+<% ArrayList<String> categories = new DBController().getCategories(); 
+
+    for (String category : categories) {
+            out.println("<a href=\"#\" class=\"list-group-item\">" + category +"</a>");
+        }
+%> 
+

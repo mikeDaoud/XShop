@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
@@ -95,13 +96,13 @@ public class ProductDAO {
         return item;
     }
 
-    public ArrayList<Product> getAllProducts() {
+    public Vector<Product> getAllProducts() {
         // get an array list containing all products in the database
         // and return it
         // return empty arraylist if nothing was found
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Product> products = new ArrayList<>();
+            Vector<Product> products = new Vector<>();
             try {
                 String query = "select * from products";
                 PreparedStatement pst;
@@ -275,5 +276,31 @@ public class ProductDAO {
 
         }
         return false;
+    }
+
+    public ArrayList<String> getCategories() {
+        dbController.connectToDB();
+        ArrayList<String> categories = new ArrayList<>();
+
+        try {
+            String query = "SELECT DISTINCT category FROM products";
+            PreparedStatement pst;
+            ResultSet rs;
+
+            pst = dbController.con.prepareStatement(query);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                categories.add(rs.getString(1));
+            }
+            rs.close();
+            pst.close();
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+
+            dbController.disconnect();
+            return categories;
+
+        }
     }
 }

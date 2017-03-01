@@ -1,17 +1,9 @@
 <%-- 
     Document   : admin
-    Created on : Feb 26, 2017, 11:13:30 PM
+    Created on : Mar 1, 2017, 8:41:24 AM
     Author     : michael
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+<!--A JSP for the main Admin view that renders the view accroding to the admin's privilages-->

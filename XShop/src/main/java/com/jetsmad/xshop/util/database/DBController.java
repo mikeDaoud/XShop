@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
@@ -82,7 +83,7 @@ public class DBController {
         return productdao.getProduct(id);
     }
 
-    public ArrayList<Product> getAllProducts() {
+    public Vector<Product> getAllProducts() {
         return productdao.getAllProducts();
     }
 
@@ -104,4 +105,7 @@ public class DBController {
         
     //Marko end
     
+    public ArrayList<String> getCategories(){
+        return productdao.getCategories();
+    }
 }

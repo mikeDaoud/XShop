@@ -12,20 +12,22 @@
     <div class="container">
         <a class="navbar-brand" href="#">Brand</a>
         <ul class="nav navbar-nav navbar-right">
-            <li>
+<!--            <li>
                 <a href="#">Login</a>
-            </li>
-            
+            </li>-->
+
             <li>
-                <c:if test="${empty sessionScope.userName}"> 
-                    color="red"
-                </c:if>
+                <c:choose>
+                    <c:when test="${empty sessionScope.userName}">
+                         <a href="#">Login</a>
+                    </c:when>
                     
-                <c:otherwise>
-                        color = "blue"
-                </c:otherwise>
+                    <c:otherwise>
+                        <c:out value="${sessionScope.userName}" />
+                    </c:otherwise>
+                </c:choose>
             </li>
-            
+
             <li>
                 <a href="#"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><span class="badge">0</span></a>
             </li>
