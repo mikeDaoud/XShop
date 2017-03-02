@@ -135,12 +135,54 @@ public class UserDAO {
                 while (rsInt.next()) {
                     arrayList.add(rsInt.getString(1));
                 }
+                System.out.println(user);
                 user.setInterests((String[]) arrayList.toArray());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             controller.disconnect();
+            return user;
+        }
+    }
+    
+    
+    public User getUserById(String id) {
+        User user = null;
+        PreparedStatement pst;
+        ResultSet rs;
+        String query = "SELECT id,name,email,dob,password,address,job FROM users WHERE id=?";
+        try {
+            controller.connectToDB();
+            pst = controller.con.prepareStatement(query);
+            pst.setString(1, id);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getString(1));
+                user.setName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setDob(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                user.setAddress(rs.getString(6));
+                user.setJob(rs.getString(7));
+                PreparedStatement pstInt;
+                ResultSet rsInt;
+                String queryInt = "SELECT interest FROM interests WHERE users_id=?";
+                pstInt = controller.con.prepareStatement(queryInt);
+                pstInt.setString(1, rs.getString(1));
+                rsInt = pstInt.executeQuery();
+                ArrayList<String> arrayList = new ArrayList<>();
+                while (rsInt.next()) {
+                    arrayList.add(rsInt.getString(1));
+                }
+                user.setInterests((String[]) arrayList.toArray());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            controller.disconnect();
+            System.out.println(user);
             return user;
         }
     }
