@@ -15,5 +15,8 @@ public final class SessionAttrs {
     public static final String PRODUCTS_LIST = "products";
     public static final String CART_ITEMS = "cart";
     public static final String CURRENT_USER_OBJECT = "user_object";
+    //start of marko
+    public static final String USERS_ARRAYLIST = "users_arraylist";
+    // end of marko
     
 }
