@@ -8,6 +8,7 @@
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/beans/Admin.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/UpdateUserAcct.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/SignInAdminService.java
+/home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/beans/CartItem.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/EditAccount.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/database/UserDAO.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/database/ProductDAO.java

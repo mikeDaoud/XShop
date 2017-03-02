@@ -111,4 +111,7 @@ public class DBController {
     public User getUserById(String id) {
         return userdao.getUserById(id);
     }
+    public void ubdateUser(User user) {
+        userdao.ubdateUser(user);
+    }
 }

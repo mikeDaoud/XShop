@@ -26,8 +26,7 @@ public class EditAccount extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+       
         String userId = (String) request.getAttribute(SessionAttrs.USER_ID);
         System.out.println(userId);
         User currUser = (new DBController()).getUserById(userId);

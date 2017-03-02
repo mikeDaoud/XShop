@@ -145,8 +145,7 @@ public class UserDAO {
             return user;
         }
     }
-    
-    
+
     public User getUserById(String id) {
         User user = null;
         PreparedStatement pst;
@@ -184,6 +183,42 @@ public class UserDAO {
             controller.disconnect();
             System.out.println(user);
             return user;
+        }
+    }
+
+    public void ubdateUser(User user) {
+        PreparedStatement pst;
+        String query = "update users set name=?,email=?,dob=?,password=?,address=?,job=? where id=?";
+        try {
+            controller.connectToDB();
+            pst = controller.con.prepareStatement(query);
+            pst.setString(7, user.getId());
+            pst.setString(1, user.getName());
+            pst.setString(2, user.getEmail());
+            pst.setString(3, user.getDob());
+            pst.setString(4, user.getPassword());
+            pst.setString(5, user.getAddress());
+            pst.setString(6, user.getJob());
+            pst.executeUpdate();
+
+            if (user.getInterests() != null) {
+                String queryDelete = "Delete from interests where users_id=?";
+                PreparedStatement pstmntDelete = controller.con.prepareStatement(queryDelete);
+                pstmntDelete.setString(1, user.getId());
+                pstmntDelete.executeUpdate();
+                for (String interest : user.getInterests()) {
+                    String queryString = "INSERT INTO interests VALUES (?, ?)";
+                    PreparedStatement pstmnt = controller.con.prepareStatement(queryString);
+                    pstmnt.setString(1, user.getId());
+                    pstmnt.setString(2, interest);
+                    pstmnt.executeUpdate();
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            controller.disconnect();
         }
     }
 }

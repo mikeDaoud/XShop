@@ -1,6 +1,7 @@
 com/jetsmad/xshop/SignInService.class
 com/jetsmad/xshop/util/database/UserDAO.class
 com/jetsmad/xshop/SignInAdminService$1.class
+com/jetsmad/xshop/util/beans/CartItem.class
 com/jetsmad/xshop/util/beans/Admin.class
 com/jetsmad/xshop/cart/RemoveFromCart.class
 com/jetsmad/xshop/EditAccount.class
