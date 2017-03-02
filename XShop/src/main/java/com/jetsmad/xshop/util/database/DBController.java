@@ -83,7 +83,7 @@ public class DBController {
         return productdao.getProduct(id);
     }
 
-    public Vector<Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() {
         return productdao.getAllProducts();
     }
 
@@ -91,13 +91,13 @@ public class DBController {
         return productdao.getCategoryProducts(category);
     }
 
-    public ArrayList<Product> getPriceLimitProducts(int upper, int lower) {
-        return productdao.getPriceLimitProducts(upper, lower);
+    public ArrayList<Product> getPriceLimitProducts(String name, int upper, int lower) {
+        return productdao.getPriceLimitProducts(name, upper, lower);
     }
 
-    public ArrayList<Product> searchProductsByName(String name) {
-        return productdao.searchProductsByName(name);
-    }
+//    public ArrayList<Product> searchProductsByName(String name) {
+//        return productdao.searchProductsByName(name);
+//    }
 
     public boolean updateProduct(Product prdct) {
        return productdao.updateProduct(prdct);

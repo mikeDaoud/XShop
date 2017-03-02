@@ -96,13 +96,13 @@ public class ProductDAO {
         return item;
     }
 
-    public Vector<Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() {
         // get an array list containing all products in the database
         // and return it
         // return empty arraylist if nothing was found
         dbController.connectToDB();
         if (dbController.con != null) {
-            Vector<Product> products = new Vector<>();
+            ArrayList<Product> products = new ArrayList<>();
             try {
                 String query = "select * from products";
                 PreparedStatement pst;
@@ -172,19 +172,20 @@ public class ProductDAO {
         return null;
     }
 
-    public ArrayList<Product> getPriceLimitProducts(int upper, int lower) {
+    public ArrayList<Product> getPriceLimitProducts(String name,int upper, int lower) {
         //Same as above but within the price limits given
         dbController.connectToDB();
         if (dbController.con != null) {
             ArrayList<Product> products = new ArrayList<>();
             try {
-                String query = "select * from products where price between ? and ?";
+                String query = "select * from products where name=? and price between ? and ?";
                 PreparedStatement pst;
                 ResultSet rs;
 
                 pst = dbController.con.prepareStatement(query);
-                pst.setInt(1, lower);
-                pst.setInt(2, upper);
+                pst.setString(1, name);
+                pst.setInt(2, lower);
+                pst.setInt(3, upper);
                 rs = pst.executeQuery();
                 while (rs.next()) {
                     products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
@@ -207,39 +208,39 @@ public class ProductDAO {
         return null;
     }
 
-    public ArrayList<Product> searchProductsByName(String name) {
-        //Same as above but with the product name "Like" the name given
-        dbController.connectToDB();
-        if (dbController.con != null) {
-            ArrayList<Product> products = new ArrayList<>();
-            try {
-                String query = "select * from products where name like ?";
-                PreparedStatement pst;
-                ResultSet rs;
-
-                pst = dbController.con.prepareStatement(query);
-                pst.setString(1, "%" + name + "%");
-                rs = pst.executeQuery();
-                while (rs.next()) {
-                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
-                }
-                rs.close();
-                pst.close();
-            } catch (SQLException ex) {
-                return null;
-            } finally {
-                if (products.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
-                    dbController.disconnect();
-                    return products;
-                }
-            }
-
-        }
-        return null;
-    }
+//    public ArrayList<Product> searchProductsByName(String name) {
+//        //Same as above but with the product name "Like" the name given
+//        dbController.connectToDB();
+//        if (dbController.con != null) {
+//            ArrayList<Product> products = new ArrayList<>();
+//            try {
+//                String query = "select * from products where name like ?";
+//                PreparedStatement pst;
+//                ResultSet rs;
+//
+//                pst = dbController.con.prepareStatement(query);
+//                pst.setString(1, "%" + name + "%");
+//                rs = pst.executeQuery();
+//                while (rs.next()) {
+//                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
+//                }
+//                rs.close();
+//                pst.close();
+//            } catch (SQLException ex) {
+//                return null;
+//            } finally {
+//                if (products.isEmpty()) {
+//                    dbController.disconnect();
+//                    return null;
+//                } else {
+//                    dbController.disconnect();
+//                    return products;
+//                }
+//            }
+//
+//        }
+//        return null;
+//    }
 
     public boolean updateProduct(Product prdct) {
         //Update the product in the database with the product ID in the given

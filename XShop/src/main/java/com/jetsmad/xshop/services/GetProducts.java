@@ -9,6 +9,7 @@ import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.beans.SessionAttrs;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,10 +33,44 @@ public class GetProducts extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String type = request.getAttribute("type").toString();
         DBController db = new DBController();
-        Vector<Product> products = db.getAllProducts();
+        ArrayList<Product> allProducts = new ArrayList<>();
+        ArrayList<Product> productsToShow = new ArrayList<>();
+        if(type.equals("all")){
+            allProducts = db.getAllProducts();
+        }else if(type.equals("category")){
+            String categoryName = request.getAttribute("categoryName").toString();
+            allProducts = db.getCategoryProducts(categoryName);
+        }else if(type.equals("search")){
+            Integer min;
+            Integer max;
+            String query = request.getAttribute("query").toString();
+            if(request.getAttribute("min") != null){
+                min = (Integer)request.getAttribute("min");
+            }else{
+                min = 0;
+            }
+            if(request.getAttribute("max") != null){
+                max = (Integer)request.getAttribute("max");
+            }else{
+                max = 10000000;
+            }
+            allProducts = db.getPriceLimitProducts(query, max, min);
+        }
         
-        request.setAttribute(SessionAttrs.PRODUCTS_LIST, products);
+        Integer pagenum = (Integer)request.getAttribute("pagenum");
+        if(allProducts.size() >= (pagenum*12)){
+            for(int i = ((pagenum - 1)*12);i < (pagenum*12);i++){
+                productsToShow.add(allProducts.get(i));
+            }
+        }else{
+            for(int j = ((pagenum - 1)*12);j < allProducts.size();j++){
+                productsToShow.add(allProducts.get(j));
+            }
+        }
+        
+        request.setAttribute(SessionAttrs.PRODUCTS_LIST, productsToShow);
         
         request.getRequestDispatcher("products.jsp").include(request,response);
         
