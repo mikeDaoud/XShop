@@ -7,3 +7,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!--A JSP for the main Admin view that renders the view accroding to the admin's privilages-->
+
+<h1>Admin Home page here</h1>>

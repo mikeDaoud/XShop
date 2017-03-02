@@ -5,6 +5,7 @@
  */
 package com.jetsmad.xshop;
 
+import com.mysql.cj.api.Session;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,16 +33,27 @@ public class SignInAdminService extends HttpServlet {
             throws ServletException, IOException {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+        System.out.println(userName);
+        System.out.println(password);
         getAdminXmlData();
+
         if (userName != null && password != null && adminPassword != null && adminUserName != null) {
-            if (adminPassword.equals(password) && adminUserName.equals(userName)) {
-                // login
+            if (adminUserName.trim().equals(userName) && adminPassword.trim().equals(password)) {
+//                
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
             } else {
-                // data invalid
+                request.getSession(true).setAttribute("admin_name", userName);
+                request.setAttribute("error", "Wrong user name or Password");
+                request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
             }
         } else {
             //emptey data
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 
     public void getAdminXmlData() {
@@ -65,6 +77,7 @@ public class SignInAdminService extends HttpServlet {
                         blname = true;
                     }
                 }
+
                 @Override
                 public void characters(char ch[], int start, int length) {
                     if (bfname) {
@@ -77,7 +90,9 @@ public class SignInAdminService extends HttpServlet {
                     }
                 }
             };
-            saxParser.parse("src/main/webapp/resources/xml/admin.xml", handler);
+            
+            saxParser.parse("admin.xml", handler);
+//            saxParser.parse("src/main/webapp/resources/xml/admin.xml", handler);
         } catch (ParserConfigurationException | org.xml.sax.SAXException | IOException ex) {
             ex.printStackTrace();
         }
