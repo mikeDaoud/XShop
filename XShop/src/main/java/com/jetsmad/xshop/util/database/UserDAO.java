@@ -221,4 +221,61 @@ public class UserDAO {
             controller.disconnect();
         }
     }
+
+    public ArrayList<User> getAllUsers() {
+        controller.connectToDB();
+
+        if (controller.con != null) {
+            ArrayList<User> users = new ArrayList<>();
+            try {
+                String query = "select * from users";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = controller.con.prepareStatement(query);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getString(1));
+                    user.setName(rs.getString(2));
+                    user.setEmail(rs.getString(3));
+                    user.setDob(rs.getString(4));
+                    user.setPassword(rs.getString(5));
+                    user.setAddress(rs.getString(6));
+                    user.setJob(rs.getString(7));
+                    PreparedStatement pstInt;
+                    ResultSet rsInt;
+                    String queryInt = "SELECT interest FROM interests WHERE users_id=?";
+                    pstInt = controller.con.prepareStatement(queryInt);
+                    pstInt.setString(1, rs.getString(1));
+                    rsInt = pstInt.executeQuery();
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    while (rsInt.next()) {
+                        arrayList.add(rsInt.getString(1));
+                    }
+                    System.out.println(user);
+                    user.setInterests((String[]) arrayList.toArray());
+                    users.add(user);
+                    System.out.println(users.isEmpty());
+                }
+                rs.close();
+                pst.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                if (users.isEmpty()) {
+                    controller.disconnect();
+                    System.out.println("ops null data");
+                    return null;
+                } else {
+                    controller.disconnect();
+                    return users;
+                }
+            }
+
+        }
+        return null;
+    }
 }

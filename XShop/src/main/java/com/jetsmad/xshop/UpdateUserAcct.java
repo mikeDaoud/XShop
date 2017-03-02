@@ -33,8 +33,8 @@ public class UpdateUserAcct extends HttpServlet {
 //        2. Checks the database for the mail if exists -> if exists reply with "false"
 //        3. update the user data in the database
 //        4. reply with "true" or "false" string
-        //String user_id = (String) request.getAttribute(SessionAttrs.USER_ID);
-        String user_id = "12";
+        String user_id = (String) request.getAttribute(SessionAttrs.USER_ID);
+       // String user_id = "12";
         if (user_id != null) {
             User currUser = (new DBController()).getUserById(user_id);
             String user_email = (String) request.getParameter("email");

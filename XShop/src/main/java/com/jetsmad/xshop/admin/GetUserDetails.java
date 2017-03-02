@@ -10,8 +10,6 @@ import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,19 +21,28 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author markoiti
  */
-@WebServlet(name = "GetAllUsers", urlPatterns = {"/GetAllUsers"})
-public class GetAllUsers extends HttpServlet {
+@WebServlet(name = "GetUserDetails", urlPatterns = {"/GetUserDetails"})
+public class GetUserDetails extends HttpServlet {
 
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<User> users = (new DBController()).getAllUsers();
-        request.setAttribute(SessionAttrs.USERS_ARRAYLIST, users);
-        for(User user : users){
-            System.out.println(user.getEmail());
-        }
-        // include viwe jsp
-//        RequestDispatcher rd = request.getRequestDispatcher("viewUsers.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+        String userId = (String) request.getAttribute(SessionAttrs.USER_ID);
+        System.out.println(userId);
+        User currUser = (new DBController()).getUserById(userId);
+        // get the number of orders and orders and put it to reguest
+        request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, currUser);
+
+//        RequestDispatcher rd = request.getRequestDispatcher("userdetails.jsp");
 //        rd.forward(request, response);
     }
 
