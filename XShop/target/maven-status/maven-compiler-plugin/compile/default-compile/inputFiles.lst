@@ -1,8 +1,11 @@
+/home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/admin/AddNewProduct.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/cart/RemoveFromCart.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/beans/SessionAttrs.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/database/DBController.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/SignUpService.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/cart/UpdateCartItemQuantity.java
+/home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/admin/GetAllProducts.java
+/home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/admin/CommitProductEdits.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/SignInService.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/beans/Product.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/beans/Admin.java
@@ -10,6 +13,8 @@
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/SignInAdminService.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/beans/CartItem.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/EditAccount.java
+/home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/admin/GetProductDetailsForEditing.java
+/home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/admin/GetAllUsers.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/database/UserDAO.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/util/database/ProductDAO.java
 /home/markoiti/NetBeansProjects/XShop/XShop/src/main/java/com/jetsmad/xshop/cart/AddToCart.java

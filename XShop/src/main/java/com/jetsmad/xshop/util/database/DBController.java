@@ -114,4 +114,7 @@ public class DBController {
     public void ubdateUser(User user) {
         userdao.ubdateUser(user);
     }
+    public ArrayList<User> getAllUsers() {
+        return userdao.getAllUsers();
+    }
 }
