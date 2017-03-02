@@ -5,13 +5,19 @@
  */
 package com.jetsmad.xshop.cart;
 
+import com.jetsmad.xshop.util.beans.CartItem;
+import com.jetsmad.xshop.util.beans.Product;
+import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +36,42 @@ public class AddToCart extends HttpServlet {
 //        3. update stock in database (-1)
 //        4. adds the product to the cart object on the session 
 //        5. reply with a response of one string "true" or "false"
-        
+        boolean isNew = true;
+        PrintWriter out = response.getWriter();
+        String productId = request.getAttribute("productId").toString();
+        DBController dbc = new DBController();
+        if(productId != null){
+            Product product = dbc.getProduct(productId);
+            if(product!= null && product.getStock() >= 1){
+                int newStock = product.getStock() - 1;
+                product.setStock(newStock);
+                dbc.updateProduct(product);
+                ArrayList<CartItem> cartItems;
+                HttpSession session = request.getSession(false);
+                if (session == null){
+                    session = request.getSession(true);
+                    cartItems = new ArrayList<>();
+                }else{
+                    cartItems = (ArrayList<CartItem>) session.getAttribute(SessionAttrs.CART_ITEMS);
+                }
+                for(CartItem item:cartItems){
+                    if(item.getProduct().getId().equals(productId)){
+                        item.addOne();
+                        isNew = false;
+                    }
+                }
+                if(isNew){
+                    CartItem newItem = new CartItem(product, 1);
+                    cartItems.add(newItem);
+                }
+                session.setAttribute(SessionAttrs.CART_ITEMS, cartItems);
+                out.write("True");
+            }else{
+                out.write("false");
+            }
+        }else{
+            out.write("false");
+        }
     }
 
     

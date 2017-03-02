@@ -17,4 +17,5 @@ package com.jetsmad.xshop.util.beans;
 
 public class Admin {
     
+    
 }
