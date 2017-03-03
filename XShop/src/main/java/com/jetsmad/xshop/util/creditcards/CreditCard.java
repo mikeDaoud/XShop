@@ -11,7 +11,6 @@ package com.jetsmad.xshop.util.creditcards;
  */
 public class CreditCard {
     
-    String id;
     String creditCardNumber;
     int expiryMonth;
     int expiryYear;
@@ -22,8 +21,7 @@ public class CreditCard {
         
     }
 
-    public CreditCard(String id, String creditCardNumber, int expiryMonth, int expiryYear, double balance, String securityCode) {
-        this.id = id;
+    public CreditCard(String creditCardNumber, int expiryMonth, int expiryYear, double balance, String securityCode) {
         this.creditCardNumber = creditCardNumber;
         this.expiryMonth = expiryMonth;
         this.expiryYear = expiryYear;
@@ -31,14 +29,6 @@ public class CreditCard {
         this.securityCode = securityCode;
     }
     
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
