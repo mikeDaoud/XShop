@@ -242,21 +242,8 @@ public class UserDAO {
                     user.setDob(rs.getString(4));
                     user.setPassword(rs.getString(5));
                     user.setAddress(rs.getString(6));
-                    user.setJob(rs.getString(7));
-                    PreparedStatement pstInt;
-                    ResultSet rsInt;
-                    String queryInt = "SELECT interest FROM interests WHERE users_id=?";
-                    pstInt = controller.con.prepareStatement(queryInt);
-                    pstInt.setString(1, rs.getString(1));
-                    rsInt = pstInt.executeQuery();
-                    ArrayList<String> arrayList = new ArrayList<>();
-                    while (rsInt.next()) {
-                        arrayList.add(rsInt.getString(1));
-                    }
-                    System.out.println(user);
-                    user.setInterests((String[]) arrayList.toArray());
-                    users.add(user);
-                    System.out.println(users.isEmpty());
+                    user.setJob(rs.getString(7));                   
+                    users.add(user);                    
                 }
                 rs.close();
                 pst.close();
