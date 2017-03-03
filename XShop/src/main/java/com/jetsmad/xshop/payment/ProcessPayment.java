@@ -5,6 +5,8 @@
  */
 package com.jetsmad.xshop.payment;
 
+import com.jetsmad.xshop.util.creditcards.CreditCard;
+import com.jetsmad.xshop.util.creditcards.CreditCardDataBase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,18 +34,29 @@ public class ProcessPayment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProcessPayment</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProcessPayment at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        //1- get creditCard data from request  and put it in Obj
+        CreditCard creditCard = new CreditCard();
+        creditCard.setCreditCardNumber(request.getParameter("creditCardNumber"));
+        creditCard.setExpiryMonth(Integer.parseInt(request.getParameter("expiryMonth")));
+        creditCard.setExpiryYear(Integer.parseInt(request.getParameter("expiryYear")));
+        creditCard.setSecurityCode(request.getParameter("securityCode"));
+
+        CreditCardDataBase creditCardDB = new CreditCardDataBase();
+        //2- check if this card valid in our DB or Not 
+        if (creditCardDB.validateCreditCard(creditCard)) {
+            //FOCUS!!,,send "totalPrice" with request..
+            double totalPrice = Double.parseDouble(request.getParameter("totalPrice")); 
+            //3- send total price to make payment processing and update balance in DB ..
+            if (creditCardDB.processPayment(creditCard.getCreditCardNumber(), totalPrice)) {
+                // completed the payment process successfully
+            } else {
+                //  Balance not enough
+            }
+        } else {
+            // creditCard not Vaild
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
