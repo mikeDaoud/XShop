@@ -5,8 +5,11 @@
  */
 package com.jetsmad.xshop.admin;
 
+import com.jetsmad.xshop.util.beans.Product;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +35,20 @@ public class AddNewProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddNewProduct</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddNewProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        Product product = new Product();
+        DBController dbController = new DBController();
+        product.setId(UUID.randomUUID().toString().substring(10));
+        product.setName(request.getParameter("name"));
+        product.setPrice(Float.parseFloat(request.getParameter("price")));
+        product.setStock(Integer.parseInt(request.getParameter("stock")));
+        product.setCategory(request.getParameter("category"));
+        product.setDesc(request.getParameter("desc"));
+        product.setActive(Boolean.parseBoolean(request.getParameter("active")));
+      
+        dbController.insertProduct(product);
+        
+        // redirect to products
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

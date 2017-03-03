@@ -18,5 +18,10 @@ public final class SessionAttrs {
     //start of marko
     public static final String USERS_ARRAYLIST = "users_arraylist";
     // end of marko
+    //----- Merna  ------
+    // this variables not in session so i recommended change name to Constants :D
+    public static final String PRODUCT_ID= "productID";
+    public static final String PRODUCT_OBJECT="productObj";
+    //----- End Merna ------
     
 }
