@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +42,10 @@ public class GetAllProducts extends HttpServlet {
         for(Product product : products){
             System.out.println(product.getName());
         }
-        // include viwe jsp
-//        RequestDispatcher rd = request.getRequestDispatcher("viewUsers.jsp");
-//        rd.forward(request, response);
+         //include viwe jsp
+        RequestDispatcher rd = request.getRequestDispatcher("adminviews/productsList.jsp");
+        // bug in view
+        rd.include(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
