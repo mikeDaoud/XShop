@@ -16,17 +16,27 @@ public class CreditCard {
     int expiryYear;
     double balance;
     String securityCode;
+    String holderName;
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
 
     public CreditCard() {
         
     }
 
-    public CreditCard(String creditCardNumber, int expiryMonth, int expiryYear, double balance, String securityCode) {
+     public CreditCard(String creditCardNumber, int expiryMonth, int expiryYear, double balance, String securityCode, String holderName) {
         this.creditCardNumber = creditCardNumber;
         this.expiryMonth = expiryMonth;
         this.expiryYear = expiryYear;
         this.balance = balance;
         this.securityCode = securityCode;
+        this.holderName = holderName;
     }
     
     public String getCreditCardNumber() {

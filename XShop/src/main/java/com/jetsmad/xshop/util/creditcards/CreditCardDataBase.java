@@ -58,13 +58,17 @@ public class CreditCardDataBase {
         connectToDB();
         if (con != null) {
             try {
-                String query = "SELECT * FROM creditCard WHERE creditCardNumber=? and securityCode=?";
+                String query = "SELECT * FROM creditCard WHERE creditCardNumber=? and securityCode=? and expiryMonth=? and expiryYear=? and holder_name=?";
                 PreparedStatement pst;
                 ResultSet rs;
 
                 pst = con.prepareStatement(query);
                 pst.setString(1, creditCard.getCreditCardNumber());
                 pst.setString(2, creditCard.getSecurityCode());
+                pst.setInt(3, creditCard.getExpiryMonth());
+                pst.setInt(4, creditCard.getExpiryYear());
+                pst.setString(5, creditCard.getHolderName());
+                
 
                 rs = pst.executeQuery();
 
