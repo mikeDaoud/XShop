@@ -121,7 +121,7 @@
 
                                         <c:forEach var="prdct" items="${productsList}">
                                             <tr>
-                                            <form class="" action="index.html" method="post">
+                                            <form class="" action="" method="post">
                                                 <td><input type="text" name="productid" value="<c:out value="${prdct.id}"></c:out>" disabled="" style="background: transparent; border: none ;text-align: center"></td>
                                                 <td><c:out value="${prdct.name}"></c:out></td>
                                                 <td><c:out value="${prdct.price}"></c:out></td>

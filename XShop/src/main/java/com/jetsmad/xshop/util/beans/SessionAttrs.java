@@ -17,6 +17,7 @@ public final class SessionAttrs {
     public static final String CURRENT_USER_OBJECT = "user_object";
     //start of marko
     public static final String USERS_ARRAYLIST = "users_arraylist";
+    public static final String USER_EMAIL = "user_email";
     // end of marko
     //----- Merna  ------
     // this variables not in session so i recommended change name to Constants :D
