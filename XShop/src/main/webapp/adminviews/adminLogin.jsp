@@ -13,7 +13,7 @@
   <head>
     <meta charset="utf-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="resources/css/adminLogin.css">
+    <link rel="stylesheet" href="../resources/css/adminLogin.css">
   </head>
   <body>
 
