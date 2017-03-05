@@ -5,28 +5,34 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title> Welcome to XShop </title>
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet">Ï
-        <link href="resources/css/custom.css" rel="stylesheet">
-        <link href="resources/css/font-awesome.css" rel="stylesheet">
-        <link href="resources/css/slider.css" rel="stylesheet">
-    </head>
-    <body>
-        <jsp:include page="header.jsp" />
-        <jsp:include page="carousel.jsp" />
-        <div id="content">
-            <div class="list-group col-md-3">
-                <jsp:include page="categories.jsp" />
-            </div>
-            
-            <div class="items col-md-9">
-                <jsp:include page="/productslist" />
-            </div>
 
+<!DOCTYPE html>
+<html lang="en">
+
+    <jsp:include page="clientviews/head.jsp" />
+
+    <body>
+        <jsp:include page="clientviews/header.jsp" />  
+
+        <div id="all">
+
+            <div id="content" class="container">
+
+                <div class="container">
+                    <jsp:include page="clientviews/carousel.jsp" />
+                    <div class="list-group col-md-3">                    
+                    <jsp:include page="GetCategories" /> 
+                    <jsp:include page="clientviews/search.jsp" />
+                    </div>
+                    <jsp:include page="productslist" />
+                    
+                </div>
+            </div>
+                    <jsp:include page="footer" />
         </div>
+                    <jsp:include page="clientviews/scripts.jsp" />
     </body>
 </html>
+
+<%--<jsp:include page="clientviews/header.jsp" />--%>
+<%--<jsp:include page="clientviews/carousel.jsp" />--%>

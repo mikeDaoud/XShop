@@ -8,7 +8,6 @@ package com.jetsmad.xshop.services;
 import com.jetsmad.xshop.util.beans.SessionAttrs;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

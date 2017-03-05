@@ -8,7 +8,6 @@ package com.jetsmad.xshop.admin;
 import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

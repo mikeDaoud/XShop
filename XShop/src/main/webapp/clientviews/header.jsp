@@ -8,32 +8,68 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Brand</a>
-        <ul class="nav navbar-nav navbar-right">
-<!--            <li>
-                <a href="#">Login</a>
-            </li>-->
+   <!-- *** TOPBAR *** -->
+   
+    <div id="top">
 
-            <li>
-                <c:choose>
-                    <c:when test="${empty sessionScope.userName}">
-                         <a href="#">Login</a>
-                    </c:when>
-                    
-                    <c:otherwise>
-                        <c:out value="${sessionScope.userName}" />
-                    </c:otherwise>
-                </c:choose>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><span class="badge">0</span></a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a>
-            </li>
-        </ul>
+        
     </div>
-</nav>
+    <!-- *** TOP BAR END *** -->
+    
+    <!-- *** NAVBAR ***
+ _________________________________________________________ -->
+
+    <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a class="navbar-brand home" href="" data-animate-hover="bounce">
+                    <img src="${pageContext.request.contextPath}/resources/client/img/logo.png" alt="Obaju logo" class="hidden-xs">
+                </a>
+
+            </div>
+            <!--/.navbar-header -->
+
+            <!--/.nav-collapse -->
+
+            <div class="navbar-buttons">
+
+                <div class="navbar-collapse collapse right" id="basket-overview">
+                  <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="cart.jsp"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i><span class="badge">0</span></a>
+                    </li>
+                      <li><a href="#">Login</a>
+                      </li>
+                  </ul>
+                </div>
+                <!--/.nav-collapse -->
+
+
+
+            </div>
+
+            <div class="collapse clearfix" id="search">
+
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
+
+			<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+		    </span>
+                    </div>
+                </form>
+
+            </div>
+            <!--/.nav-collapse -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#navbar -->
+
+    <!-- *** NAVBAR END *** -->
+    
+    

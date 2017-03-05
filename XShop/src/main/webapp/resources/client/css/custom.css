@@ -1,0 +1,66 @@
+/** Your theme modifications here **/
+
+.product-holder{
+  padding: 7px;
+}
+
+.product-item{
+  border: 1px solid #ecf0f1;
+  background: #ecf0f1;
+  margin-top: 7px;
+}
+
+.buttons-holder{
+  margin-bottom: 10px;
+}
+
+.product-item .btn-quick-view{
+  background: #ecf0f1;
+  color: #4fbfa8;
+  border: 1px solid #4fbfa8;
+}
+
+.product-item .btn-quick-view:hover , .product-item .btn-quick-view:active{
+  background: #4fbfa8;
+  color: #ecf0f1;
+  border: 1px solid #ecf0f1;
+}
+
+.product-item .btn-add-cart{
+  background: #007D77;
+  color: #ecf0f1;
+  border: 1px solid #007D77;
+}
+
+.product-item .btn-add-cart:hover , .product-item .btn-add-cart:active{
+  background: #045955;
+}
+
+.badge {
+  margin-left: -12px;
+  background: #4fbfa8;
+}
+
+.row{
+  max-height: 20px;
+}
+
+.row input{
+  max-width: 30px;
+  border: none;
+}
+.row .fa-minus{
+  color: #e74c3c;
+  font-size: 10px;
+}
+
+.row .fa-plus{
+  color: #27ae60;
+  font-size: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

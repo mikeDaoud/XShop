@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testpackage;
+package com.jetsmad.xshop.services;
 
-import com.jetsmad.xshop.util.beans.CartItem;
-import com.jetsmad.xshop.util.beans.Product;
+import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author markoiti
+ * @author michael
  */
-@WebServlet(urlPatterns = {"/testBasket"})
-public class testBasket extends HttpServlet {
+@WebServlet(name = "footer", urlPatterns = "/footer")
+public class footer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,31 +33,15 @@ public class testBasket extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ArrayList<CartItem> i = new ArrayList<>();
-        Product ppp = new Product("6", "pc", 1000f, 55, "pc", "full qualfied pc", true);
-        Product pp = new Product("6", "pc", 2000f, 55, "pc", "full qualfied pc", true);
-        Product p = new Product("6", "pc", 100f, 55, "pc", "full qualfied pc", true);
-        Product pppp = new Product("6", "pc", 10000f, 55, "pc", "full qualfied pc", true);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("clientviews/footer.jsp");
+        request.setAttribute(SessionAttrs.FOOTER_CATS, (new DBController()).getCategories());
+        rd.include(request, response);
+        }
+    
 
-        CartItem item = new CartItem(ppp, 1);
-        CartItem item1 = new CartItem(pp, 2);
-        CartItem item2 = new CartItem(p, 1);
-        CartItem item3 = new CartItem(pppp, 3);
 
-        i.add(item);
-        i.add(item1);
-        i.add(item2);
-        i.add(item3);
-
-        HttpSession s = request.getSession(true);
-        s.setAttribute("cart", i);
-        RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-        rd.forward(request, response);
-
-    }
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

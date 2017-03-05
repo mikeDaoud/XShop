@@ -10,7 +10,6 @@ import com.jetsmad.xshop.util.beans.SessionAttrs;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,11 +32,11 @@ public class GetProducts extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String type = request.getAttribute("type").toString();
+        String type = (String) request.getAttribute("type");
         DBController db = new DBController();
         ArrayList<Product> allProducts = new ArrayList<>();
         ArrayList<Product> productsToShow = new ArrayList<>();
-        if(type.equals("all")){
+        if(type == null || type.equals("all")){
             allProducts = db.getAllProducts();
         }else if(type.equals("category")){
             String categoryName = request.getAttribute("categoryName").toString();
@@ -60,6 +59,9 @@ public class GetProducts extends HttpServlet {
         }
         
         Integer pagenum = (Integer)request.getAttribute("pagenum");
+        if(pagenum == null){
+            pagenum = 1;
+        }
         if(allProducts.size() >= (pagenum*12)){
             for(int i = ((pagenum - 1)*12);i < (pagenum*12);i++){
                 productsToShow.add(allProducts.get(i));
@@ -72,7 +74,7 @@ public class GetProducts extends HttpServlet {
         
         request.setAttribute(SessionAttrs.PRODUCTS_LIST, productsToShow);
         
-        request.getRequestDispatcher("products.jsp").include(request,response);
+        request.getRequestDispatcher("clientviews/products.jsp").include(request,response);
         
     }
 

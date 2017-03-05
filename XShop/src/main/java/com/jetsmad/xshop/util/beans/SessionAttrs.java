@@ -25,5 +25,6 @@ public final class SessionAttrs {
     public static final String PRODUCT_ID= "productID";
     public static final String PRODUCT_OBJECT="productObj";
     //----- End Merna ------
+    public static final String FOOTER_CATS = "footercats";
     
 }

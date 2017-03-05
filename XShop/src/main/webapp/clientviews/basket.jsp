@@ -4,6 +4,8 @@
 <%@page import="com.jetsmad.xshop.util.beans.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="cart" value="${sessionScope.cart}"></c:set>
 <c:set var="total" value="${0}"></c:set>
 
@@ -27,42 +29,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="item" items="${cart}">
-                            <tr>
-                                <td>
-                                    <a href="#">
-                                        <img src="img/detailsquare.jpg" alt="White Blouse Armani">
-                                    </a>
-                                </td>
-                                <td><c:out value="${item.product.name}"></c:out>
-                                    </td>
-                                    <td>
-                                        <input type="number" value="<c:out value="${item.quantity}"></c:out>">
-                                    </td>
-                                    <td>$<c:out value="${item.product.price}"></c:out></td>
-                                    <c:set var="itemtotal" value="${item.product.price * item.quantity}"></c:set>
-                                    <td>$<c:out value="${pageScope.itemtotal}"></c:out></td>
-                                    <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                            <c:set var="total" value="${pageScope.total + pageScope.itemtotal }"></c:set>
-                        </c:forEach>
                        
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="4">Total</th>
-                            <th colspan="2">$<c:out value="${pageScope.total}"></c:out></th>
-                        </tr>
-                    </tfoot>
-                </table>
+                                <c:forEach var="item" items="${cart}">
+                                    <tr>
+                                        <td>
+                                            <a href="#">
+                                                <img src="img/detailsquare.jpg" alt="White Blouse Armani">
+                                            </a>
+                                        </td>
+                                        <td><c:out value="${item.product.name}"></c:out>
+                                            </td>
+                                            <td>
+                                                <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                                <input type="number" value="<c:out value="${item.quantity}"></c:out>">
+                                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>$<c:out value="${item.product.price}"></c:out></td>
+                                        <c:set var="itemtotal" value="${item.product.price * item.quantity}"></c:set>
+                                        <td>$<c:out value="${pageScope.itemtotal}"></c:out></td>
+                                            <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        </tr>
+                                    <c:set var="total" value="${pageScope.total + pageScope.itemtotal }"></c:set>
+                                </c:forEach>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="4">Total</th>
+                                    <th colspan="2">$<c:out value="${pageScope.total}"></c:out></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                 
+
 
             </div>
             <!-- /.table-responsive -->
 
             <div class="box-footer">
                 <div class="pull-left">
-                    <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
+                    <a href="index.jsp" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                 </div>
                 <div class="pull-right">
 
@@ -96,18 +102,18 @@
                     <tr>
                         <td>Order subtotal</td>
                         <th>$<c:out value="${pageScope.total}"></c:out></th>
-                    </tr>
-                    <tr>
-                        <td>Shipping and handling</td>
-                        <th>$10.00</th>
-                    </tr>
-                    <tr>
-                        <td>Tax</td>
-                        <th>$0.00</th>
-                    </tr>
-                    <tr class="total">
-                        <td>Total</td>
-                        <th>$<c:out value="${pageScope.total + 10}"></c:out></th>
+                        </tr>
+                        <tr>
+                            <td>Shipping and handling</td>
+                            <th>$10.00</th>
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <th>$0.00</th>
+                        </tr>
+                        <tr class="total">
+                            <td>Total</td>
+                            <th>$<c:out value="${pageScope.total + 10}"></c:out></th>
                     </tr>
                 </tbody>
             </table>

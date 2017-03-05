@@ -12,12 +12,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="productsList" value="${requestScope.products}"></c:set>
-
-
-
-
-
-
+    <div class="items col-md-9 box">
     <c:forEach var="prdct" items="${productsList}">
         <div class="product-holder col-md-4">
             <div class="product-item text-center">
@@ -35,3 +30,15 @@
             </div>
 
     </c:forEach>
+        <!-- *****  pagination ***** -->
+                    <div class="myPagination col-md-4 col-md-offset-8">
+                        <ul class="pagination">
+                            <li class="disabled"><a href="#">&laquo;</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                    <!-- *****  End pagination ***** -->
+</div>
