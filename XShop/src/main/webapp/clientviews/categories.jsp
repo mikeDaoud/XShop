@@ -5,14 +5,27 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.jetsmad.xshop.util.database.DBController"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:set var="categories" value="${requestScope.categories_arraylist}"></c:set>
+    <div class="panel panel-default sidebar-menu">
 
-<% ArrayList<String> categories = new DBController().getCategories(); 
+        <div class="panel-heading">
+            <h3 class="panel-title">Categories</h3>
+        </div>
 
-    for (String category : categories) {
-            out.println("<a href=\"#\" class=\"list-group-item\">" + category +"</a>");
-        }
-%> 
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked category-menu">
+                <li class="active">
+                    <a href="category.html">All</a>
+                </li>
+            <c:forEach var="category" items="${categories}">
+                <li>
+                    <a href="category.html"><c:out value="${category}"></c:out> </a>
+                    </li>
+            </c:forEach>
 
+        </ul>
+
+    </div>
+</div>
