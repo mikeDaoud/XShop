@@ -10,6 +10,7 @@ import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.util.UUID;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,36 +34,47 @@ public class UpdateUserAcct extends HttpServlet {
 //        2. Checks the database for the mail if exists -> if exists reply with "false"
 //        3. update the user data in the database
 //        4. reply with "true" or "false" string
-        String user_id = (String) request.getAttribute(SessionAttrs.USER_ID);
-       // String user_id = "12";
+        //String user_id = (String) request.getAttribute(SessionAttrs.USER_ID);
+        String user_id = "025-418e-bc8f-26e7e6781082";
+        
         if (user_id != null) {
+            
+            User user = new User();
+            user.setId(user_id);
+            user.setName(request.getParameter("name"));
+            user.setEmail(request.getParameter("email"));
+            user.setDob(request.getParameter("dOB"));
+            user.setPassword(request.getParameter("password"));
+            user.setAddress(request.getParameter("address"));
+            user.setJob(request.getParameter("job"));
+            user.setInterests(request.getParameterValues("interest"));
+            
             User currUser = (new DBController()).getUserById(user_id);
             String user_email = (String) request.getParameter("email");
             if ((user_email != null && user_email.equals(currUser.getEmail())) || (new DBController()).getUser(user_email) == null) {
-                User user = new User();
-                user.setId(user_id);
-                user.setName(request.getParameter("name"));
-                user.setEmail(request.getParameter("email"));
-                user.setDob(request.getParameter("dOB"));
-                user.setPassword(request.getParameter("password"));
-                user.setAddress(request.getParameter("address"));
-                user.setJob(request.getParameter("job"));
-                user.setInterests(request.getParameterValues("interest"));
-                (new DBController()).ubdateUser(user);
-                HttpSession session = request.getSession(false);
-                if (session == null) {
-                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
-                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
-                    //TODO:redirect to profil page
+                if (request.getParameter("password").equals(request.getParameter("repeatedPassword"))) {
 
-                } else {
+                    (new DBController()).ubdateUser(user);
+
+                    HttpSession session = request.getSession(true);
+
                     session.setAttribute(SessionAttrs.USER_ID, user.getId());
                     session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to card page
 
+                } else {
+                    request.setAttribute("errorpassword", "passowords don't match");
+                    request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, user);
+                    RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
+                    rd.include(request, response);
                 }
+
             } else {
                 // show error email found
+                request.setAttribute("erroremail", "Email already exists");
+                request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, user);
+                RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
+                rd.include(request, response);
             }
         }
 
