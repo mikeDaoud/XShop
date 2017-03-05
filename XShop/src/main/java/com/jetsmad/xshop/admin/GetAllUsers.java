@@ -35,8 +35,8 @@ public class GetAllUsers extends HttpServlet {
             System.out.println(user.getEmail());
         }
         // include viwe jsp
-//        RequestDispatcher rd = request.getRequestDispatcher("viewUsers.jsp");
-//        rd.forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("adminviews/usersList.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
