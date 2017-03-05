@@ -19,6 +19,7 @@ public final class Constants {
     public static final String USERS_ARRAYLIST = "users_arraylist";
     public static final String CATEGORIES_ARRAYLIST = "categories_arraylist";
     public static final String USER_EMAIL = "user_email";
+    public static final String Order = "order";
     // end of marko
     //----- Merna  ------
     // this variables not in session so i recommended change name to Constants :D

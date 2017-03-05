@@ -5,13 +5,23 @@
  */
 package com.jetsmad.xshop.cart;
 
+import com.jetsmad.xshop.util.beans.CartItem;
+import com.jetsmad.xshop.util.beans.Constants;
+import com.jetsmad.xshop.util.beans.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.UUID;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,7 +42,7 @@ public class PlaceOrder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
 //        Servlet that does the following:
 //        1. get the details of the form from the request
 //        2. get the cart items from the session
@@ -42,6 +52,20 @@ public class PlaceOrder extends HttpServlet {
 //        6. Create an order object with all that data (Status: pending)
 //        7. Add teh Order object on the session
 //        8. upon success forward to the payment step in checkout (to be done later)
+        // let that the names of filed the same in the bean 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        HttpSession session = request.getSession(false);
+        Order order;
+        if (session != null) {
+            order = new Order(UUID.randomUUID().toString().substring(20), (String) session.getAttribute(Constants.USER_ID), (String) request.getAttribute("street"), (String) request.getAttribute("city"), (String) request.getAttribute("governorate"), (String) request.getAttribute("phone"), dtf.format(now).toString(), (ArrayList<CartItem>) (session.getAttribute(Constants.CART_ITEMS)), "pending");
+            session.setAttribute(Constants.Order, order);
+            RequestDispatcher rd = request.getRequestDispatcher("clientviews/transaction.jsp");
+            rd.forward(request, response);
+            // forward for what 
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -12,6 +12,18 @@ import java.util.ArrayList;
  * @author michael
  */
 public class Order {
+
+    public Order(String orderID, String userID, String street, String city, String governorate, String phone, String date, ArrayList<CartItem> orderItems, String status) {
+        this.orderID = orderID;
+        this.userID = userID;
+        this.street = street;
+        this.city = city;
+        this.governorate = governorate;
+        this.phone = phone;
+        this.date = date;
+        this.orderItems = orderItems;
+        this.status = status;
+    }
     private String orderID;
     private String userID;
     private String street;

@@ -5,6 +5,7 @@
  */
 package com.jetsmad.xshop.util.database;
 
+import com.jetsmad.xshop.util.beans.Order;
 import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.beans.User;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.util.Vector;
  * @author michael
  */
 public class DBController {
+
     OrderDAO orderdao;
     ProductDAO productdao;
     UserDAO userdao;
@@ -28,26 +30,26 @@ public class DBController {
         productdao = new ProductDAO(this);
         userdao = new UserDAO(this);
     }
-    
-    public void connectToDB(){
+
+    public void connectToDB() {
         // Marko start
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //here mydb is database name, root is username and  password
             con = DriverManager.getConnection("jdbc:mysql://localhost/xshop?user=root&password=123");
             System.out.println("hii");
-            
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
 
         }
         //Marko end
     }
-    
-    public void disconnect(){
+
+    public void disconnect() {
         // Marko start
         try {
-           
+
             con.close();
             System.out.println("byee");
 
@@ -56,25 +58,24 @@ public class DBController {
         }
         //Marko end
     }
-    
-    public void addUser(User user){
+
+    public void addUser(User user) {
         userdao.addUser(user);
     }
-    
-    public boolean checkEmail(String email){
+
+    public boolean checkEmail(String email) {
         return userdao.checkEmail(email);
     }
-    
-    public String checkPass(String email){
+
+    public String checkPass(String email) {
         return userdao.checkPass(email);
     }
-    
-    public User getUser(String email){
+
+    public User getUser(String email) {
         return userdao.getUser(email);
     }
-    
+
     // Marko start
-    
     public boolean insertProduct(Product prdct) {
         return productdao.insertProduct(prdct);
     }
@@ -98,23 +99,41 @@ public class DBController {
 //    public ArrayList<Product> searchProductsByName(String name) {
 //        return productdao.searchProductsByName(name);
 //    }
-
     public boolean updateProduct(Product prdct) {
-       return productdao.updateProduct(prdct);
+        return productdao.updateProduct(prdct);
     }
-        
+
     //Marko end
-    
-    public ArrayList<String> getCategories(){
+    public ArrayList<String> getCategories() {
         return productdao.getCategories();
     }
+
     public User getUserById(String id) {
         return userdao.getUserById(id);
     }
+
     public void ubdateUser(User user) {
         userdao.ubdateUser(user);
     }
+
     public ArrayList<User> getAllUsers() {
         return userdao.getAllUsers();
     }
+
+    public void insertOrder(Order order) {
+        orderdao.insertOrder(order);
+    }
+
+    public Order getOrder(int orderID) {
+        return orderdao.getOrder(orderID);
+    }
+
+    public ArrayList<Order> getAllOrders() {
+        return orderdao.getAllOrders();
+    }
+
+    public void updateOrderStatus(String orderID, String status) {
+        orderdao.updateOrderStatus(orderID, status);
+    }
+
 }
