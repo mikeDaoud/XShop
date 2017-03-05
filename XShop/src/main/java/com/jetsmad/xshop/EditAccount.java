@@ -33,7 +33,7 @@ public class EditAccount extends HttpServlet {
         request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, currUser);
 
         RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
-        rd.forward(request, response);
+        rd.include(request, response);
 
     }
 

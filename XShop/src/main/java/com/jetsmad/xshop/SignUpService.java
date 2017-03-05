@@ -11,6 +11,7 @@ import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,37 +38,39 @@ public class SignUpService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        System.out.println("signup in");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             User user = new User();
             DBController dbc = new DBController();
-            if(dbc.checkEmail(request.getParameter("email"))){
-                user.setId(UUID.randomUUID().toString().substring(10));
-                user.setName(request.getParameter("name"));
-                user.setEmail(request.getParameter("email"));
-                user.setDob(request.getParameter("dOB"));
-                user.setPassword(request.getParameter("password"));
-                user.setAddress(request.getParameter("address"));
-                user.setJob(request.getParameter("job"));
-                user.setInterests(request.getParameterValues("interest"));
-                dbc.addUser(user);
-                HttpSession session = request.getSession(false);
-		if (session == null){
-                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
-                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
-                    //TODO:redirect to profil page
-                    
-                }else{
+            if (dbc.checkEmail(request.getParameter("email"))) {
+                if (request.getParameter("password").equals(request.getParameter("repeatedPassword"))) {
+                    user.setId(UUID.randomUUID().toString().substring(10));
+                    user.setName(request.getParameter("name"));
+                    user.setEmail(request.getParameter("email"));
+                    user.setDob(request.getParameter("dOB"));
+                    user.setPassword(request.getParameter("password"));
+                    user.setAddress(request.getParameter("address"));
+                    user.setJob(request.getParameter("job"));
+                    user.setInterests(request.getParameterValues("interest"));
+                    dbc.addUser(user);
+                    HttpSession session = request.getSession(true);
                     session.setAttribute(SessionAttrs.USER_ID, user.getId());
                     session.setAttribute(SessionAttrs.USER_NAME, user.getName());
                     //TODO:redirect to card page
-                    
-		}
-            }else{
+                } else {
+                    request.setAttribute("errorpassword", "passowords don't match");
+                    RequestDispatcher rd = request.getRequestDispatcher("clientviews/register.jsp");
+                    rd.include(request, response);
+                }
+            } else {
+
                 //TODO:redirect to signup page with message to change email becouse it used before
-                out.println("repeated email");
+//                out.println("repeated email");
+                request.setAttribute("erroremail", "Email already exists");
+                RequestDispatcher rd = request.getRequestDispatcher("clientviews/register.jsp");
+                rd.include(request, response);
             }
-            
             
         }
     }

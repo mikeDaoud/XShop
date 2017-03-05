@@ -10,7 +10,9 @@ import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,29 +40,26 @@ public class SignInService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            String email = request.getParameter("loginemail");
+            String password = request.getParameter("loginpassword");
             DBController dbc = new DBController();
             String checkPass = dbc.checkPass(email);
-            if(password.equals(checkPass))
-            {
-                
+            if (password.equals(checkPass)) {
+
                 User user = dbc.getUser(email);
-		HttpSession session = request.getSession(false);
-		if (session == null){
-                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
-                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
-                    //TODO:redirect to profil page
-                    
-                    
-                }else{
-                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
-                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
-                    //TODO:redirect to card page
-		}
-            }else{ 
-		//TODO:redirect to signIn page with message to check email or password becouse one of them is wrong
-                out.println("fail login");
+                HttpSession session = request.getSession(true);
+                session.setAttribute(SessionAttrs.USER_ID, user.getId());
+                session.setAttribute(SessionAttrs.USER_NAME, user.getName());
+                //TODO:redirect to profil page
+
+            } else {
+                //TODO:redirect to signIn page with message to check email or password becouse one of them is wrong
+                // out.println("fail login");
+                //include header 
+                request.setAttribute("error", "wrong email or password");
+                RequestDispatcher rd = request.getRequestDispatcher("clientviews/register.jsp");
+                rd.include(request, response);
+                // include footer
             }
         }
     }
