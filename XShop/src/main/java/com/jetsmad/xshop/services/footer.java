@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop.services;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +35,7 @@ public class footer extends HttpServlet {
             throws ServletException, IOException {
         
         RequestDispatcher rd = request.getRequestDispatcher("clientviews/footer.jsp");
-        request.setAttribute(SessionAttrs.FOOTER_CATS, (new DBController()).getCategories());
+        request.setAttribute(Constants.FOOTER_CATS, (new DBController()).getCategories());
         rd.include(request, response);
         }
     

@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop.admin;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class GetAllUsers extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ArrayList<User> users = (new DBController()).getAllUsers();
-        request.setAttribute(SessionAttrs.USERS_ARRAYLIST, users);
+        request.setAttribute(Constants.USERS_ARRAYLIST, users);
         for(User user : users){
             System.out.println(user.getEmail());
         }

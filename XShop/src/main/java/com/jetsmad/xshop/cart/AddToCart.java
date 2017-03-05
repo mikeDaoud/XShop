@@ -7,7 +7,7 @@ package com.jetsmad.xshop.cart;
 
 import com.jetsmad.xshop.util.beans.CartItem;
 import com.jetsmad.xshop.util.beans.Product;
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,7 +52,7 @@ public class AddToCart extends HttpServlet {
                     session = request.getSession(true);
                     cartItems = new ArrayList<>();
                 }else{
-                    cartItems = (ArrayList<CartItem>) session.getAttribute(SessionAttrs.CART_ITEMS);
+                    cartItems = (ArrayList<CartItem>) session.getAttribute(Constants.CART_ITEMS);
                 }
                 for(CartItem item:cartItems){
                     if(item.getProduct().getId().equals(productId)){
@@ -64,7 +64,7 @@ public class AddToCart extends HttpServlet {
                     CartItem newItem = new CartItem(product, 1);
                     cartItems.add(newItem);
                 }
-                session.setAttribute(SessionAttrs.CART_ITEMS, cartItems);
+                session.setAttribute(Constants.CART_ITEMS, cartItems);
                 out.write("True");
             }else{
                 out.write("false");

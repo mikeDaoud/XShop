@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
@@ -55,8 +55,8 @@ public class SignUpService extends HttpServlet {
                     user.setInterests(request.getParameterValues("interest"));
                     dbc.addUser(user);
                     HttpSession session = request.getSession(true);
-                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
-                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
+                    session.setAttribute(Constants.USER_ID, user.getId());
+                    session.setAttribute(Constants.USER_NAME, user.getName());
                     //TODO:redirect to card page
                 } else {
                     request.setAttribute("errorpassword", "passowords don't match");

@@ -3,28 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop;
+package com.jetsmad.xshop.cart;
 
-import com.jetsmad.xshop.util.beans.Constants;
-import com.jetsmad.xshop.util.beans.User;
-import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author michael
  */
-@WebServlet(name = "SignInService", urlPatterns = {"/signin"})
-public class SignInService extends HttpServlet {
+@WebServlet(name = "PlaceOrder", urlPatterns = {"/PlaceOrder"})
+public class PlaceOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,30 +32,16 @@ public class SignInService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String email = request.getParameter("loginemail");
-            String password = request.getParameter("loginpassword");
-            DBController dbc = new DBController();
-            String checkPass = dbc.checkPass(email);
-            if (password.equals(checkPass)) {
-
-                User user = dbc.getUser(email);
-                HttpSession session = request.getSession(true);
-                session.setAttribute(Constants.USER_ID, user.getId());
-                session.setAttribute(Constants.USER_NAME, user.getName());
-                //TODO:redirect to profil page
-
-            } else {
-                //TODO:redirect to signIn page with message to check email or password becouse one of them is wrong
-                // out.println("fail login");
-                //include header 
-                request.setAttribute("error", "wrong email or password");
-                RequestDispatcher rd = request.getRequestDispatcher("clientviews/register.jsp");
-                rd.include(request, response);
-                // include footer
-            }
-        }
+        
+//        Servlet that does the following:
+//        1. get the details of the form from the request
+//        2. get the cart items from the session
+//        3. Create a unique Id for the order
+//        4. get the userID from the session
+//        5. get the system date into a string (hint check simpledatefromat class)
+//        6. Create an order object with all that data (Status: pending)
+//        7. Add teh Order object on the session
+//        8. upon success forward to the payment step in checkout (to be done later)
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

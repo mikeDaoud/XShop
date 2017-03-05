@@ -6,7 +6,7 @@
 package com.jetsmad.xshop.admin;
 
 import com.jetsmad.xshop.util.beans.Product;
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,10 +36,10 @@ public class GetProductDetailsForEditing extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String productID = (String) request.getAttribute(SessionAttrs.PRODUCT_ID);
+        String productID = (String) request.getAttribute(Constants.PRODUCT_ID);
         Product product = new DBController().getProduct(productID);
 
-        request.setAttribute(SessionAttrs.PRODUCT_OBJECT, product);
+        request.setAttribute(Constants.PRODUCT_OBJECT, product);
 
         RequestDispatcher rd = request.getRequestDispatcher("updateProduct.jsp");
         rd.forward(request, response);

@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
@@ -27,10 +27,10 @@ public class EditAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        String userId = (String) request.getAttribute(SessionAttrs.USER_ID);
+        String userId = (String) request.getAttribute(Constants.USER_ID);
         System.out.println(userId);
         User currUser = (new DBController()).getUserById(userId);
-        request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, currUser);
+        request.setAttribute(Constants.CURRENT_USER_OBJECT, currUser);
 
         RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
         rd.include(request, response);

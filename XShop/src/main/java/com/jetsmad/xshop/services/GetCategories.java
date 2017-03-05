@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop.services;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -34,7 +34,7 @@ public class GetCategories extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("clientviews/categories.jsp");
-        request.setAttribute(SessionAttrs.CATEGORIES_ARRAYLIST, (new DBController()).getCategories());
+        request.setAttribute(Constants.CATEGORIES_ARRAYLIST, (new DBController()).getCategories());
         rd.include(request, response);
 
     }

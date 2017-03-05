@@ -7,7 +7,7 @@ package com.jetsmad.xshop.cart;
 
 import com.jetsmad.xshop.util.beans.CartItem;
 import com.jetsmad.xshop.util.beans.Product;
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +37,7 @@ public class RemoveFromCart extends HttpServlet {
         String productId = request.getAttribute("productId").toString();
         HttpSession session = request.getSession(false);
         if(productId != null && session != null ){
-            ArrayList<CartItem> cartItems = (ArrayList<CartItem>) session.getAttribute(SessionAttrs.CART_ITEMS);
+            ArrayList<CartItem> cartItems = (ArrayList<CartItem>) session.getAttribute(Constants.CART_ITEMS);
             for(CartItem item:cartItems){
                 if(item.getProduct().getId().equals(productId)){
                     if(item.removeOne()){
@@ -49,7 +49,7 @@ public class RemoveFromCart extends HttpServlet {
                     }
                 }
             }
-            session.setAttribute(SessionAttrs.CART_ITEMS, cartItems);
+            session.setAttribute(Constants.CART_ITEMS, cartItems);
         }
     }
 

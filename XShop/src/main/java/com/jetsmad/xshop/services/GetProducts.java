@@ -6,7 +6,7 @@
 package com.jetsmad.xshop.services;
 
 import com.jetsmad.xshop.util.beans.Product;
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class GetProducts extends HttpServlet {
             }
         }
         
-        request.setAttribute(SessionAttrs.PRODUCTS_LIST, productsToShow);
+        request.setAttribute(Constants.PRODUCTS_LIST, productsToShow);
         
         request.getRequestDispatcher("clientviews/products.jsp").include(request,response);
         

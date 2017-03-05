@@ -7,7 +7,7 @@ package com.jetsmad.xshop.cart;
 
 import com.jetsmad.xshop.util.beans.CartItem;
 import com.jetsmad.xshop.util.beans.Product;
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,7 +43,7 @@ public class UpdateCartItemQuantity extends HttpServlet {
             DBController dbc = new DBController();
             Product product = dbc.getProduct(productId);
             int newStock;
-            ArrayList<CartItem> cartItems = (ArrayList<CartItem>) session.getAttribute(SessionAttrs.CART_ITEMS);
+            ArrayList<CartItem> cartItems = (ArrayList<CartItem>) session.getAttribute(Constants.CART_ITEMS);
             if(action.equals("increase")){
                 if(product.getStock() >= 1){
                     for(CartItem item:cartItems){
@@ -70,7 +70,7 @@ public class UpdateCartItemQuantity extends HttpServlet {
                 }
             }
             dbc.updateProduct(product);
-            session.setAttribute(SessionAttrs.CART_ITEMS, cartItems);
+            session.setAttribute(Constants.CART_ITEMS, cartItems);
         }else{
             out.write("False");
         }

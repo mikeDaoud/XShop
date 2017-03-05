@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class UpdateUserAcct extends HttpServlet {
 //        2. Checks the database for the mail if exists -> if exists reply with "false"
 //        3. update the user data in the database
 //        4. reply with "true" or "false" string
-        //String user_id = (String) request.getAttribute(SessionAttrs.USER_ID);
+        //String user_id = (String) request.getAttribute(Constants.USER_ID);
         String user_id = "025-418e-bc8f-26e7e6781082";
         
         if (user_id != null) {
@@ -58,13 +58,13 @@ public class UpdateUserAcct extends HttpServlet {
 
                     HttpSession session = request.getSession(true);
 
-                    session.setAttribute(SessionAttrs.USER_ID, user.getId());
-                    session.setAttribute(SessionAttrs.USER_NAME, user.getName());
+                    session.setAttribute(Constants.USER_ID, user.getId());
+                    session.setAttribute(Constants.USER_NAME, user.getName());
                     //TODO:redirect to card page
 
                 } else {
                     request.setAttribute("errorpassword", "passowords don't match");
-                    request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, user);
+                    request.setAttribute(Constants.CURRENT_USER_OBJECT, user);
                     RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
                     rd.include(request, response);
                 }
@@ -72,7 +72,7 @@ public class UpdateUserAcct extends HttpServlet {
             } else {
                 // show error email found
                 request.setAttribute("erroremail", "Email already exists");
-                request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, user);
+                request.setAttribute(Constants.CURRENT_USER_OBJECT, user);
                 RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
                 rd.include(request, response);
             }

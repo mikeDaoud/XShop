@@ -5,7 +5,7 @@
  */
 package com.jetsmad.xshop.admin;
 
-import com.jetsmad.xshop.util.beans.SessionAttrs;
+import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
@@ -36,11 +36,11 @@ public class GetUserDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String userId = (String) request.getAttribute(SessionAttrs.USER_ID);
+        String userId = (String) request.getAttribute(Constants.USER_ID);
         System.out.println(userId);
         User currUser = (new DBController()).getUserById(userId);
         // get the number of orders and orders and put it to reguest
-        request.setAttribute(SessionAttrs.CURRENT_USER_OBJECT, currUser);
+        request.setAttribute(Constants.CURRENT_USER_OBJECT, currUser);
 
 //        RequestDispatcher rd = request.getRequestDispatcher("userdetails.jsp");
 //        rd.forward(request, response);
