@@ -10,3 +10,5 @@
     <script src="${pageContext.request.contextPath}/resources/client/js/bootstrap-hover-dropdown.js"></script>
     <script src="${pageContext.request.contextPath}/resources/client/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/client/js/front.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/client/js/customAjax.js"></script>
+    
