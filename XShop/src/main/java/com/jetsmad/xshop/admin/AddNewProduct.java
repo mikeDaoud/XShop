@@ -29,7 +29,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(name = "AddNewProduct", urlPatterns = {"/AddNewProduct"})
 public class AddNewProduct extends HttpServlet {
 
-    private static final String SAVE_DIR = "uploadFiles";
+    private static final String SAVE_DIR = "resources/images";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -86,7 +86,7 @@ public class AddNewProduct extends HttpServlet {
                 } else {
                     // processUploadedFile(item);
                     if (!item.isFormField()) {
-                        item.write(new File(path + "/uploadFiles/" + item.getName()));
+                        item.write(new File(path + "/resources/images/" + item.getName()));
                         System.out.println(path);
 
                     }
