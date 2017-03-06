@@ -24,7 +24,7 @@
         <div class="container">
             <div class="navbar-header">
 
-                <a class="navbar-brand home" href="" data-animate-hover="bounce">
+                <a class="navbar-brand home" href="index.jsp" data-animate-hover="bounce">
                     <img src="${pageContext.request.contextPath}/resources/client/img/logo.png" alt="Obaju logo" class="hidden-xs">
             </a>
 
@@ -53,7 +53,7 @@
                     </li>
                     <c:choose>
                         <c:when test="${empty userName}">
-                            <li><a href="#">Login</a>
+                            <li><a href="register.jsp">Login</a>
                             </li>
                         </c:when>
                         <c:otherwise>
