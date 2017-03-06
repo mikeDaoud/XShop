@@ -58,7 +58,7 @@ public class OrderDAO {
                     PreparedStatement pstmnt = dbController.con.prepareStatement(queryString);
                     pstmnt.setString(1, order.getOrderID());
                     pstmnt.setString(2, item.getProduct().getId());
-                    pstmnt.setInt(2, item.getQuantity());
+                    pstmnt.setInt(3, item.getQuantity());
                     pstmnt.executeUpdate();
                 }
             }
@@ -94,7 +94,7 @@ public class OrderDAO {
                 if (rs.next()) {
                     PreparedStatement pstDet;
                     ResultSet rsDet;
-                    String queryDet = "SELECT products_id,quant FROM interests WHERE order_id=?";
+                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
                     pstDet = dbController.con.prepareStatement(queryDet);
                     pstDet.setString(1, orderID);
                     rsDet = pstDet.executeQuery();
@@ -102,6 +102,7 @@ public class OrderDAO {
                     while (rsDet.next()) {
                         CartItem cartItem = new CartItem();
                         Product product = dbController.productdao.getProduct(rsDet.getString(1));
+                        cartItem.setProduct(product);
                         cartItem.setQuantity(rsDet.getInt(2));
                         arrayList.add(cartItem);
                     }
@@ -114,6 +115,7 @@ public class OrderDAO {
 
             } catch (SQLException ex) {
                 System.out.println("order not found !");
+                ex.printStackTrace();
 
             } finally {
                 dbController.disconnect();
@@ -140,7 +142,7 @@ public class OrderDAO {
                 while (rs.next()) {
                     PreparedStatement pstDet;
                     ResultSet rsDet;
-                    String queryDet = "SELECT products_id,quant FROM interests WHERE order_id=?";
+                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
                     pstDet = dbController.con.prepareStatement(queryDet);
                     pstDet.setString(1, rs.getString(1));
                     rsDet = pstDet.executeQuery();
@@ -148,6 +150,7 @@ public class OrderDAO {
                     while (rsDet.next()) {
                         CartItem cartItem = new CartItem();
                         Product product = dbController.productdao.getProduct(rsDet.getString(1));
+                        cartItem.setProduct(product);
                         cartItem.setQuantity(rsDet.getInt(2));
                         arrayList.add(cartItem);
                     }
@@ -159,7 +162,7 @@ public class OrderDAO {
                 pst.close();
 
             } catch (SQLException ex) {
-
+                ex.printStackTrace();
                 return null;
             } finally {
                 if (orders.isEmpty()) {
