@@ -6,6 +6,13 @@
 
 
 //------ Merna --------
+$(document).on("click", ".eye-btn", function (event) {
+//    var $form = $(this);
+    $.post("getProductDetails", {productId:event.target.name}, function (response) {
+        $(".items").html(response);
+    });
+    return false;
+});
 //------ End Merna --------
 
 //------ Mikke --------

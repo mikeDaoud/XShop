@@ -7,13 +7,20 @@ package com.jetsmad.xshop.admin;
 
 import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.database.DBController;
+import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -21,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AddNewProduct", urlPatterns = {"/AddNewProduct"})
 public class AddNewProduct extends HttpServlet {
+
+    private static final String SAVE_DIR = "resources/images";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +43,7 @@ public class AddNewProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         Product product = new Product();
         DBController dbController = new DBController();
         product.setId(UUID.randomUUID().toString().substring(10));
@@ -44,10 +53,60 @@ public class AddNewProduct extends HttpServlet {
         product.setCategory(request.getParameter("category"));
         product.setDesc(request.getParameter("desc"));
         product.setActive(Boolean.parseBoolean(request.getParameter("active")));
-      
+
         dbController.insertProduct(product);
-        
+
         // redirect to products
+        try {
+            String path = request.getServletContext().getRealPath("");
+
+            // constructs path of the directory to save uploaded file
+            String savePath = path + File.separator + SAVE_DIR;
+
+            // creates the save directory if it does not exists
+            File fileSaveDir = new File(savePath);
+            if (!fileSaveDir.exists()) {
+                fileSaveDir.mkdir();
+            }
+
+            // Create a factory for disk-based file items
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            // Create a new file upload handler
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            // Parse the request
+            List<FileItem> items = upload.parseRequest(request);
+            Iterator<FileItem> iter = items.iterator();
+            while (iter.hasNext()) {
+                FileItem item = iter.next();
+                if (item.isFormField()) {
+                    //processFormField(item);
+                    String name = item.getFieldName();
+                    String value = item.getString();
+                    System.out.println(name + "---" + value);
+                } else {
+                    // processUploadedFile(item);
+                    if (!item.isFormField()) {
+                        item.write(new File(path + "/resources/images/" + item.getName()));
+                        System.out.println(path);
+
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            System.out.println(s);
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length()-1);
+            }
+        }
+        return "";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
