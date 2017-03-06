@@ -172,20 +172,56 @@ public class ProductDAO {
         return null;
     }
 
-    public ArrayList<Product> getPriceLimitProducts(String name,int upper, int lower) {
+    public ArrayList<Product> getPriceLimitProducts(String name, Float upper, Float lower) {
         //Same as above but within the price limits given
         dbController.connectToDB();
         if (dbController.con != null) {
             ArrayList<Product> products = new ArrayList<>();
             try {
-                String query = "select * from products where name=? and price between ? and ?";
+                String query = "select * from products where name like ? and price between ? and ?";
                 PreparedStatement pst;
                 ResultSet rs;
 
                 pst = dbController.con.prepareStatement(query);
-                pst.setString(1, name);
-                pst.setInt(2, lower);
-                pst.setInt(3, upper);
+                pst.setString(1, "%" + name + "%");
+                pst.setFloat(2, lower);
+                pst.setFloat(3, upper);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
+                }
+                rs.close();
+                pst.close();
+            } catch (SQLException ex) {
+                return null;
+            } finally {
+                if (products.isEmpty()) {
+                    dbController.disconnect();
+                    return null;
+                } else {
+                    dbController.disconnect();
+                    return products;
+                }
+            }
+
+        }
+        return null;
+    }
+
+    public ArrayList<Product> getPriceLimitProducts(Float upper, Float lower) {
+        //Same as above but within the price limits given
+        dbController.connectToDB();
+        if (dbController.con != null) {
+            ArrayList<Product> products = new ArrayList<>();
+            try {
+                String query = "select * from products where price between ? and ?";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = dbController.con.prepareStatement(query);
+
+                pst.setFloat(1, lower);
+                pst.setFloat(2, upper);
                 rs = pst.executeQuery();
                 while (rs.next()) {
                     products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
@@ -241,7 +277,6 @@ public class ProductDAO {
 //        }
 //        return null;
 //    }
-
     public boolean updateProduct(Product prdct) {
         //Update the product in the database with the product ID in the given
         //product object and return true if updated, false if not
