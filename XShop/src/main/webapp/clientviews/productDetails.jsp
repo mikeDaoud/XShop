@@ -22,7 +22,7 @@
                 <p class="text-center">${requestScope.productObj.desc}</a>
                 </p>
 
-                <p class="price">${requestScope.productObj.price}</p>
+                <p class="price">$${requestScope.productObj.price}</p>
                
                 <c:choose>
                     <c:when test="${requestScope.productObj.stock gt 0}">

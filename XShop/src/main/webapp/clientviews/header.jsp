@@ -42,10 +42,13 @@
                             <span class="badge">
                                 <c:choose>
                                     <c:when test="${empty cartList}">
-                                       0
+                                        <div id="items-number">0</div>
                                     </c:when>
                                     <c:otherwise>
-                                       ${fn:length(cartList)}
+                                        <div id="items-number">
+                                          ${fn:length(cartList)}
+                                        </div>
+                                       
                                     </c:otherwise>    
                                 </c:choose>
                             </span>

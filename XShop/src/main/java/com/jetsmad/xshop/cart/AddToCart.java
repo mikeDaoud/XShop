@@ -29,7 +29,7 @@ public class AddToCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
 //        Servlet called with AJAX that does the following:
 //        1. gets Product ID from request
 //        2. check product stock in database
@@ -38,43 +38,42 @@ public class AddToCart extends HttpServlet {
 //        5. reply with a response of one string "true" or "false"
         boolean isNew = true;
         PrintWriter out = response.getWriter();
-        String productId = request.getAttribute("productId").toString();
+        //String productId = request.getAttribute("productId").toString();
+        String productId = request.getParameter("productId");
+        System.out.println(">>>>>" + productId + "<<<<<<<");
         DBController dbc = new DBController();
-        if(productId != null){
+        if (productId != null) {
             Product product = dbc.getProduct(productId);
-            if(product!= null && product.getStock() >= 1){
+            if (product != null && product.getStock() >= 1) {
                 int newStock = product.getStock() - 1;
                 product.setStock(newStock);
                 dbc.updateProduct(product);
                 ArrayList<CartItem> cartItems;
                 HttpSession session = request.getSession(false);
-                if (session == null){
+                if (session.getAttribute(Constants.CART_ITEMS) == null) {
                     session = request.getSession(true);
                     cartItems = new ArrayList<>();
-                }else{
+                } else {
                     cartItems = (ArrayList<CartItem>) session.getAttribute(Constants.CART_ITEMS);
                 }
-                for(CartItem item:cartItems){
-                    if(item.getProduct().getId().equals(productId)){
+                for (CartItem item : cartItems) {
+                    if (item.getProduct().getId().equals(productId)) {
                         item.addOne();
                         isNew = false;
                     }
                 }
-                if(isNew){
+                if (isNew) {
                     CartItem newItem = new CartItem(product, 1);
                     cartItems.add(newItem);
                 }
                 session.setAttribute(Constants.CART_ITEMS, cartItems);
-                out.write("true");
-            }else{
-                out.write("false");
+                out.write(cartItems.size() + "");
             }
-        }else{
+        } else {
             out.write("false");
         }
     }
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

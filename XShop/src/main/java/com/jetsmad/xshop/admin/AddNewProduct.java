@@ -88,7 +88,6 @@ public class AddNewProduct extends HttpServlet {
                     if (!item.isFormField()) {
                         item.write(new File(path + "/resources/images/" + item.getName()));
                         System.out.println(path);
-
                     }
                 }
             }
