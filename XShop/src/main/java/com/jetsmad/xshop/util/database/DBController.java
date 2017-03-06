@@ -92,13 +92,17 @@ public class DBController {
         return productdao.getCategoryProducts(category);
     }
 
-    public ArrayList<Product> getPriceLimitProducts(String name, int upper, int lower) {
+    public ArrayList<Product> getPriceLimitProducts(String name, Float upper, Float lower) {
         return productdao.getPriceLimitProducts(name, upper, lower);
     }
 
+    public ArrayList<Product> getPriceLimitProducts(Float upper, Float lower) {
+        return productdao.getPriceLimitProducts(upper, lower);
+    }
 //    public ArrayList<Product> searchProductsByName(String name) {
 //        return productdao.searchProductsByName(name);
 //    }
+
     public boolean updateProduct(Product prdct) {
         return productdao.updateProduct(prdct);
     }

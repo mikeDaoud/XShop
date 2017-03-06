@@ -27,55 +27,84 @@ public class GetProducts extends HttpServlet {
 // if equals "all" -> check parameter "pagenum" and get products at this page
 // if equals "category" check parameter "categoryName" and get products of this category
 // if equals "search" check parameters "query" "min" "max" and get products with this search query
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String type = (String) request.getAttribute("type");
+
+        System.out.println("sdfdsjfdsjkfhfdsjk");
+        String type = (String) request.getParameter("type");
         DBController db = new DBController();
         ArrayList<Product> allProducts = new ArrayList<>();
         ArrayList<Product> productsToShow = new ArrayList<>();
-        if(type == null || type.equals("all")){
+        System.out.println(type);
+
+        if (type == null || type.equals("all")) {
+            System.out.println("all case >>>>>" + type);
             allProducts = db.getAllProducts();
-        }else if(type.equals("category")){
-            String categoryName = request.getAttribute("categoryName").toString();
+        } else if (type.equals("category")) {
+            String categoryName = request.getParameter("categoryName").toString();
+            System.out.println("categoty case >>>>>" + type);
+            System.out.println(categoryName);
             allProducts = db.getCategoryProducts(categoryName);
-        }else if(type.equals("search")){
-            Integer min;
-            Integer max;
-            String query = request.getAttribute("query").toString();
-            if(request.getAttribute("min") != null){
-                min = (Integer)request.getAttribute("min");
-            }else{
-                min = 0;
+        } else if (type.equals("search")) {
+            Float min;
+            Float max;
+            System.out.println("query search case >>>>>");
+            allProducts = null;
+            String query = request.getParameter("query").toString();
+            if (query != null && !(query.trim().equals(""))) {
+                System.out.println("query search case >>>>>1");
+
+                if (request.getParameter("min") != null && !(request.getParameter("min").trim().equals(""))) {
+                    min = Float.parseFloat((String) request.getParameter("min"));
+                } else {
+                    min = 0f;
+                }
+                if (request.getParameter("max") != null && !(request.getParameter("max").trim().equals(""))) {
+                    max = Float.parseFloat((String) request.getParameter("max"));
+                } else {
+                    max = 10000000f;
+                }
+
+                allProducts = db.getPriceLimitProducts(query, max, min);
+            } else {
+                if (request.getParameter("min") != null && !(request.getParameter("min").trim().equals(""))) {
+                    min = Float.parseFloat((String) request.getParameter("min"));
+                } else {
+                    min = 0f;
+                }
+                if (request.getParameter("max") != null && !(request.getParameter("max").trim().equals(""))) {
+                    max = Float.parseFloat((String) request.getParameter("max"));
+                } else {
+                    max = 10000000f;
+                }
+
+                allProducts = db.getPriceLimitProducts(max, min);
             }
-            if(request.getAttribute("max") != null){
-                max = (Integer)request.getAttribute("max");
-            }else{
-                max = 10000000;
-            }
-            allProducts = db.getPriceLimitProducts(query, max, min);
         }
-        
-        Integer pagenum = (Integer)request.getAttribute("pagenum");
-        if(pagenum == null){
-            pagenum = 1;
-        }
-        if(allProducts.size() >= (pagenum*12)){
-            for(int i = ((pagenum - 1)*12);i < (pagenum*12);i++){
-                productsToShow.add(allProducts.get(i));
-            }
-        }else{
-            for(int j = ((pagenum - 1)*12);j < allProducts.size();j++){
+
+//        Integer pagenum = (Integer)request.getParameter("pagenum");
+//        if(pagenum == null){
+//            pagenum = 1;
+//        }
+//        if(allProducts.size() >= (pagenum*12)){
+//            for(int i = ((pagenum - 1)*12);i < (pagenum*12);i++){
+//                productsToShow.add(allProducts.get(i));
+//            }
+//        }else{
+        if (allProducts != null) {
+            for (int j = 0; j < allProducts.size(); j++) {
                 productsToShow.add(allProducts.get(j));
             }
+        } else {
+// error not found
         }
-        
+//        }
+//        
+
         request.setAttribute(Constants.PRODUCTS_LIST, productsToShow);
-        
-        request.getRequestDispatcher("clientviews/products.jsp").include(request,response);
-        
+
+        request.getRequestDispatcher("clientviews/products.jsp").include(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
