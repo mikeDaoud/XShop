@@ -7,17 +7,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="col-md-9">
+<div class="col-md-12">
 
     <div class="row" id="productMain">
         <div class="col-sm-6">
             <div id="mainImage">
-                <img src="img/detailbig1.jpg" alt="" class="img-responsive">
+                <img src="${pageContext.request.contextPath}/resources/client/img/detailbig1.jpg" alt="" class="img-responsive">
             </div>
 
         </div>
         <div class="col-sm-6">
-            <div class="box">
+            <div class="">
                 <h1 class="text-center">${requestScope.productObj.name}</h1>
                 <p class="text-center">${requestScope.productObj.desc}</a>
                 </p>

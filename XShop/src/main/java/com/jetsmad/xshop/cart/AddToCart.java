@@ -65,7 +65,7 @@ public class AddToCart extends HttpServlet {
                     cartItems.add(newItem);
                 }
                 session.setAttribute(Constants.CART_ITEMS, cartItems);
-                out.write("True");
+                out.write("true");
             }else{
                 out.write("false");
             }
