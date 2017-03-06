@@ -25,3 +25,4 @@
         </div>
         <jsp:include page="clientviews/scripts.jsp" />
     </body>
+</html>
