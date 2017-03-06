@@ -124,7 +124,7 @@ public class DBController {
         orderdao.insertOrder(order);
     }
 
-    public Order getOrder(int orderID) {
+    public Order getOrder(String orderID) {
         return orderdao.getOrder(orderID);
     }
 
