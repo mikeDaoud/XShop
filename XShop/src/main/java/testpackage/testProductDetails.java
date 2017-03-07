@@ -37,7 +37,7 @@ public class testProductDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Product product = new Product("12", "product1", 10.5F, 0, "cat1", "desc1", true);
+        Product product = new Product("12", "product1", 10.5F, 0, "cat1", "desc1", true,"example.png");
         request.setAttribute("productObj", product);
         
         RequestDispatcher re=request.getRequestDispatcher("clientviews/productDetails.jsp");

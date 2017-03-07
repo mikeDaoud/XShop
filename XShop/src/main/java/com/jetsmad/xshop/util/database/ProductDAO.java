@@ -35,7 +35,7 @@ public class ProductDAO {
         dbController.connectToDB();
         if (dbController.con != null) {
             try {
-                String query = "insert into products(id,name,price,stock,category,description,active) values (?,?,?,?,?,?,?)";
+                String query = "insert into products(id,name,price,stock,category,description,active,image) values (?,?,?,?,?,?,?,?)";
                 PreparedStatement pst;
 
                 pst = dbController.con.prepareStatement(query);
@@ -46,6 +46,7 @@ public class ProductDAO {
                 pst.setString(5, prdct.getCategory());
                 pst.setString(6, prdct.getDesc());
                 pst.setByte(7, (prdct.isActive() == true ? (byte) 1 : (byte) 0));
+                pst.setString(8, prdct.getImg());
                 pst.executeUpdate();
 
                 pst.close();
@@ -80,7 +81,7 @@ public class ProductDAO {
                 rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    item = new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false));
+                    item = new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false), rs.getString(8));
                 }
                 rs.close();
                 pst.close();
@@ -111,7 +112,7 @@ public class ProductDAO {
                 pst = dbController.con.prepareStatement(query);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
+                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false), rs.getString(8)));
                 }
                 rs.close();
                 pst.close();
@@ -152,7 +153,7 @@ public class ProductDAO {
                 pst.setString(1, category);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
+                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false), rs.getString(8)));
                 }
                 rs.close();
                 pst.close();
@@ -188,7 +189,7 @@ public class ProductDAO {
                 pst.setFloat(3, upper);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
+                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false), rs.getString(8)));
                 }
                 rs.close();
                 pst.close();
@@ -224,7 +225,7 @@ public class ProductDAO {
                 pst.setFloat(2, upper);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false)));
+                    products.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getInt(4), rs.getString(5), rs.getString(6), (rs.getInt(7) == 1 ? true : false), rs.getString(8)));
                 }
                 rs.close();
                 pst.close();
@@ -283,7 +284,7 @@ public class ProductDAO {
         dbController.connectToDB();
         if (dbController.con != null) {
             try {
-                String query = "update products set name=?,price=?,stock=?,category=?,description=?,active=? where id=?";
+                String query = "update products set name=?,price=?,stock=?,category=?,description=?,active=?,image=? where id=?";
                 PreparedStatement pst;
                 ResultSet rs;
 
@@ -295,7 +296,8 @@ public class ProductDAO {
                 pst.setString(4, prdct.getCategory());
                 pst.setString(5, prdct.getDesc());
                 pst.setByte(6, (prdct.isActive() == true ? (byte) 1 : (byte) 0));
-                pst.setString(7, prdct.getId());
+                pst.setString(7, prdct.getImg());
+                pst.setString(8, prdct.getId());
                 if (pst.executeUpdate() > 0) {
                     pst.close();
                     return true;

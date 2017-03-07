@@ -37,10 +37,10 @@ public class testBasket extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ArrayList<CartItem> i = new ArrayList<>();
-        Product ppp = new Product("6", "pc", 1000f, 55, "pc", "full qualfied pc", true);
-        Product pp = new Product("6", "pc", 2000f, 55, "pc", "full qualfied pc", true);
-        Product p = new Product("6", "pc", 100f, 55, "pc", "full qualfied pc", true);
-        Product pppp = new Product("6", "pc", 10000f, 55, "pc", "full qualfied pc", true);
+        Product ppp = new Product("6", "pc", 1000f, 55, "pc", "full qualfied pc", true,"example.png");
+        Product pp = new Product("6", "pc", 2000f, 55, "pc", "full qualfied pc", true,"example.png");
+        Product p = new Product("6", "pc", 100f, 55, "pc", "full qualfied pc", true,"example.png");
+        Product pppp = new Product("6", "pc", 10000f, 55, "pc", "full qualfied pc", true,"example.png");
 
         CartItem item = new CartItem(ppp, 1);
         CartItem item1 = new CartItem(pp, 2);
