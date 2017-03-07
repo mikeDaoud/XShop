@@ -8,8 +8,18 @@
 //------ Merna --------
 $(document).on("click", ".eye-btn", function (event) {
 //    var $form = $(this);
-    $.post("getProductDetails", {productId:event.target.name}, function (response) {
+    $.post("getProductDetails", {productId: event.target.name}, function (response) {
         $(".items").html(response);
+    });
+    return false;
+});
+$(document).on("click", ".cart-btn", function (event) {
+    $.post("addtocart", {productId: event.target.name}, function (response) {
+//       var x=eval($("#items-number").html());
+//       $("#items-number").text(++x);
+        console.log(">>><<<<<" + response);
+        if(response !== "false")
+        $("#items-number").text(response);
     });
     return false;
 });
