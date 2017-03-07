@@ -39,13 +39,12 @@ public class CancelCustomerOrder extends HttpServlet {
         // Calls the method in the DB to delete that order
         new DBController().updateOrderStatus(order_id, "canceled");
         // Include the JSP called "orders.jsp"
-        if(request.getParameter("orderid").equals("client")){
-        RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
-        rd.include(request, response);
-        }
-        else if (request.getParameter("orderid").equals("admin")){
-        RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-        rd.include(request, response);
+        if (request.getParameter("orderid").equals("client")) {
+            RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
+            rd.include(request, response);
+        } else if (request.getParameter("orderid").equals("admin")) {
+            RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+            rd.include(request, response);
         }
     }
 
