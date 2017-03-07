@@ -5,12 +5,8 @@
  */
 package com.jetsmad.xshop.cart;
 
-import com.jetsmad.xshop.util.beans.Constants;
-import com.jetsmad.xshop.util.beans.Order;
-import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author michael
+ * @author markoiti
  */
-@WebServlet(name = "Checkout", urlPatterns = {"/Checkout"})
-public class Checkout extends HttpServlet {
+@WebServlet(name = "OrdersView", urlPatterns = {"/myorders"})
+public class OrdersView extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +32,11 @@ public class Checkout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-//        Servlet that does the following:
-//        1. get the order object from session and update it 
-//        2. put the order object in the database
-//        3. clear the cart object on the session
-//        4. remove the order object from the session
-//        5. forward to the successfull transaction jsp
-        Order order = (Order) request.getSession().getAttribute(Constants.Order);
-        new DBController().insertOrder(order);
-        request.getSession().setAttribute(Constants.CART_ITEMS, null);
-        request.getSession().setAttribute(Constants.Order, null);
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
-// what's meaning of update  order object from session 
-// forward or include 
+       
+        // call getuserorders from data base and pass userID from session
+        //add the returned arraylist on the request
+        // include the jsp called orders.jsp
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
