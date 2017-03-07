@@ -47,7 +47,7 @@ public class Checkout extends HttpServlet {
         new DBController().insertOrder(order);
         request.getSession().setAttribute(Constants.CART_ITEMS, null);
         request.getSession().setAttribute(Constants.Order, null);
-        RequestDispatcher rd = request.getRequestDispatcher("clientviews/transaction.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
 // what's meaning of update  order object from session 
 // forward or include 

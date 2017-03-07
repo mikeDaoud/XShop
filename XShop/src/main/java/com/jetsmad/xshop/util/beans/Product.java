@@ -36,7 +36,7 @@ public class Product {
         //Empty Constructor for the Bean
     }
 
-    public Product(String id, String name, Float price, int stock, String category, String desc, boolean active) {
+    public Product(String id, String name, Float price, int stock, String category, String desc, boolean active, String img) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -44,6 +44,7 @@ public class Product {
         this.category = category;
         this.desc = desc;
         this.active = active;
+        this.img = img;
     }
 
     public String getId() {

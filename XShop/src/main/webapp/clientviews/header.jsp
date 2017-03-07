@@ -75,17 +75,6 @@
 
         <div class="collapse clearfix" id="search">
 
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <span class="input-group-btn">
-
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-
-                    </span>
-                </div>
-            </form>
-
         </div>
         <!--/.nav-collapse -->
 

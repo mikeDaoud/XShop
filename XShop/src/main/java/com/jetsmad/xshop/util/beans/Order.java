@@ -13,7 +13,21 @@ import java.util.ArrayList;
  */
 public class Order {
 
-    public Order(String orderID, String userID, String street, String city, String governorate, String phone, String date, ArrayList<CartItem> orderItems, String status) {
+   
+    private String orderID;
+    private String userID;
+    private String street;
+    private String city;
+    private String governorate;
+    private String phone;
+    private String date;
+    private ArrayList<CartItem> orderItems;
+    private String status;
+    private String total;
+
+    
+    
+     public Order(String orderID, String userID, String street, String city, String governorate, String phone, String date, ArrayList<CartItem> orderItems, String status) {
         this.orderID = orderID;
         this.userID = userID;
         this.street = street;
@@ -24,15 +38,6 @@ public class Order {
         this.orderItems = orderItems;
         this.status = status;
     }
-    private String orderID;
-    private String userID;
-    private String street;
-    private String city;
-    private String governorate;
-    private String phone;
-    private String date;
-    private ArrayList<CartItem> orderItems;
-    private String status;
 
     public Order() {
     }
@@ -109,6 +114,12 @@ public class Order {
         this.date = date;
     }
 
-    
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
     
 }

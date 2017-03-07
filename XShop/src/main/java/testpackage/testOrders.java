@@ -5,9 +5,9 @@
  */
 package testpackage;
 
-import com.jetsmad.xshop.util.beans.CartItem;
-import com.jetsmad.xshop.util.beans.Product;
+import com.jetsmad.xshop.util.beans.Order;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author markoiti
+ * @author michael
  */
-@WebServlet(urlPatterns = {"/testBasket"})
-public class testBasket extends HttpServlet {
+@WebServlet(name = "testOrders", urlPatterns = {"/test"})
+public class testOrders extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,30 +35,31 @@ public class testBasket extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ArrayList<CartItem> i = new ArrayList<>();
-        Product ppp = new Product("6", "pc", 1000f, 55, "pc", "full qualfied pc", true,"example.png");
-        Product pp = new Product("6", "pc", 2000f, 55, "pc", "full qualfied pc", true,"example.png");
-        Product p = new Product("6", "pc", 100f, 55, "pc", "full qualfied pc", true,"example.png");
-        Product pppp = new Product("6", "pc", 10000f, 55, "pc", "full qualfied pc", true,"example.png");
-
-        CartItem item = new CartItem(ppp, 1);
-        CartItem item1 = new CartItem(pp, 2);
-        CartItem item2 = new CartItem(p, 1);
-        CartItem item3 = new CartItem(pppp, 3);
-
-        i.add(item);
-        i.add(item1);
-        i.add(item2);
-        i.add(item3);
-
-        HttpSession s = request.getSession(true);
-        s.setAttribute("cart", i);
-        RequestDispatcher rd = request.getRequestDispatcher("cart.jsp");
-        rd.forward(request, response);
-
+        Order or = new Order("ID123", "ss", "", "", "", "", "", null, "pending");
+        Order or1 = new Order("ID1234", "ss", "", "", "", "", "", null, "canceled");
+        Order or2 = new Order("ID1235", "ss", "", "", "", "", "", null, "received");
+        Order or3 = new Order("ID1236", "ss", "", "", "", "", "", null, "canceled");
+        Order or4 = new Order("ID1237", "ss", "", "", "", "", "", null, "pending");
+        
+        ArrayList<Order> orders = new ArrayList<>();
+        
+        orders.add(or);
+        orders.add(or1);
+        orders.add(or2);
+        orders.add(or3);
+        orders.add(or4);
+        
+        System.out.println("ana gwa ahoh ya 3m enta");
+        
+        request.setAttribute("orders", orders);
+        RequestDispatcher re=request.getRequestDispatcher("ordersView.jsp");
+        re.forward(request, response);
+        
+        
+        
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

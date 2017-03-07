@@ -1,7 +1,7 @@
 <%-- 
-    Document   : cart
-    Created on : Mar 5, 2017, 6:27:55 PM
-    Author     : michael
+    Document   : reviewOrder
+    Created on : Mar 7, 2017, 6:59:02 PM
+    Author     : markoiti
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,8 +16,8 @@
         <div id="all">
             
             <div id="content">
-                <div class="container" id="basketDiv">
-                    <jsp:include page="clientviews/basket.jsp" />  
+                <div class="container">
+                    <jsp:include page="clientviews/checkout1.jsp" />  
                 </div>
             </div>
             
