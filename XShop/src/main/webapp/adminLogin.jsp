@@ -13,7 +13,7 @@
     <head>
         <meta charset="utf-8">
         <title>Admin</title>
-        <link rel="stylesheet" href="../resources/css/adminLogin.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/style.css">
     </head>
     <body>
 
@@ -74,7 +74,7 @@
                 <h3 class="sign-in">signin</h3>
             </div>
             <div class="clear"></div>
-            <form action="/XShop/SignInAdmin" method="post">
+            <form action="SignInAdmin" method="post">
                 <div>
                     <label class="user" for="text">
                         <svg viewBox="0 0 32 32">

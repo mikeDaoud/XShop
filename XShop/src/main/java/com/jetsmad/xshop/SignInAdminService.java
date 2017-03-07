@@ -35,12 +35,13 @@ public class SignInAdminService extends HttpServlet {
         String password = request.getParameter("password");
         System.out.println(userName);
         System.out.println(password);
-        getAdminXmlData();
+        
+        getAdminXmlData(request.getServletContext().getRealPath(""));
 
         if (userName != null && password != null && adminPassword != null && adminUserName != null) {
             if (adminUserName.trim().equals(userName) && adminPassword.trim().equals(password)) {
 //                
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
+                request.getRequestDispatcher("adminviews/admin.jsp").forward(request, response);
             } else {
                 request.getSession(true).setAttribute("admin_name", userName);
                 request.setAttribute("error", "Wrong user name or Password");
@@ -56,7 +57,7 @@ public class SignInAdminService extends HttpServlet {
         doPost(req, resp);
     }
 
-    public void getAdminXmlData() {
+    public void getAdminXmlData(String path) {
         try {
 
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -91,7 +92,7 @@ public class SignInAdminService extends HttpServlet {
                 }
             };
             
-            saxParser.parse("admin.xml", handler);
+            saxParser.parse(path+"/resources/xml/admin.xml", handler);
 //            saxParser.parse("src/main/webapp/resources/xml/admin.xml", handler);
         } catch (ParserConfigurationException | org.xml.sax.SAXException | IOException ex) {
             ex.printStackTrace();

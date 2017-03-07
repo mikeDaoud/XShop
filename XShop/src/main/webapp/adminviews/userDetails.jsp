@@ -49,11 +49,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><span>XShop</span>Admin</a>
+                    <a class="navbar-brand" href="AdminHome"><span>XShop</span>Admin</a>                    <ul class="user-menu">
                     <ul class="user-menu">
                         <li class="dropdown pull-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Admin <span></span></a>
-                        </li>
                     </ul>
                 </div>
 
@@ -66,14 +65,13 @@
 
             </form>
             <ul class="nav menu">
-                <li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-                <li><a href="products.html"><svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg>
+                <li><a href="AdminHome"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+                <li><a href="GetAllProducts"><svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg>
                         Products</a></li>
-                <li class="active"><a href="users.html"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
+                <li class="active"><a href="GetAllUsers"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
                         Users</a></li>
-                <li><a href="tables.html"><svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
+                <li><a href="GetAllOrders"><svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
                         Orders</a></li>
-
 
 
             </ul>
