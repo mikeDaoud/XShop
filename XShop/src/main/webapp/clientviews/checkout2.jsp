@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div class="col-md-9" id="checkout">
 
     <div class="box">
@@ -65,7 +66,7 @@
 
             <div class="box-footer">
                 <div class="pull-left">
-                    <a href="basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Order Review</a>
+                    <a href="reviewOrder" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Order Review</a>
                 </div>
                 <div class="pull-right">
                     <button type="submit" class="btn btn-primary">Continue to Payment<i class="fa fa-chevron-right"></i>
