@@ -36,13 +36,14 @@ public class CancelCustomerOrder extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         // a servlet that gets the order ID as a parameter named "orderid"
         String order_id = request.getParameter("orderid");
+        String status = request.getParameter("status");
         // Calls the method in the DB to delete that order
-        new DBController().updateOrderStatus(order_id, "canceled");
+        new DBController().updateOrderStatus(order_id, status);
         // Include the JSP called "orders.jsp"
-        if (request.getParameter("orderid").equals("client")) {
+        if (request.getParameter("user").equals("client")) {
             RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
             rd.include(request, response);
-        } else if (request.getParameter("orderid").equals("admin")) {
+        } else if (request.getParameter("user").equals("admin")) {
             RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
             rd.include(request, response);
         }
