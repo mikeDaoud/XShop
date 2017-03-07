@@ -16,10 +16,10 @@
         <div id="all">
             
             <div id="content">
-                <div class="container">
+                <div class="container" id="basketDiv">
                     <jsp:include page="clientviews/basket.jsp" />  
                 </div>
-            </div>Ï
+            </div>
             
             <jsp:include page="footer" />
         </div>
