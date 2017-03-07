@@ -5,8 +5,10 @@
  */
 package com.jetsmad.xshop.cart;
 
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +34,19 @@ public class CancelCustomerOrder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       // a servlet that gets the order ID as a parameter named "orderid"
-       // Calls the method in the DB to delete that order
-       // Include the JSP called "orders.jsp"
+        // a servlet that gets the order ID as a parameter named "orderid"
+        String order_id = request.getParameter("orderid");
+        // Calls the method in the DB to delete that order
+        new DBController().updateOrderStatus(order_id, "canceled");
+        // Include the JSP called "orders.jsp"
+        if(request.getParameter("orderid").equals("client")){
+        RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
+        rd.include(request, response);
+        }
+        else if (request.getParameter("orderid").equals("admin")){
+        RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+        rd.include(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
