@@ -19,7 +19,7 @@
                 <div class="container">
                     <jsp:include page="clientviews/basket.jsp" />  
                 </div>
-            </div>Ï
+            </div>
             
             <jsp:include page="footer" />
         </div>
