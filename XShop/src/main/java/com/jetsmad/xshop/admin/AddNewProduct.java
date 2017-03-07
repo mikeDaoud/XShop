@@ -48,7 +48,8 @@ public class AddNewProduct extends HttpServlet {
 
         Product product = new Product();
         DBController dbController = new DBController();
-        product.setId(UUID.randomUUID().toString().substring(10));
+        String productId = UUID.randomUUID().toString().substring(10);
+        product.setId(productId);
         
 //        product.setName(request.getParameter("name"));
 //        product.setPrice(Float.parseFloat(request.getParameter("price")));
@@ -105,7 +106,7 @@ public class AddNewProduct extends HttpServlet {
                     if (!item.isFormField()) {
                         product.setImg(item.getName());
                         System.out.println("Image name : "+item.getName());
-                        item.write(new File(path + "/resources/images/" + item.getName()));
+                        item.write(new File(path + "/resources/images/" + productId));
                         
                     }
                 }
