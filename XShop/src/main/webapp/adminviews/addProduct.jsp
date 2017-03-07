@@ -13,9 +13,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Lumino - Dashboard</title>
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-table.css" rel="stylesheet">
-        <link href="css/styles.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap-table.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/admin/css/styles.css" rel="stylesheet">
         <style media="screen">
             thead {
                 text-align: center;
@@ -31,7 +31,7 @@
         </style>
 
         <!--Icons-->
-        <script src="js/lumino.glyphs.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/lumino.glyphs.js"></script>
         <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
@@ -102,7 +102,7 @@
                             <div class="panel panel-default">
                                 <div class="" style="padding: 20px">
 
-                                    <form class="" action="AddNewProduct" method="post" enctype="multipart/form-data">
+                                    <form class="" action="/XShop/AddNewProduct" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label>Product Name</label>
                                             <input class="form-control" placeholder="Product Name" name="productName">
@@ -186,14 +186,14 @@
         </div>
         <!--/.main-->
 
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/chart.min.js"></script>
-        <script src="js/chart-data.js"></script>
-        <script src="js/easypiechart.js"></script>
-        <script src="js/easypiechart-data.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/bootstrap-table.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/jquery-1.11.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/chart.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/chart-data.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/easypiechart.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/easypiechart-data.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/bootstrap-datepicker.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/bootstrap-table.js"></script>
         <script>
             $('#calendar').datepicker({});
 

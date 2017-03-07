@@ -41,7 +41,7 @@
                                             </td>
                                             <td>
                                                 <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
-                                                <input type="number" value="<c:out value="${item.quantity}"></c:out>">
+                                                <input disabled type="number" min="0" value="<c:out value="${item.quantity}"></c:out>">
                                                 <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                             </td>
                                             <td>$<c:out value="${item.product.price}"></c:out></td>

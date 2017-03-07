@@ -22,6 +22,15 @@ public class Product {
     private String category;
     private String desc;
     private boolean active;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public Product() {
         //Empty Constructor for the Bean

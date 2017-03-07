@@ -49,6 +49,7 @@ public class AddNewProduct extends HttpServlet {
         Product product = new Product();
         DBController dbController = new DBController();
         product.setId(UUID.randomUUID().toString().substring(10));
+        
 //        product.setName(request.getParameter("name"));
 //        product.setPrice(Float.parseFloat(request.getParameter("price")));
 //        product.setStock(Integer.parseInt(request.getParameter("stock")));
@@ -80,9 +81,9 @@ public class AddNewProduct extends HttpServlet {
                 FileItem item = iter.next();
                 if (item.isFormField()) {
                     //processFormField(item);
-                    String name = item.getFieldName();
-                    String value = item.getString();
-                    System.out.println(name + "---" + value);
+//                    String name = item.getFieldName();
+//                    String value = item.getString();
+//                    System.out.println(name + "---" + value);
                     if(item.getFieldName().equals("productName")){
                         product.setName(item.getString());
                         System.out.println(item.getFieldName()+" : "+item.getString());
@@ -102,11 +103,14 @@ public class AddNewProduct extends HttpServlet {
                 } else {
                     // processUploadedFile(item);
                     if (!item.isFormField()) {
+                        product.setImg(item.getName());
+                        System.out.println("Image name : "+item.getName());
                         item.write(new File(path + "/resources/images/" + item.getName()));
-                        System.out.println(item.getFieldName()+" : "+item.getString());
+                        
                     }
                 }
             }
+            System.out.println(product.getName()+" : "+product.getPrice());
             dbController.insertProduct(product);
         } catch (Exception ex) {
             ex.printStackTrace();
