@@ -46,6 +46,7 @@ public class UpdateProduct extends HttpServlet {
         product.setCategory(request.getParameter("category"));
         product.setDesc(request.getParameter("desc"));
         product.setActive(Boolean.parseBoolean(request.getParameter("productStatus")));
+        //product.setImg(request.getParameter("img"));
         System.out.println("product geh hena" + product.getName());
         dbController.updateProduct(product);
         RequestDispatcher rd = request.getRequestDispatcher("GetAllProducts");
