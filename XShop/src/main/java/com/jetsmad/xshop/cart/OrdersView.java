@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testpackage;
+package com.jetsmad.xshop.cart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author michael
+ * @author markoiti
  */
-@WebServlet(name = "testcreditcard", urlPatterns = {"/testcreditcard"})
-public class testcreditcard extends HttpServlet {
+@WebServlet(name = "OrdersView", urlPatterns = {"/myorders"})
+public class OrdersView extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,8 +32,11 @@ public class testcreditcard extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       RequestDispatcher re=request.getRequestDispatcher("transaction.jsp");
-        re.forward(request, response);
+       
+        // call getuserorders from data base and pass userID from session
+        //add the returned arraylist on the request
+        // include the jsp called orders.jsp
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -37,10 +37,10 @@ public class ProcessPayment extends HttpServlet {
         
         //1- get creditCard data from request  and put it in Obj
         CreditCard creditCard = new CreditCard();
-        creditCard.setCreditCardNumber(request.getParameter("creditCardNumber"));
-        creditCard.setExpiryMonth(Integer.parseInt(request.getParameter("expiryMonth")));
-        creditCard.setExpiryYear(Integer.parseInt(request.getParameter("expiryYear")));
-        creditCard.setSecurityCode(request.getParameter("securityCode"));
+        creditCard.setCreditCardNumber(request.getParameter("number").trim());
+        creditCard.setExpiryMonth(request.getParameter("expiry").trim());
+        creditCard.setExpiryYear(request.getParameter("expiry").trim());
+        creditCard.setSecurityCode(request.getParameter("cvc").trim());
 
         CreditCardDataBase creditCardDB = new CreditCardDataBase();
         //2- check if this card valid in our DB or Not 

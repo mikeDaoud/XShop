@@ -61,7 +61,7 @@ public class PlaceOrder extends HttpServlet {
         if (session != null) {
             order = new Order(UUID.randomUUID().toString().substring(20), (String) session.getAttribute(Constants.USER_ID), (String) request.getAttribute("street"), (String) request.getAttribute("city"), (String) request.getAttribute("governorate"), (String) request.getAttribute("phone"), dtf.format(now).toString(), (ArrayList<CartItem>) (session.getAttribute(Constants.CART_ITEMS)), "pending");
             session.setAttribute(Constants.Order, order);
-            RequestDispatcher rd = request.getRequestDispatcher("clientviews/transaction.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
             rd.forward(request, response);
             // forward for what 
         }

@@ -5,15 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <div class="col-md-9" id="checkout">
 
     <div class="box">
         <form method="post" action="PlaceOrder">
             <h1>Checkout - Delivery Address</h1>
             <ul class="nav nav-pills nav-justified">
-                <li><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
+                <li><a href="reviewOrder"><i class="fa fa-eye"></i><br>Order Review</a>
                 </li>
-                <li class="active"><a href="checkout1.html"><i class="fa fa-map-marker"></i><br>Address</a>
+                <li class="active"><a href="deliveryAddress.jsp"><i class="fa fa-map-marker"></i><br>Address</a>
                 </li>
                 <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Payment</a>
                 </li>
@@ -65,7 +66,7 @@
 
             <div class="box-footer">
                 <div class="pull-left">
-                    <a href="basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Order Review</a>
+                    <a href="reviewOrder" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Order Review</a>
                 </div>
                 <div class="pull-right">
                     <button type="submit" class="btn btn-primary">Continue to Payment<i class="fa fa-chevron-right"></i>

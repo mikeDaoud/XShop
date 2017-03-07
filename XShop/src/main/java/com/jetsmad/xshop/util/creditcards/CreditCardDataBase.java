@@ -65,8 +65,8 @@ public class CreditCardDataBase {
                 pst = con.prepareStatement(query);
                 pst.setString(1, creditCard.getCreditCardNumber());
                 pst.setString(2, creditCard.getSecurityCode());
-                pst.setInt(3, creditCard.getExpiryMonth());
-                pst.setInt(4, creditCard.getExpiryYear());
+                pst.setString(3, creditCard.getExpiryMonth());
+                pst.setString(4, creditCard.getExpiryYear());
                 pst.setString(5, creditCard.getHolderName());
                 
 

@@ -21,18 +21,17 @@ import java.util.ArrayList;
 /*
 * Class that acts as a Data Access Object to perform different functionalities
 * related to sales records and user's shopping carts
-*/
-
+ */
 public class OrderDAO {
-    
+
     private DBController dbController;
 
     OrderDAO(DBController controller) {
-       dbController = controller;
+        dbController = controller;
     }
-    
-    public void insertOrder(Order order){
-    
+
+    public void insertOrder(Order order) {
+
 //        1. connect to database
 //        2. insert the order data in the two tables (orders, order_details)
 //        3. disconnect database
@@ -53,15 +52,15 @@ public class OrderDAO {
                 pst.setString(8, order.getDate());
                 pst.executeUpdate();
                 if (order.getOrderItems() != null) {
-                for (CartItem item : order.getOrderItems()) {
-                    String queryString = "INSERT INTO order_details VALUES (?, ?, ?)";
-                    PreparedStatement pstmnt = dbController.con.prepareStatement(queryString);
-                    pstmnt.setString(1, order.getOrderID());
-                    pstmnt.setString(2, item.getProduct().getId());
-                    pstmnt.setInt(3, item.getQuantity());
-                    pstmnt.executeUpdate();
+                    for (CartItem item : order.getOrderItems()) {
+                        String queryString = "INSERT INTO order_details VALUES (?, ?, ?)";
+                        PreparedStatement pstmnt = dbController.con.prepareStatement(queryString);
+                        pstmnt.setString(1, order.getOrderID());
+                        pstmnt.setString(2, item.getProduct().getId());
+                        pstmnt.setInt(3, item.getQuantity());
+                        pstmnt.executeUpdate();
+                    }
                 }
-            }
                 pst.close();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -71,13 +70,13 @@ public class OrderDAO {
         }
         dbController.disconnect();
     }
-    
-    public Order getOrder(String orderID){
+
+    public Order getOrder(String orderID) {
 //        1. connect to database
 //        2. get the order data with the given order id from the two tables (orders, order_details)
 //        3. return the created Order object
 //        4. disconnect database
-     
+
         Order item = null;
         dbController.connectToDB();
         if (dbController.con != null) {
@@ -106,7 +105,7 @@ public class OrderDAO {
                         cartItem.setQuantity(rsDet.getInt(2));
                         arrayList.add(cartItem);
                     }
-                    item = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList,  rs.getString(8));
+                    item = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8));
                     rsDet.close();
                     pstDet.close();
                 }
@@ -124,9 +123,9 @@ public class OrderDAO {
         }
         return item;
     }
-    
-    public ArrayList<Order> getAllOrders(){
-    
+
+    public ArrayList<Order> getAllOrders() {
+
         // like get order .. only gets all the orders in the database and return array list of them
         // Instead 
         dbController.connectToDB();
@@ -154,7 +153,7 @@ public class OrderDAO {
                         cartItem.setQuantity(rsDet.getInt(2));
                         arrayList.add(cartItem);
                     }
-                    orders.add(new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList,  rs.getString(8)));
+                    orders.add(new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8)));
                     rsDet.close();
                     pstDet.close();
                 }
@@ -175,11 +174,11 @@ public class OrderDAO {
             }
 
         }
-        
+
         return null;
     }
-    
-    public void updateOrderStatus(String orderID, String status){
+
+    public void updateOrderStatus(String orderID, String status) {
 //        connect to database
 //        update the status of the order with the given id to the given status
 //        disconnect database
@@ -205,5 +204,14 @@ public class OrderDAO {
         }
         dbController.disconnect();
     }
-    
+
+    public ArrayList<Order> getUserOrders(String userID) {
+        return null;
+    }
+
+    public double getOrderTotal(String orderID) {
+        //michael
+        return 0;
+        //michael
+    }
 }
