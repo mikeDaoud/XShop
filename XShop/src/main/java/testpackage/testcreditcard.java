@@ -5,8 +5,10 @@
  */
 package testpackage;
 
+import com.jetsmad.xshop.util.beans.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +35,27 @@ public class testcreditcard extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       RequestDispatcher re=request.getRequestDispatcher("transaction.jsp");
+       Order or = new Order("ID123", "ss", "", "", "", "", "5/5", null, "pending");
+        Order or1 = new Order("ID1235", "ss", "", "", "", "", "5/5", null, "received");
+        Order or2 = new Order("ID1235", "ss", "", "", "", "", "5/5", null, "received");
+        Order or3 = new Order("ID1236", "ss", "", "", "", "", "5/5", null, "canceled");
+        Order or4 = new Order("ID1237", "ss", "", "", "", "", "5/5", null, "pending");
+        
+        ArrayList<Order> orders = new ArrayList<>();
+        
+        orders.add(or);
+        orders.add(or1);
+        orders.add(or2);
+        orders.add(or3);
+        orders.add(or4);
+        
+        System.out.println("ana gwa ahoh ya 3m enta");
+        
+        request.setAttribute("orders", orders);
+        
+        RequestDispatcher re=request.getRequestDispatcher("orders.jsp");
         re.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

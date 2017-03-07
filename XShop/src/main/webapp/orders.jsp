@@ -17,7 +17,7 @@
             
             <div id="content">
                 <div class="container">
-                    <jsp:include page="clientviews/myorders" />  
+                    <jsp:include page="clientviews/ordersdetails.jsp" />  
                 </div>
             </div>
             

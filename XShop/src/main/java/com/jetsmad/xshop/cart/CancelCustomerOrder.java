@@ -6,6 +6,7 @@
 package com.jetsmad.xshop.cart;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author markoiti
+ * @author michael
  */
-@WebServlet(name = "OrdersView", urlPatterns = {"/myorders"})
-public class OrdersView extends HttpServlet {
+@WebServlet(name = "CancelCustomerOrder", urlPatterns = {"/cancelorder"})
+public class CancelCustomerOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,11 +32,9 @@ public class OrdersView extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-        // call getuserorders from data base and pass userID from session
-        //add the returned arraylist on the request naming it "orders"
-        // include the jsp called orders.jsp
-        
+       // a servlet that gets the order ID as a parameter named "orderid"
+       // Calls the method in the DB to delete that order
+       // Include the JSP called "orders.jsp"
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

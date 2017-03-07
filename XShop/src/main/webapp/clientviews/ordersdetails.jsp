@@ -5,7 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<c:set var="orders" value="${requestScope.orders}"></c:set>
 
                 <div class="col-md-3">
                     <!-- *** CUSTOMER MENU ***
@@ -40,7 +43,7 @@
                     <div class="box">
                         <h1>My orders</h1>
 
-                        <p class="lead">Your orders on one place.</p>
+                        <p class="lead">Your orders in one place.</p>
                         <hr>
 
                         <div class="table-responsive">
@@ -55,31 +58,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                <c:forEach var="order" items="${orders}">
+                                     
                                     <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td><span class="label label-info">Pending</span>
+                                        <th><c:out value="${order.orderID}"></c:out></th>
+                                        <td><c:out value="${order.orderID}"></c:out></td>
+                                        <td>$<c:out value="${order.orderID}"></c:out> </td>
+                                        <td>
+                                        <c:choose>
+                                            <c:when test="${order.status == 'received'}">
+                                                <span class="label label-success">Received</span>
+                                            </td>
+                                            <td></td>
+                                            </c:when>
+                                            <c:when test="${order.status == 'canceled'}">
+                                                <span class="label label-danger">Canceled</span>
+                                                </td>
+                                            <td></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                 <span class="label label-info">Pending</span>
+                                                 </td>
+                                        
+                                        <td><a href="cancelorder?orderid=${order.orderID}" class="text-danger">Cancel</a>
                                         </td>
-                                        <td><a href="customer-order.html" class="text-danger">Cancel</a>
-                                        </td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        
                                     </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td><span class="label label-success">Received</span>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th># 1735</th>
-                                        <td>22/06/2013</td>
-                                        <td>$ 150.00</td>
-                                        <td><span class="label label-danger">Cancelled</span>
-                                        </td>
-                                        <td></td>
-                                    </tr>
+                                </c:forEach>
+                                    
                                 </tbody>
                             </table>
                         </div>

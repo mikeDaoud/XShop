@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop.cart;
+package testpackage;
 
+import com.jetsmad.xshop.util.beans.Order;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author markoiti
+ * @author michael
  */
-@WebServlet(name = "OrdersView", urlPatterns = {"/myorders"})
-public class OrdersView extends HttpServlet {
+@WebServlet(name = "testOrders", urlPatterns = {"/test"})
+public class testOrders extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,10 +35,27 @@ public class OrdersView extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-        // call getuserorders from data base and pass userID from session
-        //add the returned arraylist on the request naming it "orders"
-        // include the jsp called orders.jsp
+        Order or = new Order("ID123", "ss", "", "", "", "", "", null, "pending");
+        Order or1 = new Order("ID1234", "ss", "", "", "", "", "", null, "canceled");
+        Order or2 = new Order("ID1235", "ss", "", "", "", "", "", null, "received");
+        Order or3 = new Order("ID1236", "ss", "", "", "", "", "", null, "canceled");
+        Order or4 = new Order("ID1237", "ss", "", "", "", "", "", null, "pending");
+        
+        ArrayList<Order> orders = new ArrayList<>();
+        
+        orders.add(or);
+        orders.add(or1);
+        orders.add(or2);
+        orders.add(or3);
+        orders.add(or4);
+        
+        System.out.println("ana gwa ahoh ya 3m enta");
+        
+        request.setAttribute("orders", orders);
+        RequestDispatcher re=request.getRequestDispatcher("ordersView.jsp");
+        re.forward(request, response);
+        
+        
         
     }
 

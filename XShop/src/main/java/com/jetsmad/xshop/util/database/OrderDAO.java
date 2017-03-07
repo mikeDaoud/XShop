@@ -206,12 +206,20 @@ public class OrderDAO {
     }
 
     public ArrayList<Order> getUserOrders(String userID) {
-        return null;
+        
+        // A method that selects the ordersfrom the database that's related to the user ID given
+        // calls the method below (getOrderTotal) to get the total of each order
+        // adds that total to the order object with setTotal() method
+        // adds all the found orders to the arraylist
+        // returns the arraylist
+        
+        return null; //to be removed
     }
 
     public double getOrderTotal(String orderID) {
-        //michael
-        return 0;
-        //michael
+        // A method that gets the total of a certain order with the given ID
+        // gets the data from the two tables (products) & (orders_details)
+        // calculated the total of the order and return it
+        return 0; //to be removed
     }
 }
