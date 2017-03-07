@@ -47,6 +47,7 @@ public class CommitProductEdits extends HttpServlet {
         product.setCategory(request.getParameter("category"));
         product.setDesc(request.getParameter("desc"));
         product.setActive(Boolean.parseBoolean(request.getParameter("active")));
+        //product.setImg(request.getParameter("img"));
 
         new DBController().updateProduct(product);
 
