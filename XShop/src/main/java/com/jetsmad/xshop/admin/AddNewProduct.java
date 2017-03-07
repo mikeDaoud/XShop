@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  * @author markoiti
  */
 @WebServlet(name = "AddNewProduct", urlPatterns = {"/AddNewProduct"})
+@MultipartConfig
 public class AddNewProduct extends HttpServlet {
 
     private static final String SAVE_DIR = "resources/images";
@@ -47,14 +49,12 @@ public class AddNewProduct extends HttpServlet {
         Product product = new Product();
         DBController dbController = new DBController();
         product.setId(UUID.randomUUID().toString().substring(10));
-        product.setName(request.getParameter("name"));
-        product.setPrice(Float.parseFloat(request.getParameter("price")));
-        product.setStock(Integer.parseInt(request.getParameter("stock")));
-        product.setCategory(request.getParameter("category"));
-        product.setDesc(request.getParameter("desc"));
-        product.setActive(Boolean.parseBoolean(request.getParameter("active")));
-
-        dbController.insertProduct(product);
+//        product.setName(request.getParameter("name"));
+//        product.setPrice(Float.parseFloat(request.getParameter("price")));
+//        product.setStock(Integer.parseInt(request.getParameter("stock")));
+//        product.setCategory(request.getParameter("category"));
+//        product.setDesc(request.getParameter("desc"));
+        product.setActive(true);
 
         // redirect to products
         try {
@@ -83,14 +83,31 @@ public class AddNewProduct extends HttpServlet {
                     String name = item.getFieldName();
                     String value = item.getString();
                     System.out.println(name + "---" + value);
+                    if(item.getFieldName().equals("productName")){
+                        product.setName(item.getString());
+                        System.out.println(item.getFieldName()+" : "+item.getString());
+                    }else if(item.getFieldName().equals("productDescription")){
+                        product.setDesc(item.getString());
+                        System.out.println(item.getFieldName()+" : "+item.getString());
+                    }else if(item.getFieldName().equals("productPrice")){
+                        product.setPrice(Float.parseFloat(item.getString()));
+                        System.out.println(item.getFieldName()+" : "+item.getString());
+                    }else if(item.getFieldName().equals("productStock")){
+                        product.setStock(Integer.parseInt(item.getString()));
+                        System.out.println(item.getFieldName()+" : "+item.getString());
+                    }else if(item.getFieldName().equals("productCategory")){
+                        product.setCategory(item.getString());
+                        System.out.println(item.getFieldName()+" : "+item.getString());
+                    }
                 } else {
                     // processUploadedFile(item);
                     if (!item.isFormField()) {
                         item.write(new File(path + "/resources/images/" + item.getName()));
-                        System.out.println(path);
+                        System.out.println(item.getFieldName()+" : "+item.getString());
                     }
                 }
             }
+            dbController.insertProduct(product);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
