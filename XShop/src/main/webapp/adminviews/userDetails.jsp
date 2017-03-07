@@ -1,30 +1,26 @@
 <%-- 
-    Document   : productsList
-    Created on : Mar 4, 2017, 4:35:03 PM
+    Document   : userDetails
+    Created on : Mar 7, 2017, 7:27:59 AM
     Author     : markoiti
 --%>
-<%@page import="com.jetsmad.xshop.util.beans.Product"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.jetsmad.xshop.util.database.DBController"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="productsList" value="${requestScope.products}"></c:set>
-    <!DOCTYPE html>
-    <html>
+<%@page import="java.util.ArrayList"%>
 
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Lumino - Dashboard</title>
+<!DOCTYPE html>
+<html>
 
-            <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lumino - Dashboard</title>
+
+
+        <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap-table.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/admin/css/styles.css" rel="stylesheet">
         <style media="screen">
-            thead{
-                text-align: center;
-            }
             .editbtn{
                 border: 1px solid #30a5ff;
                 background: transparent;
@@ -35,7 +31,7 @@
         </style>
 
         <!--Icons-->
-        <script src="${pageContext.request.contextPath}/resources/admin/lumino/js/lumino.glyphs.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/admin/js/lumino.glyphs.js"></script>
         <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
@@ -70,10 +66,10 @@
 
             </form>
             <ul class="nav menu">
-                <li ><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-                <li class="active"><a href="products.html"><svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg>
+                <li><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+                <li><a href="products.html"><svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg>
                         Products</a></li>
-                <li><a href="users.html"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
+                <li class="active"><a href="users.html"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
                         Users</a></li>
                 <li><a href="tables.html"><svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
                         Orders</a></li>
@@ -89,7 +85,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Products</h1>
+                    <h1 class="page-header">Users</h1>
                 </div>
             </div>
             <!--/.row-->
@@ -101,60 +97,42 @@
                 <div class="col-md-12">
 
                     <div class="panel panel-default chat">
-                        <div class="panel-heading" id="accordion"><svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg> Listed Products </div>
+                        <div class="panel-heading" id="accordion"><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>User Name </div>
 
                         <div class="col-md-12">
-                            <div class="panel panel-default">
+                            <div class="panel panel-default p">
                                 <div class="">
-
                                     <table data-toggle="table" >
-                                        <thead>
-                                            <tr>
-                                                <th data-field="id" data-align="center">Item ID</th>
-                                                <th data-field="name">Name</th>
-                                                <th data-field="price">Price</th>
-                                                <th data-field="stock">Stock</th>
-                                                <th data-field="state">State</th>
-                                                <th data-field="editbtn"></th>
-                                            </tr>
-                                        </thead>
 
+                                        <tr>
+                                            <td>ID: </td>
+                                            <td>${requestScope.user_object.id}</td>
+                                        </tr>
 
-                                        <c:forEach var="prdct" items="${productsList}">
+                                        <tr>
+                                            <td> Name: </td>
+                                            <td>${requestScope.user_object.name}</td>
+                                        </tr>
 
-                                            <tr>
-                                                <td>
-                                                    <form>
-                                                        <input type="text" name="productID" value="<c:out value="${prdct.id}"></c:out> " disabled="" style="background: transparent; border: none ;text-align: center"/>     
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                    <c:out value="${prdct.name}"></c:out>
-                                                    </td>
-                                                    <td>
-                                                    <c:out value="${prdct.price}"></c:out>
-                                                    </td>
-                                                    <td>
-                                                    <c:out value="${prdct.stock}"></c:out>
-                                                    </td>
+                                        <tr>
+                                            <td>Email: </td>
+                                            <td>${requestScope.user_object.email}</td>
+                                        </tr>
 
-                                                <c:if test="${prdct.active == true}">
-                                                    <td>
-                                                        <span style="background: #4CAF50; padding: 1px 3px; color: #ecf0f1; border-radius: 2px;">Active</span>
-                                                    </td>
-                                                </c:if>
+                                        <tr>
+                                            <td>Date Of Birth: </td>
+                                            <td>${requestScope.user_object.dob}</td>
+                                        </tr>
 
-                                                <c:if test="${prdct.active == false}"> 
-                                                    <td>
-                                                        <span style="background: #9E9E9E; padding: 1px 3px; color: #ecf0f1; border-radius: 2px;">Inactive</span>
-                                                    </td>
-                                                </c:if>
-                                                <td><a href="EditProduct?productID=${prdct.id}" name="productID" value="${prdct.id}" class="btn btn-primary editbtn">Edit</a></td>
+                                        <tr>
+                                            <td>Address: </td>
+                                            <td>${requestScope.user_object.address}</td>
+                                        </tr>
 
-                                            </tr>
-
-
-                                        </c:forEach>
+                                        <tr>
+                                            <td>Job: </td>
+                                            <td>${requestScope.user_object.job}</td>
+                                        </tr>
 
                                     </table>
                                 </div>
@@ -165,6 +143,30 @@
                     </div>
 
 
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" id="accordion"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg> Orders History </div>
+                            <div class="panel-body">
+
+                                <div class="alert bg-primary" role="alert">
+                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) on (order date here) total $(Order total here)
+                                </div>
+
+                                <div class="alert bg-primary" role="alert">
+                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) on (order date here) total $(Order total here)
+                                </div>
+
+                                <div class="alert bg-primary" role="alert">
+                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) on (order date here) total $(Order total here)
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+
+
+                    </div>
                 </div>
                 <!--/.row-->
             </div>

@@ -5,8 +5,8 @@
  */
 package com.jetsmad.xshop.admin;
 
-import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.beans.Constants;
+import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author markoiti
  */
-@WebServlet(name = "GetProductDetailsForEditing", urlPatterns = {"/GetProductDetailsForEditing"})
-public class GetProductDetailsForEditing extends HttpServlet {
+@WebServlet(name = "EditProduct", urlPatterns = {"/EditProduct"})
+public class EditProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +36,15 @@ public class GetProductDetailsForEditing extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String productID = (String) request.getAttribute(Constants.PRODUCT_ID);
-        Product product = new DBController().getProduct(productID);
-
+        String product_id = request.getParameter(Constants.PRODUCT_ID);
+        Product product = new DBController().getProduct(product_id);
         request.setAttribute(Constants.PRODUCT_OBJECT, product);
-
-        RequestDispatcher rd = request.getRequestDispatcher("updateProduct.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("adminviews/editProduct.jsp");
         rd.forward(request, response);
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

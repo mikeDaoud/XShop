@@ -24,7 +24,9 @@
                     <jsp:include page="GetCategories" /> 
                     <jsp:include page="clientviews/search.jsp" />
                     </div>
+                    <div class="items col-md-9 box">
                     <jsp:include page="productslist" />
+                    </div>
                     
                 </div>
             </div>

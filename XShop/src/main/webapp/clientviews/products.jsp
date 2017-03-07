@@ -12,8 +12,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="productsList" value="${requestScope.products}"></c:set>
-    <div class="items col-md-9 box">
+    
     <c:forEach var="prdct" items="${productsList}">
+        <c:if test="${prdct.active==true}">
         <div class="product-holder col-md-4">
             <div class="product-item text-center">
                 <img class="product-img img-responsive" src="image.png" />
@@ -28,7 +29,7 @@
                     </div>
                 </div>
             </div>
-
+        </c:if>
     </c:forEach>
         <!-- *****  pagination ***** -->
                     <div class="myPagination col-md-4 col-md-offset-8">
@@ -41,4 +42,3 @@
                         </ul>
                     </div>
                     <!-- *****  End pagination ***** -->
-</div>

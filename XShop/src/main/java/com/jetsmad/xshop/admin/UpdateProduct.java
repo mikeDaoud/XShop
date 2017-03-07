@@ -5,11 +5,9 @@
  */
 package com.jetsmad.xshop.admin;
 
-import com.jetsmad.xshop.util.beans.Constants;
-import com.jetsmad.xshop.util.beans.User;
+import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author markoiti
  */
-@WebServlet(name = "GetUserDetails", urlPatterns = {"/GetUserDetails"})
-public class GetUserDetails extends HttpServlet {
+@WebServlet(name = "UpdateProduct", urlPatterns = {"/UpdateProduct"})
+public class UpdateProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +31,29 @@ public class GetUserDetails extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         response.setContentType("text/html;charset=UTF-8");
-        String userId = (String) request.getParameter(Constants.USER_ID);
-        System.out.println(userId);
-        User currUser = (new DBController()).getUserById(userId);
-        // get the number of orders and orders and put it to reguest
-        request.setAttribute(Constants.CURRENT_USER_OBJECT, currUser);
-        RequestDispatcher rd = request.getRequestDispatcher("adminviews/userDetails.jsp");
+        String product_id = request.getParameter("productObjUbdate");
+        Product product = new Product();
+        DBController dbController = new DBController();
+        product.setId(product_id);
+        product.setName(request.getParameter("name"));
+        product.setPrice(Float.parseFloat((String)request.getParameter("price")));
+        product.setStock(Integer.parseInt(request.getParameter("stock")));
+        product.setCategory(request.getParameter("category"));
+        product.setDesc(request.getParameter("desc"));
+        product.setActive(Boolean.parseBoolean(request.getParameter("productStatus")));
+        System.out.println("product geh hena" + product.getName());
+        dbController.updateProduct(product);
+        RequestDispatcher rd = request.getRequestDispatcher("GetAllProducts");
         rd.forward(request, response);
 
-//        RequestDispatcher rd = request.getRequestDispatcher("userdetails.jsp");
-//        rd.forward(request, response);
     }
+
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

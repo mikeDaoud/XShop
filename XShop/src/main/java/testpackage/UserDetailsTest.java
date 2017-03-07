@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop.admin;
+package testpackage;
 
 import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author markoiti
  */
-@WebServlet(name = "GetUserDetails", urlPatterns = {"/GetUserDetails"})
-public class GetUserDetails extends HttpServlet {
+@WebServlet(name = "UserDetailsTest", urlPatterns = {"/UserDetailsTest"})
+public class UserDetailsTest extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +36,12 @@ public class GetUserDetails extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String userId = (String) request.getParameter(Constants.USER_ID);
-        System.out.println(userId);
-        User currUser = (new DBController()).getUserById(userId);
+        User currUser = (new DBController()).getUserById("1");
         // get the number of orders and orders and put it to reguest
         request.setAttribute(Constants.CURRENT_USER_OBJECT, currUser);
         RequestDispatcher rd = request.getRequestDispatcher("adminviews/userDetails.jsp");
         rd.forward(request, response);
 
-//        RequestDispatcher rd = request.getRequestDispatcher("userdetails.jsp");
-//        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
