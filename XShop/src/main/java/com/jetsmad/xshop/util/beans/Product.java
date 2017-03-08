@@ -5,6 +5,8 @@
  */
 package com.jetsmad.xshop.util.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author michael
@@ -14,7 +16,7 @@ package com.jetsmad.xshop.util.beans;
 * A Java Bean for each product to carry its details
 */
 
-public class Product {
+public class Product implements Serializable{
     private String id;
     private String name;
     private Float price;

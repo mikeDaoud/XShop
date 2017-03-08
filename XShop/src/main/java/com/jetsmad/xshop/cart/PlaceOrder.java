@@ -51,24 +51,28 @@ public class PlaceOrder extends HttpServlet {
 //        7. Add teh Order object on the session
 //        8. upon success forward to the payment step in checkout (to be done later)
         // let that the names of filed the same in the bean 
-        
         HttpSession session = request.getSession(false);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         Order order;
         
-        if(session != null && session.getAttribute(Constants.USER_ID) !=null){
-            order = new Order(UUID.randomUUID().toString().substring(20), (String) session.getAttribute(Constants.USER_ID), (String) request.getAttribute("street"), (String) request.getAttribute("city"), (String) request.getAttribute("governorate"), (String) request.getAttribute("phone"), dtf.format(now).toString(), (ArrayList<CartItem>) (session.getAttribute(Constants.CART_ITEMS)), "pending");
+        if (session != null && session.getAttribute(Constants.USER_ID) != null) {
+            double result = 0;
+            ArrayList<CartItem> cartItems = (ArrayList<CartItem>) (session.getAttribute(Constants.CART_ITEMS));
+            order = new Order(UUID.randomUUID().toString().substring(20), (String) session.getAttribute(Constants.USER_ID), (String) request.getAttribute("street"), (String) request.getAttribute("city"), (String) request.getAttribute("governorate"), (String) request.getAttribute("phone"), dtf.format(now).toString(), cartItems, "pending");
+            for (CartItem cartItem : cartItems) {
+                result += cartItem.getQuantity() * cartItem.getProduct().getPrice();
+            }
+            order.setTotal(result+10);
             session.setAttribute(Constants.Order, order);
             RequestDispatcher rd = request.getRequestDispatcher("Transaction");
             rd.forward(request, response);
             
-        }else{
+        } else {
             RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
         
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

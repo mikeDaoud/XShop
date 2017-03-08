@@ -5,11 +5,13 @@
  */
 package com.jetsmad.xshop.util.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author michael
  */
-public class CartItem {
+public class CartItem implements Serializable{
 
     public Product product;
     public int quantity;

@@ -55,7 +55,7 @@ public class OrderDAO {
                 pst.executeUpdate();
                 if (order.getOrderItems() != null) {
                     for (CartItem item : order.getOrderItems()) {
-                        String queryString = "INSERT INTO order_details VALUES (?, ?, ?)";
+                        String queryString = "INSERT INTO order_details (order_id, products_id, quant)VALUES (?, ?, ?)";
                         PreparedStatement pstmnt = dbController.con.prepareStatement(queryString);
                         pstmnt.setString(1, order.getOrderID());
                         pstmnt.setString(2, item.getProduct().getId());
@@ -319,6 +319,7 @@ public class OrderDAO {
                     }
                     Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8));
                     order.setTotal(getOrderTotal(rs.getString(1)));
+                    dbController.connectToDB();
                     orders.add(order);
                     rsDet.close();
                     pstDet.close();

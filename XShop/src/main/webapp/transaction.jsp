@@ -89,14 +89,14 @@
         </c:if>
 
         <c:set var="success" value="${requestScope.success}" />
-        <%--<c:if test="${!empty success}">--%>
+        <c:if test="${!empty success}">
             <div class="successoverlay">
                 <div class="successmsg">
                     <i class="fa fa-check-circle-o fa-5x" aria-hidden="true"></i>
                     <br>${success} <br> <a href="index.jsp" class="btn btn-primary" id="gohome">Continue Shopping</a>
                 </div>
             </div>
-        <%--</c:if>--%>
+        </c:if>
 
         <jsp:include page="clientviews/header.jsp" />  
 
