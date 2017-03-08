@@ -41,7 +41,7 @@ public class SignInAdminService extends HttpServlet {
         if (userName != null && password != null && adminPassword != null && adminUserName != null) {
             if (adminUserName.trim().equals(userName) && adminPassword.trim().equals(password)) {
                 request.getSession(true).setAttribute("admin_name", userName);
-                request.getRequestDispatcher("adminviews/admin.jsp").forward(request, response);
+                request.getRequestDispatcher("AdminHome").forward(request, response);
             } else {
                 request.setAttribute("error", "Wrong user name or Password");
                 request.getRequestDispatcher("adminLogin.jsp").forward(request, response);

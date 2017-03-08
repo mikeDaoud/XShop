@@ -5,16 +5,18 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="orders" value="${requestScope.orderstoview}"></c:set>
+    <!DOCTYPE html>
+    <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lumino - Dashboard</title>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Lumino - Dashboard</title>
 
 
-        <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
+            <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap-table.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/admin/css/styles.css" rel="stylesheet">
         <style media="screen">
@@ -92,33 +94,33 @@
             <!--/.row-->
 
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-md-6 col-lg-6">
                     <div class="panel panel-blue panel-widget ">
                         <div class="row no-padding">
                             <div class="col-sm-3 col-lg-5 widget-left">
                                 <svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
                             </div>
                             <div class="col-sm-9 col-lg-7 widget-right">
-                                <div class="large">100</div>
+                                <div class="large">${requestScope.usersnumber}</div>
                                 <div class="text-muted">Registered Users</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-md-6 col-lg-6">
                     <div class="panel panel-orange panel-widget">
                         <div class="row no-padding">
                             <div class="col-sm-3 col-lg-5 widget-left">
                                 <svg class="glyph stroked tag"><use xlink:href="#stroked-tag"/></svg>
                             </div>
                             <div class="col-sm-9 col-lg-7 widget-right">
-                                <div class="large">150</div>
+                                <div class="large">${requestScope.productsnumber}</div>
                                 <div class="text-muted">Listed products</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-md-6 col-lg-6">
                     <div class="panel panel-teal panel-widget">
                         <div class="row no-padding">
                             <div class="col-sm-3 col-lg-5 widget-left">
@@ -126,20 +128,20 @@
 
                             </div>
                             <div class="col-sm-9 col-lg-7 widget-right">
-                                <div class="large">5000</div>
+                                <div class="large">${requestScope.ordersnumber}</div>
                                 <div class="text-muted">Total sales</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="col-xs-12 col-md-6 col-lg-6">
                     <div class="panel panel-red panel-widget">
                         <div class="row no-padding">
                             <div class="col-sm-3 col-lg-5 widget-left">
                                 <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
                             </div>
                             <div class="col-sm-9 col-lg-7 widget-right">
-                                <div class="large">12</div>
+                                <div class="large">${requestScope.pendingordersnumber}</div>
                                 <div class="text-muted">Pending orders</div>
                             </div>
                         </div>
@@ -157,18 +159,22 @@
 
                         <div class="panel-body">
 
-                            <div class="alert bg-primary" role="alert">
-                                <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here)  from user (User name here) on (order date here) total $(Order total here) <span style="color: #3498db;">Pending</span>
-                            </div>
-
-                            <div class="alert bg-primary" role="alert">
-                                <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) from user (User name here) on (order date here) total $(Order total here) <span style="color: #2ecc71;">Delivered</span>
-                            </div>
-
-                            <div class="alert bg-primary" role="alert">
-                                <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) from user (User name here) on (order date here) total $(Order total here) <span style="color: #e74c3c;">Cancelled</span>
-                            </div>
-
+                            <c:forEach var="order" items="${orders}">
+                                <div class="alert bg-primary" role="alert">
+                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. <b>${order.orderID}</b> on <b>${order.date}</b>
+                                    <c:choose>
+                                        <c:when test="${order.status=='canceled'}">
+                                            <span style ="color:red">${order.status}</span>
+                                        </c:when>
+                                        <c:when test="${order.status=='pending'}">
+                                            <span style ="color:blue">${order.status}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span style ="color:green">${order.status}</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </c:forEach>
                         </div>
 
                     </div>

@@ -98,16 +98,16 @@
                             <div class="panel panel-default">
                                 <div class="" style="padding: 20px">
 
-                                    <form class="" action="UpdateProduct" method="post">
-                                        <input type="hidden" name="productObjUbdate" value="${requestScope.productObj.id}">
-                                        <input type="hidden" name="productStatus" value="${requestScope.productObj.active}">
+                                    <form class="" action="UpdateProduct" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="productId" value="${requestScope.productObj.id}">
+                                        <input type="hidden" name="productActive" value="${requestScope.productObj.active}">
                                         <div class="form-group">
                                             <label>Product Name</label>
-                                            <input name="name" class="form-control" value="${requestScope.productObj.name}" required>
+                                            <input name="productName" class="form-control" value="${requestScope.productObj.name}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Product Description</label>
-                                            <textarea name="desc" class="form-control" rows="3"  required>${requestScope.productObj.desc}</textarea>
+                                            <textarea name="productDescription" class="form-control" rows="3"  required>${requestScope.productObj.desc}</textarea>
                                         </div>
 
                                         <div class="col-md-12">
@@ -117,7 +117,7 @@
                                                     <label>Price</label>
                                                     <div class="input-group">
                                                         <div class="input-group-addon">$</div>
-                                                        <input type="number" min="0" class="form-control" name="price" id="exampleInputAmount" value="${requestScope.productObj.price}" required>
+                                                        <input type="number" min="0" class="form-control" name="productPrice" id="exampleInputAmount" value="${requestScope.productObj.price}" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,7 +126,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Stock</label>
-                                                    <input type="number" min="0" class="form-control" name="stock" value="${requestScope.productObj.stock}" required>
+                                                    <input type="number" min="0" class="form-control" name="productStock" value="${requestScope.productObj.stock}" required>
                                                 </div>
                                             </div>
 
@@ -136,10 +136,15 @@
                                         <div class="col-md-12">
                                             <div class="col-md-6">
                                                 <label>Category</label>
-                                                <input class="form-control" name="category" value="${requestScope.productObj.category}" required>
+                                                <input class="form-control" name="productCategory" value="${requestScope.productObj.category}" required>
                                             </div>
 
-
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Upload an  image </label>
+                                                    <input type="file" name="productImg" size="60" />
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-12">

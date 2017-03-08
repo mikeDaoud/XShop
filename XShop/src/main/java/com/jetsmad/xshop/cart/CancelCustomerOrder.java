@@ -44,7 +44,7 @@ public class CancelCustomerOrder extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
             rd.include(request, response);
         } else if (request.getParameter("user").equals("admin")) {
-            RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/GetAllOrders");
             rd.include(request, response);
         }
     }

@@ -107,11 +107,12 @@ public class AddNewProduct extends HttpServlet {
                     } else {
                         // processUploadedFile(item);
                         if (!item.isFormField()) {
-                            String extention = item.getName().substring(item.getName().lastIndexOf("."),item.getName().length());
-                            System.out.println("Image name : " + item.getName());
-                            product.setImg(productId+extention);
-                            item.write(new File(path + "/resources/images/" + productId+extention));
-
+                            if (item.getName()!=null && item.getName().length()>0) {
+                                String extention = item.getName().substring(item.getName().lastIndexOf("."), item.getName().length());
+                                System.out.println("Image name : " + item.getName());
+                                product.setImg(productId + extention);
+                                item.write(new File(path + "/resources/images/" + productId + extention));
+                            }
                         }
                     }
                 }

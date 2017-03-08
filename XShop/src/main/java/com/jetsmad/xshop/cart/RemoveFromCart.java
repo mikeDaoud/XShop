@@ -45,8 +45,10 @@ public class RemoveFromCart extends HttpServlet {
         HttpSession session = request.getSession(true);
         if (productId != null && session != null) {
             ArrayList<CartItem> cartItems = (ArrayList<CartItem>) session.getAttribute(Constants.CART_ITEMS);
-           CartItem item;
-            for (int i=0;i<=cartItems.size();i++) {
+            CartItem item;
+            System.out.println(cartItems.size()
+            );
+            for (int i=0;i<cartItems.size();i++) {
                 item=cartItems.get(i);
                 if (item.getProduct().getId().equals(productId)) {
                     if (item.getQuantity()>= 1 ) {

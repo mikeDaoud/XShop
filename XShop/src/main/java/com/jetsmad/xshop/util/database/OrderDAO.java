@@ -141,23 +141,23 @@ public class OrderDAO {
                 pst = dbController.con.prepareStatement(query);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                    PreparedStatement pstDet;
-                    ResultSet rsDet;
-                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
-                    pstDet = dbController.con.prepareStatement(queryDet);
-                    pstDet.setString(1, rs.getString(1));
-                    rsDet = pstDet.executeQuery();
-                    ArrayList<CartItem> arrayList = new ArrayList<>();
-                    while (rsDet.next()) {
-                        CartItem cartItem = new CartItem();
-                        Product product = dbController.productdao.getProduct(rsDet.getString(1));
-                        cartItem.setProduct(product);
-                        cartItem.setQuantity(rsDet.getInt(2));
-                        arrayList.add(cartItem);
-                    }
-                    orders.add(new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8)));
-                    rsDet.close();
-                    pstDet.close();
+//                    PreparedStatement pstDet;
+//                    ResultSet rsDet;
+//                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
+//                    pstDet = dbController.con.prepareStatement(queryDet);
+//                    pstDet.setString(1, rs.getString(1));
+//                    rsDet = pstDet.executeQuery();
+//                    ArrayList<CartItem> arrayList = new ArrayList<>();
+//                    while (rsDet.next()) {
+//                        CartItem cartItem = new CartItem();
+//                        Product product = dbController.productdao.getProduct(rsDet.getString(1));
+//                        cartItem.setProduct(product);
+//                        cartItem.setQuantity(rsDet.getInt(2));
+//                        arrayList.add(cartItem);
+//                    }
+                    orders.add(new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), new ArrayList<CartItem>(), rs.getString(8)));
+//                    rsDet.close();
+//                    pstDet.close();
                 }
                 rs.close();
                 pst.close();
