@@ -46,7 +46,7 @@ public class GetAllOrders extends HttpServlet {
             request.setAttribute("history", history);
             RequestDispatcher rd = request.getRequestDispatcher("adminviews/orders.jsp");
             // bug in view
-            rd.include(request, response);
+            rd.forward(request, response);
         } else {
             request.setAttribute("error", "Admin not logged in");
             request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
