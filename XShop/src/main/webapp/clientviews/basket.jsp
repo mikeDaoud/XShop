@@ -9,8 +9,7 @@
 <c:set var="cart" value="${sessionScope.cart}"></c:set>
 <c:set var="total" value="${0}"></c:set>
 
-
-    <div class="col-md-9" id="basket">
+<div class="col-md-9" id="basket">
 
         <div class="box">
 
@@ -40,14 +39,16 @@
                                         <td><c:out value="${item.product.name}"></c:out>
                                             </td>
                                             <td>
-                                                <a href="#"><i class="fa fa-minus" aria-hidden="true"></i></a>
-                                                <input disabled type="number" min="0" value="<c:out value="${item.quantity}"></c:out>">
-                                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                <a class="btn qtyrightminus" name="${item.product.id}" href=""><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                                <input id="qty-input" disabled type="number" min="0" value="<c:out value="${item.quantity}"></c:out>">
+                                            <a class="qtyrightplus" name="${item.product.id}" herf="">
+                                                <i class="fa fa-plus"  aria-hidden="true"></i>
+                                            </a>
                                             </td>
                                             <td>$<c:out value="${item.product.price}"></c:out></td>
                                         <c:set var="itemtotal" value="${item.product.price * item.quantity}"></c:set>
                                         <td>$<c:out value="${pageScope.itemtotal}"></c:out></td>
-                                            <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                        <td><a class="trash-anchor" name="<c:out value="${item.product.id}"></c:out>" href=""><i class="fa fa-trash-o"></i></a>
                                             </td>
                                         </tr>
                                     <c:set var="total" value="${pageScope.total + pageScope.itemtotal }"></c:set>
