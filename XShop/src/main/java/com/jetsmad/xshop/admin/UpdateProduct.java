@@ -28,7 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(name = "UpdateProduct", urlPatterns = {"/UpdateProduct"})
 public class UpdateProduct extends HttpServlet {
-    
+
     private static final String SAVE_DIR = "resources/images";
 
     /**
@@ -89,7 +89,7 @@ public class UpdateProduct extends HttpServlet {
                             product_id = item.getString();
                             product.setId(product_id);
                             System.out.println(item.getFieldName() + " : " + item.getString());
-                        }else if (item.getFieldName().equals("productName")) {
+                        } else if (item.getFieldName().equals("productName")) {
                             product.setName(item.getString());
                             System.out.println(item.getFieldName() + " : " + item.getString());
                         } else if (item.getFieldName().equals("productDescription")) {
@@ -104,10 +104,10 @@ public class UpdateProduct extends HttpServlet {
                         } else if (item.getFieldName().equals("productCategory")) {
                             product.setCategory(item.getString());
                             System.out.println(item.getFieldName() + " : " + item.getString());
-                        }else if (item.getFieldName().equals("productActive")) {
-                            if(item.getString().equals("true")){
+                        } else if (item.getFieldName().equals("productActive")) {
+                            if (item.getString().equals("true")) {
                                 product.setActive(true);
-                            }else{
+                            } else {
                                 product.setActive(false);
                             }
                             System.out.println(item.getFieldName() + " : " + item.getString());
@@ -115,16 +115,17 @@ public class UpdateProduct extends HttpServlet {
                     } else {
                         // processUploadedFile(item);
                         if (!item.isFormField()) {
-                            String extention = item.getName().substring(item.getName().lastIndexOf("."),item.getName().length());
-                            System.out.println("Image name : " + item.getName());
-                            product.setImg(product_id+extention);
-                            item.write(new File(path + "/resources/images/" + product_id+extention));
-
+                            if (item.getName() != null && item.getName().length()>0) {
+                                String extention = item.getName().substring(item.getName().lastIndexOf("."), item.getName().length());
+                                System.out.println("Image name : " + item.getName());
+                                product.setImg(product_id + extention);
+                                item.write(new File(path + "/resources/images/" + product_id + extention));
+                            }
                         }
                     }
                 }
                 System.out.println(product.getName() + " : " + product.getPrice());
-                dbController.insertProduct(product);
+                dbController.updateProduct(product);
                 request.getRequestDispatcher("GetAllProducts").forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
