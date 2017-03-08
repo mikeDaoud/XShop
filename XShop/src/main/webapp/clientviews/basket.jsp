@@ -9,7 +9,7 @@
 <c:set var="cart" value="${sessionScope.cart}"></c:set>
 <c:set var="total" value="${0}"></c:set>
 
-<div class="col-md-9" id="basket">
+    <div class="col-md-9" id="basket">
 
         <div class="box">
 
@@ -28,81 +28,81 @@
                             </tr>
                         </thead>
                         <tbody>
-                       
-                                <c:forEach var="item" items="${cart}">
-                                    <tr>
-                                        <td>
-                                            <a href="#">
-                                                <img src="img/detailsquare.jpg" alt="White Blouse Armani">
-                                            </a>
-                                        </td>
-                                        <td><c:out value="${item.product.name}"></c:out>
-                                            </td>
-                                            <td>
-                                                <a class="btn qtyrightminus" name="${item.product.id}" href=""><i class="fa fa-minus" aria-hidden="true"></i></a>
-                                                <input id="qty-input" disabled type="number" min="0" value="<c:out value="${item.quantity}"></c:out>">
-                                            <a class="qtyrightplus" name="${item.product.id}" herf="">
-                                                <i class="fa fa-plus"  aria-hidden="true"></i>
-                                            </a>
-                                            </td>
-                                            <td>$<c:out value="${item.product.price}"></c:out></td>
-                                        <c:set var="itemtotal" value="${item.product.price * item.quantity}"></c:set>
-                                        <td>$<c:out value="${pageScope.itemtotal}"></c:out></td>
-                                        <td><a class="trash-anchor" name="<c:out value="${item.product.id}"></c:out>" href=""><i class="fa fa-trash-o"></i></a>
-                                            </td>
-                                        </tr>
-                                    <c:set var="total" value="${pageScope.total + pageScope.itemtotal }"></c:set>
-                                </c:forEach>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="4">Total</th>
-                                    <th colspan="2">$<c:out value="${pageScope.total}"></c:out></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                 
+
+                        <c:forEach var="item" items="${cart}">
+                            <tr>
+                                <td>
+                                    <a href="#">
+                                        <img src="img/detailsquare.jpg" alt="White Blouse Armani">
+                                    </a>
+                                </td>
+                                <td>
+                                    <c:out value="${item.product.name}"></c:out>
+                                </td>
+                                <td>
+                                    <button class="fa fa-minus qtyrightminus" name="${item.product.id}" style="outline:none; border: none; background-color: transparent;"></button>
+                                    <input id="qty-input" disabled type="number" min="0" value="<c:out value="${item.quantity}"></c:out>">
+                                    <button class="fa fa-plus qtyrightplus" name="${item.product.id}" style="outline:none; border: none; background-color: transparent;"></button>
+
+                                </td>
+                                <td>$<c:out value="${item.product.price}"></c:out></td>
+                                <c:set var="itemtotal" value="${item.product.price * item.quantity}"></c:set>
+                                <td>$<c:out value="${pageScope.itemtotal}"></c:out></td>
+                                <td><a name="${item.product.id}" class="fa fa-trash-o trash-anchor" style="text-decoration:none"></a>
+                                </td>
+                            </tr>
+                            <c:set var="total" value="${pageScope.total + pageScope.itemtotal }"></c:set>
+                        </c:forEach>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">Total</th>
+                            <th colspan="2">$<c:out value="${pageScope.total}"></c:out></th>
+                            </tr>
+                        </tfoot>
+                    </table>
 
 
-            </div>
-            <!-- /.table-responsive -->
 
-            <div class="box-footer">
-                <div class="pull-left">
-                    <a href="index.jsp" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
                 </div>
-                <div class="pull-right">
+                <!-- /.table-responsive -->
 
-                    <button type="submit" class="btn btn-primary <c:if test="${empty cart}">disabled</c:if>">Proceed to checkout <i class="fa fa-chevron-right"></i>
-                    </button>
+                <div class="box-footer">
+                    <div class="pull-left">
+                        <a href="index.jsp" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
+                    </div>
+                    <div class="pull-right">
+
+                        <button type="submit" class="btn btn-primary <c:if test="${empty cart}">disabled</c:if>">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-        </form>
+            </form>
+
+        </div>
+        <!-- /.box -->
+
+
+
+
 
     </div>
-    <!-- /.box -->
+    <!-- /.col-md-9 -->
 
+    <div class="col-md-3">
+        <div class="box" id="order-summary">
+            <div class="box-header">
+                <h3>Order summary</h3>
+            </div>
+            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
 
-
-
-
-</div>
-<!-- /.col-md-9 -->
-
-<div class="col-md-3">
-    <div class="box" id="order-summary">
-        <div class="box-header">
-            <h3>Order summary</h3>
-        </div>
-        <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
-
-        <div class="table-responsive">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>Order subtotal</td>
-                        <th>$<c:out value="${pageScope.total}"></c:out></th>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Order subtotal</td>
+                            <th>$<c:out value="${pageScope.total}"></c:out></th>
                         </tr>
                         <tr>
                             <td>Shipping and handling</td>

@@ -30,7 +30,7 @@ public class CreditCardDataBase {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //here mydb is database name, root is username and  password
-            con = DriverManager.getConnection("jdbc:mysql://localhost/xshop?user=root&password=marko");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/xshop?user=root&password=123");
             System.out.println("hii");
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -58,16 +58,16 @@ public class CreditCardDataBase {
         connectToDB();
         if (con != null) {
             try {
-                String query = "SELECT * FROM creditCard WHERE creditCardNumber=? and securityCode=? and expiryMonth=? and expiryYear=? and holder_name=?";
+                String query = "SELECT * FROM creditCard WHERE creditCardNumber=? and securityCode=? and expiryMonth=? and expiryYear=?";
                 PreparedStatement pst;
                 ResultSet rs;
-
+                System.out.println(creditCard.getCreditCardNumber()+creditCard.getSecurityCode()+creditCard.getExpiryMonth()+creditCard.getExpiryYear());
                 pst = con.prepareStatement(query);
                 pst.setString(1, creditCard.getCreditCardNumber());
                 pst.setString(2, creditCard.getSecurityCode());
                 pst.setString(3, creditCard.getExpiryMonth());
                 pst.setString(4, creditCard.getExpiryYear());
-                pst.setString(5, creditCard.getHolderName());
+                
                 
 
                 rs = pst.executeQuery();

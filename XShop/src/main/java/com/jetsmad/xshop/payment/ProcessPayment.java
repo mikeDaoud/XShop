@@ -50,13 +50,12 @@ public class ProcessPayment extends HttpServlet {
         //2- check if this card valid in our DB or Not 
         if (creditCardDB.validateCreditCard(creditCard)) {
             //FOCUS!!,,send "totalPrice" with request..
-            double totalPrice = Double.parseDouble(request.getParameter("totalPrice")); 
+            //double totalPrice = Double.parseDouble((String)request.getParameter("totalPrice")); 
             //3- send total price to make payment processing and update balance in DB ..
-            if (creditCardDB.processPayment(creditCard.getCreditCardNumber(), totalPrice)) {
-                // completed the payment process successfully
-                
-                HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
                 Order order = (Order) session.getAttribute(Constants.Order);
+            if (creditCardDB.processPayment(creditCard.getCreditCardNumber(), order.getTotal())) {
+                // completed the payment process successfully
                 new DBController().insertOrder(order);
                 
                 request.setAttribute("success", "Successful Transaction");
