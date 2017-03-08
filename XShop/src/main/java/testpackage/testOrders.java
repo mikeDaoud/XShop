@@ -6,6 +6,7 @@
 package testpackage;
 
 import com.jetsmad.xshop.util.beans.Order;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,29 +35,35 @@ public class testOrders extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Order or = new Order("ID123", "ss", "", "", "", "", "", null, "pending");
-        Order or1 = new Order("ID1234", "ss", "", "", "", "", "", null, "canceled");
-        Order or2 = new Order("ID1235", "ss", "", "", "", "", "", null, "received");
-        Order or3 = new Order("ID1236", "ss", "", "", "", "", "", null, "canceled");
-        Order or4 = new Order("ID1237", "ss", "", "", "", "", "", null, "pending");
+//        response.setContentType("text/html;charset=UTF-8");
+//        Order or = new Order("ID123", "ss", "", "", "", "", "", null, "pending");
+//        Order or1 = new Order("ID1234", "ss", "", "", "", "", "", null, "canceled");
+//        Order or2 = new Order("ID1235", "ss", "", "", "", "", "", null, "received");
+//        Order or3 = new Order("ID1236", "ss", "", "", "", "", "", null, "canceled");
+//        Order or4 = new Order("ID1237", "ss", "", "", "", "", "", null, "pending");
+//        
+//        ArrayList<Order> orders = new ArrayList<>();
+//        
+//        orders.add(or);
+//        orders.add(or1);
+//        orders.add(or2);
+//        orders.add(or3);
+//        orders.add(or4);
+//        
+//        System.out.println("ana gwa ahoh ya 3m enta");
+//        
+//        request.setAttribute("orders", orders);
+//        RequestDispatcher re=request.getRequestDispatcher("ordersView.jsp");
+//        re.forward(request, response);
         
-        ArrayList<Order> orders = new ArrayList<>();
-        
-        orders.add(or);
-        orders.add(or1);
-        orders.add(or2);
-        orders.add(or3);
-        orders.add(or4);
-        
-        System.out.println("ana gwa ahoh ya 3m enta");
-        
-        request.setAttribute("orders", orders);
-        RequestDispatcher re=request.getRequestDispatcher("ordersView.jsp");
-        re.forward(request, response);
-        
-        
-        
+        String[] arr = new DBController().getDashboardData();
+        for(String s:arr){
+            System.out.println(s);
+        }
+        ArrayList<Order> orders = new DBController().getPendingOrders();
+        for(Order s:orders){
+            System.out.println(s.getOrderID());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

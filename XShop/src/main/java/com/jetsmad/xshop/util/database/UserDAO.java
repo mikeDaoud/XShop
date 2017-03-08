@@ -223,10 +223,10 @@ public class UserDAO {
     }
 
     public ArrayList<User> getAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
         controller.connectToDB();
 
         if (controller.con != null) {
-            ArrayList<User> users = new ArrayList<>();
             try {
                 String query = "select * from users";
                 PreparedStatement pst;
@@ -250,28 +250,22 @@ public class UserDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
             } finally {
-                if (users.isEmpty()) {
                     controller.disconnect();
                     System.out.println("ops null data");
-                    return null;
-                } else {
-                    controller.disconnect();
                     return users;
-                }
             }
 
         }
-        return null;
+        return users;
     }
     
     public String getCountOfUsers(){
         controller.connectToDB();
 
+        String countOfUsers = "0";
         if (controller.con != null) {
             try {
-                String countOfUsers = null;
                 String query = "select COUNT(*) from users";
                 PreparedStatement pst;
                 ResultSet rs;
@@ -283,15 +277,14 @@ public class UserDAO {
                 }
                 rs.close();
                 pst.close();
-                return countOfUsers;
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
             } finally {
                 controller.disconnect();
+                return countOfUsers;
             }
         }
-        return null;
+        return countOfUsers;
     }
 }

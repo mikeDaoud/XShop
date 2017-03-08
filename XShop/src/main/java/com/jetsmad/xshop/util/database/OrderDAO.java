@@ -130,9 +130,9 @@ public class OrderDAO {
 
         // like get order .. only gets all the orders in the database and return array list of them
         // Instead 
+        ArrayList<Order> orders = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Order> orders = new ArrayList<>();
             try {
                 String query = "select order_id,users_id,street,city,governorate,phone,date,status from orders";
                 PreparedStatement pst;
@@ -164,20 +164,14 @@ public class OrderDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
             } finally {
-                if (orders.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
                     dbController.disconnect();
                     return orders;
-                }
             }
 
         }
 
-        return null;
+        return orders;
     }
 
     public void updateOrderStatus(String orderID, String status) {
@@ -214,9 +208,9 @@ public class OrderDAO {
         // adds that total to the order object with setTotal() method
         // adds all the found orders to the arraylist
         // returns the arraylist
+        ArrayList<Order> orders = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Order> orders = new ArrayList<>();
             try {
                 String query = "SELECT order_id,users_id,street,city,governorate,phone,date,status FROM orders WHERE users_id=?";
                 PreparedStatement pst;
@@ -251,20 +245,14 @@ public class OrderDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
             } finally {
-                if (orders.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
                     dbController.disconnect();
                     return orders;
-                }
             }
 
         }
 
-        return null;
+        return orders;
     }
     
 
@@ -298,9 +286,9 @@ public class OrderDAO {
     
     public ArrayList<Order> getPendingOrders(){
     
+        ArrayList<Order> orders = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Order> orders = new ArrayList<>();
             try {
                 String query = "SELECT order_id,users_id,street,city,governorate,phone,date,status FROM orders WHERE status=?";
                 PreparedStatement pst;
@@ -335,20 +323,15 @@ public class OrderDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
             } finally {
-                if (orders.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
+                
                     dbController.disconnect();
                     return orders;
-                }
             }
 
         }
 
-        return null;
+        return orders;
     }
     
     public String getTotalOfTotalOfAllOrders(){
@@ -372,12 +355,12 @@ public class OrderDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
+                return "0";
             } finally {
                 dbController.disconnect();
             }
         }
-        return null;
+        return "0";
     }
     
     public String getCountOfPendingOrders(){
@@ -385,7 +368,7 @@ public class OrderDAO {
 
         if (dbController.con != null) {
             try {
-                String countOfPendingOrders = null;
+                String countOfPendingOrders = "";
                 String query = "select COUNT(*) from orders WHERE status=?";
                 PreparedStatement pst;
                 ResultSet rs;
@@ -402,11 +385,11 @@ public class OrderDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
+                return "0";
             } finally {
                 dbController.disconnect();
             }
         }
-        return null;
+        return "0";
     }
 }

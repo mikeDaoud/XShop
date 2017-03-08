@@ -101,9 +101,9 @@ public class ProductDAO {
         // get an array list containing all products in the database
         // and return it
         // return empty arraylist if nothing was found
+        ArrayList<Product> products = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Product> products = new ArrayList<>();
             try {
                 String query = "select * from products";
                 PreparedStatement pst;
@@ -118,20 +118,14 @@ public class ProductDAO {
                 pst.close();
 
             } catch (SQLException ex) {
-
-                return null;
+                ex.printStackTrace();
             } finally {
-                if (products.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
                     dbController.disconnect();
                     return products;
-                }
             }
 
         }
-        return null;
+        return products;
     }
 
     public ArrayList<Product> getCategoryProducts(String category) {
@@ -141,9 +135,9 @@ public class ProductDAO {
         // create the array
         // return the Array with the list of products
         // return empty Array if nothing was found
+        ArrayList<Product> products = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Product> products = new ArrayList<>();
             try {
                 String query = "select * from products where category=?";
                 PreparedStatement pst;
@@ -158,26 +152,21 @@ public class ProductDAO {
                 rs.close();
                 pst.close();
             } catch (SQLException ex) {
-                return null;
+                ex.printStackTrace();
             } finally {
-                if (products.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
                     dbController.disconnect();
                     return products;
-                }
             }
 
         }
-        return null;
+        return products;
     }
 
     public ArrayList<Product> getPriceLimitProducts(String name, Float upper, Float lower) {
         //Same as above but within the price limits given
+        ArrayList<Product> products = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Product> products = new ArrayList<>();
             try {
                 String query = "select * from products where name like ? and price between ? and ?";
                 PreparedStatement pst;
@@ -194,26 +183,21 @@ public class ProductDAO {
                 rs.close();
                 pst.close();
             } catch (SQLException ex) {
-                return null;
+                ex.printStackTrace();
             } finally {
-                if (products.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
                     dbController.disconnect();
                     return products;
-                }
             }
 
         }
-        return null;
+        return products;
     }
 
     public ArrayList<Product> getPriceLimitProducts(Float upper, Float lower) {
         //Same as above but within the price limits given
+        ArrayList<Product> products = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
-            ArrayList<Product> products = new ArrayList<>();
             try {
                 String query = "select * from products where price between ? and ?";
                 PreparedStatement pst;
@@ -230,19 +214,14 @@ public class ProductDAO {
                 rs.close();
                 pst.close();
             } catch (SQLException ex) {
-                return null;
+                ex.printStackTrace();
             } finally {
-                if (products.isEmpty()) {
-                    dbController.disconnect();
-                    return null;
-                } else {
                     dbController.disconnect();
                     return products;
-                }
             }
 
         }
-        return null;
+        return products;
     }
 
 //    public ArrayList<Product> searchProductsByName(String name) {
@@ -333,7 +312,7 @@ public class ProductDAO {
             rs.close();
             pst.close();
         } catch (SQLException ex) {
-            return null;
+           ex.printStackTrace();
         } finally {
 
             dbController.disconnect();
@@ -345,9 +324,9 @@ public class ProductDAO {
     public String getCountOfProducts(){
         dbController.connectToDB();
 
+        String countOfProducts = "0";
         if (dbController.con != null) {
             try {
-                String countOfProducts = null;
                 String query = "select COUNT(*) from products";
                 PreparedStatement pst;
                 ResultSet rs;
@@ -363,11 +342,10 @@ public class ProductDAO {
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return null;
             } finally {
                 dbController.disconnect();
             }
         }
-        return null;
+        return countOfProducts;
     }
 }
