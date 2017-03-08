@@ -8,6 +8,7 @@ package com.jetsmad.xshop.payment;
 import com.jetsmad.xshop.util.creditcards.CreditCard;
 import com.jetsmad.xshop.util.creditcards.CreditCardDataBase;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,11 +50,19 @@ public class ProcessPayment extends HttpServlet {
             //3- send total price to make payment processing and update balance in DB ..
             if (creditCardDB.processPayment(creditCard.getCreditCardNumber(), totalPrice)) {
                 // completed the payment process successfully
+                request.setAttribute("success", "Successful Transaction");
+                RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
+                rd.forward(request, response);
             } else {
-                
+                request.setAttribute("err", "Not Enough Credit in this card");
+                RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
+                rd.forward(request, response);
                 //  Balance not enough
             }
         } else {
+                request.setAttribute("err", "Invalid Card Data");
+                RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
+                rd.forward(request, response);
             // creditCard not Vaild
         }
         

@@ -23,7 +23,7 @@
 
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href=""><i class="fa fa-user"></i> My account</a>
+                                    <a href="EditAccount"><i class="fa fa-user"></i> My account</a>
                                 </li>
                                 <li class="active">
                                     <a href="#"><i class="fa fa-list"></i> My orders</a>
