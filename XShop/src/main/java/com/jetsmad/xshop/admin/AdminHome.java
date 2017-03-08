@@ -5,8 +5,11 @@
  */
 package com.jetsmad.xshop.admin;
 
+import com.jetsmad.xshop.util.beans.Order;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +39,27 @@ public class AdminHome extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("admin_name") != null) {
+            String[] dashboardData = new DBController().getDashboardData();
+            ArrayList<Order> orders = new DBController().getAllOrders();
+            ArrayList<Order> ordersToView = new ArrayList<>();
+            if (!orders.isEmpty()) {
+                if (orders.size() > 10) {
+                    for (int i = 0; i < 10; i++) {
+                        ordersToView.add(orders.get(i));
+                    }
+
+                } else {
+                    for (int i = 0; i < orders.size(); i++) {
+                        ordersToView.add(orders.get(i));
+                    }
+                }
+
+            }
+            request.setAttribute("usersnumber", dashboardData[0]);
+            request.setAttribute("productsnumber", dashboardData[1]);
+            request.setAttribute("ordersnumber", dashboardData[2]);
+            request.setAttribute("pendingordersnumber", dashboardData[3]);
+            request.setAttribute("orderstoview", ordersToView);
             RequestDispatcher rd = request.getRequestDispatcher("adminviews/admin.jsp");
             // bug in view
             rd.include(request, response);

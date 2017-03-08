@@ -115,8 +115,8 @@
                                             <td>${order.phone}</td>
                                             <td>$<c:out value="${order.total}"></c:out></td>
                                             <td>
-                                                <a  class="btn btn-success editbtn" href="cancelorder?orderid=${order.orderID}&status=delivered&user=admin">Deliver</a>
-                                                <a type="submit" class="btn btn-danger editbtn" href="cancelorder?orderid=${order.orderID}&status=canceled&user=admin">Cancel</a>
+                                                <a  class="btn btn-success editbtn" href="/XShop/cancelorder?orderid=${order.orderID}&status=delivered&user=admin">Deliver</a>
+                                                <a type="submit" class="btn btn-danger editbtn" href="/XShop/cancelorder?orderid=${order.orderID}&status=canceled&user=admin">Cancel</a>
                                             </td>
                                         </tr>
                                         </c:forEach>
@@ -152,7 +152,6 @@
                                                 <th data-field="id" data-align="right">Order ID</th>
                                                 <th data-field="name">User ID</th>
                                                 <th data-field="price">Date</th>
-                                                <th data-field="stock">Total</th>
                                                 <th data-field="state">Status</th>
                                             </tr>
                                         </thead>
@@ -161,7 +160,6 @@
                                             <td>${order.orderID}</td>
                                             <td>${order.userID}</td>
                                             <td>${order.date}</td>
-                                            <td>$ ${order.total}</td>
                                             <c:choose>
                                                 <c:when test="${order.status == 'canceled'}">
                                                     <td>  <span class="label label-danger">Canceled</span></td>
