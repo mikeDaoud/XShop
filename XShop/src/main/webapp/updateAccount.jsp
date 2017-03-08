@@ -35,7 +35,7 @@ _________________________________________________________ -->
                                 <a href="customer-orders.html"><i class="fa fa-user"></i> My account</a>
                             </li>
                             <li>
-                                <a href="customer-account.html"><i class="fa fa-list"></i> My orders</a>
+                                <a href="myorders"><i class="fa fa-list"></i> My orders</a>
                             </li>
                             <li>
                                 <a href="LogoutServlet"><i class="fa fa-sign-out"></i> Logout</a>

@@ -14,7 +14,7 @@
             <ul class="nav nav-pills nav-justified">
                 <li><a href="reviewOrder"><i class="fa fa-eye"></i><br>Order Review</a>
                 </li>
-                <li class="active"><a href="deliveryAddress.jsp"><i class="fa fa-map-marker"></i><br>Address</a>
+                <li class="active"><a href="#"><i class="fa fa-map-marker"></i><br>Address</a>
                 </li>
                 <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Payment</a>
                 </li>
@@ -22,7 +22,7 @@
             </ul>
 
             <div class="content" style="padding-right: 20px; padding-left: 20px;">
-                <div class="row">
+                <div class="">
                     <div class="form-group">
                         <label for="street">Street Address</label>
                         <input type="text" class="form-control" name="street" id="street" required>
@@ -31,7 +31,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="">
 
                     <div class="form-group">
                         <label for="city">City</label>
@@ -41,7 +41,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="">
                     <div class="form-group">
                         <label for="gov">Governorate</label>
                         <input type="text" class="form-control" name="governorate" id="gov" required>
@@ -51,7 +51,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <div class="">
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
                         <input type="tel" class="form-control" name="phone" id="phone" required="">
@@ -66,7 +66,7 @@
 
             <div class="box-footer">
                 <div class="pull-left">
-                    <a href="reviewOrder" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Order Review</a>
+                    <a href="index.jsp" class="btn btn-default"><i class="fa fa-chevron-left"></i>Continue Shopping</a>
                 </div>
                 <div class="pull-right">
                     <button type="submit" class="btn btn-primary">Continue to Payment<i class="fa fa-chevron-right"></i>

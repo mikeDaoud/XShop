@@ -295,4 +295,28 @@ public class OrderDAO {
             return orderTotal; //to be removed
         }
     }
+    
+    public ArrayList<Order> getPendingOrders(){
+    
+        dbController.connectToDB();
+        
+        String query = "SELECT order_id,users_id, date ,phone FROM orders WHERE status='pending'";
+                PreparedStatement pst;
+                ResultSet rs;
+                
+        try {
+            pst = dbController.con.prepareStatement(query);
+            rs = pst.executeQuery();
+            
+            
+            //TODO: To Be Implemented
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+                
+        return null;
+    }
 }

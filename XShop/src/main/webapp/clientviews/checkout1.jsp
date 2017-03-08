@@ -32,7 +32,6 @@
                                     <th colspan="2">Product</th>
                                     <th>Quantity</th>
                                     <th>Unit price</th>
-
                                     <th>Total</th>
                                 </tr>
                             </thead>
@@ -57,8 +56,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="5">Total</th>
-                                <th colspan="5">$<c:out value="${pageScope.total}"></c:out></th>
+                                <th colspan="4">Total</th>
+                                <th colspan="4">$<c:out value="${pageScope.total}"></c:out></th>
                                 </tr>
                             </tfoot>
                         </table>

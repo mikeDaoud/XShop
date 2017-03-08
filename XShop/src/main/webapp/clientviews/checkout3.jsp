@@ -17,7 +17,7 @@
                 <form method="post" action="ProcessPayment">
                     <h1>Checkout - Payment</h1>
                     <ul class="nav nav-pills nav-justified">
-                        <li><a href="reviewOrder.jsp"><i class="fa fa-eye"></i><br>Order Review</a>
+                        <li><a href="reviewOrder"><i class="fa fa-eye"></i><br>Order Review</a>
                         <li><a href="deliveryAddress.jsp"><i class="fa fa-map-marker"></i><br>Address</a>
                         </li>
                         <li class="active"><a href="#"><i class="fa fa-money"></i><br>Payment</a>
@@ -64,7 +64,7 @@
 
                     <div class="box-footer">
                         <div class="pull-left">
-                            <a href="index.jsp" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Address</a>
+                            <a href="index.jsp" class="btn btn-default"><i class="fa fa-chevron-left"></i>Continue Shopping</a>
                         </div>
                         <div class="pull-right">
                             <button type="submit" class="btn btn-primary">Place an Order<i class="fa fa-chevron-right"></i>

@@ -6,7 +6,6 @@
 package com.jetsmad.xshop.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +31,12 @@ public class GetAllOrders extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       RequestDispatcher rd = request.getRequestDispatcher("adminviews/productsList.jsp");
+        
+        //get pending orders and add to an arraylist and add it to the request
+        
+        //get a list with all the orders in an arraylist and add it tp the request
+        
+       RequestDispatcher rd = request.getRequestDispatcher("adminviews/orders.jsp");
         // bug in view
         rd.include(request, response);
     }

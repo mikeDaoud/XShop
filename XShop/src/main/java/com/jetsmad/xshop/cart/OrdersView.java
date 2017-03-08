@@ -5,12 +5,16 @@
  */
 package com.jetsmad.xshop.cart;
 
+import com.jetsmad.xshop.util.beans.Constants;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,6 +35,13 @@ public class OrdersView extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        HttpSession session = request.getSession(true);
+        String userID = (String) session.getAttribute(Constants.USER_ID);
+        
+        request.setAttribute("orders", (new DBController().getUserOrders(userID)));
+        RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
+        rd.include(request, response);
        
         // call getuserorders from data base and pass userID from session
         //add the returned arraylist on the request naming it "orders"

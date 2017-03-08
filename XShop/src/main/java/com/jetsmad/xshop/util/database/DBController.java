@@ -135,6 +135,10 @@ public class DBController {
     public ArrayList<Order> getAllOrders() {
         return orderdao.getAllOrders();
     }
+    
+    public ArrayList<Order> getUserOrders(String userID){
+        return orderdao.getUserOrders(userID);
+    }
 
     public void updateOrderStatus(String orderID, String status) {
         orderdao.updateOrderStatus(orderID, status);
