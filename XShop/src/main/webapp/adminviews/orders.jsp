@@ -119,6 +119,7 @@
                                                 <a type="submit" class="btn btn-danger editbtn" href="cancelorder?orderid=${order.orderID}&status=canceled&user=admin">Cancel</a>
                                             </td>
                                         </tr>
+                                        </c:forEach>
 
 
                                     </table>
@@ -155,27 +156,30 @@
                                                 <th data-field="state">Status</th>
                                             </tr>
                                         </thead>
-                                        <tr>
-                                            <td>id23462</td>
-                                            <td>id46345</td>
-                                            <td>23/3/2017</td>
-                                            <td>$sdh</td>
-                                            <td>  <span class="label label-info">Pending</span></td>
+                                        <c:forEach var="order" items="${historyList}" end="20">
+                                            <tr>
+                                            <td>${order.orderID}</td>
+                                            <td>${order.userID}</td>
+                                            <td>${order.date}</td>
+                                            <td>$ ${order.total}</td>
+                                            <c:choose>
+                                                <c:when test="${order.status == 'canceled'}">
+                                                    <td>  <span class="label label-danger">Canceled</span></td>
+                                                </c:when>
+                                                
+                                                <c:when test="${order.status == 'pending'}">
+                                                    <td><span class="label label-info">Pending</span></td>
+                                                </c:when>
+                                                
+                                                <c:when test="${order.status == 'delivered'}">
+                                                    <td>  <span class="label label-success">Delivered</span></td>
+                                                </c:when>
+                                                
+                                            </c:choose>
                                         </tr>
-                                        <tr>
-                                            <td>id23462</td>
-                                            <td>id46345</td>
-                                            <td>23/3/2017</td>
-                                            <td>$sdh</td>
-                                            <td>  <span class="label label-success">Delivered</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>id23462</td>
-                                            <td>id46345</td>
-                                            <td>23/3/2017</td>
-                                            <td>$sdh</td>
-                                            <td>  <span class="label label-danger">Canceled</span></td>
-                                        </tr>
+                                            
+                                        </c:forEach>
+                                        
                                     </table>
                                 </div>
                             </div>
