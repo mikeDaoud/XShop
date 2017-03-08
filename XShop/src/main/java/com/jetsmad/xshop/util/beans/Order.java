@@ -23,7 +23,7 @@ public class Order {
     private String date;
     private ArrayList<CartItem> orderItems;
     private String status;
-    private String total;
+    private double total;
 
     
     
@@ -114,11 +114,11 @@ public class Order {
         this.date = date;
     }
 
-    public String getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(double total) {
         this.total = total;
     }
     

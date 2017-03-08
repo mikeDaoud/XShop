@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -206,20 +208,91 @@ public class OrderDAO {
     }
 
     public ArrayList<Order> getUserOrders(String userID) {
-        
+
         // A method that selects the ordersfrom the database that's related to the user ID given
         // calls the method below (getOrderTotal) to get the total of each order
         // adds that total to the order object with setTotal() method
         // adds all the found orders to the arraylist
         // returns the arraylist
-        
-        return null; //to be removed
+        dbController.connectToDB();
+        if (dbController.con != null) {
+            ArrayList<Order> orders = new ArrayList<>();
+            try {
+                String query = "SELECT order_id,users_id,street,city,governorate,phone,date,status FROM orders WHERE users_id=?";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = dbController.con.prepareStatement(query);
+                pst.setString(1, userID);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    PreparedStatement pstDet;
+                    ResultSet rsDet;
+                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
+                    pstDet = dbController.con.prepareStatement(queryDet);
+                    pstDet.setString(1, rs.getString(1));
+                    rsDet = pstDet.executeQuery();
+                    ArrayList<CartItem> arrayList = new ArrayList<>();
+                    while (rsDet.next()) {
+                        CartItem cartItem = new CartItem();
+                        Product product = dbController.productdao.getProduct(rsDet.getString(1));
+                        cartItem.setProduct(product);
+                        cartItem.setQuantity(rsDet.getInt(2));
+                        arrayList.add(cartItem);
+                    }
+                    Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8));
+                    order.setTotal(getOrderTotal(rs.getString(1)));
+                    orders.add(order);
+                    rsDet.close();
+                    pstDet.close();
+                }
+                rs.close();
+                pst.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                if (orders.isEmpty()) {
+                    dbController.disconnect();
+                    return null;
+                } else {
+                    dbController.disconnect();
+                    return orders;
+                }
+            }
+
+        }
+
+        return null;
     }
+    
 
     public double getOrderTotal(String orderID) {
+
         // A method that gets the total of a certain order with the given ID
         // gets the data from the two tables (products) & (orders_details)
         // calculated the total of the order and return it
-        return 0; //to be removed
+        double orderTotal = 0;
+        dbController.connectToDB();
+        try {
+            PreparedStatement pstDet;
+            ResultSet rsDet;
+            String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
+            pstDet = dbController.con.prepareStatement(queryDet);
+            pstDet.setString(1, orderID);
+            rsDet = pstDet.executeQuery();
+            while (rsDet.next()) {
+                Product product = dbController.productdao.getProduct(rsDet.getString(1));
+                orderTotal += (product.getPrice() * rsDet.getInt(2));
+            }
+            rsDet.close();
+            pstDet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            dbController.disconnect();
+            return orderTotal; //to be removed
+        }
     }
 }
