@@ -299,25 +299,55 @@ public class OrderDAO {
     public ArrayList<Order> getPendingOrders(){
     
         dbController.connectToDB();
-        
-        String query = "SELECT order_id,users_id, date ,phone FROM orders WHERE status='pending'";
+        if (dbController.con != null) {
+            ArrayList<Order> orders = new ArrayList<>();
+            try {
+                String query = "SELECT order_id,users_id,street,city,governorate,phone,date,status FROM orders WHERE status=?";
                 PreparedStatement pst;
                 ResultSet rs;
-                
-        try {
-            pst = dbController.con.prepareStatement(query);
-            rs = pst.executeQuery();
-            
-            
-            //TODO: get all orders from the database where status = pending
-            // put in arraylist and return it
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+                pst = dbController.con.prepareStatement(query);
+                pst.setString(1, "pending");
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    PreparedStatement pstDet;
+                    ResultSet rsDet;
+                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
+                    pstDet = dbController.con.prepareStatement(queryDet);
+                    pstDet.setString(1, rs.getString(1));
+                    rsDet = pstDet.executeQuery();
+                    ArrayList<CartItem> arrayList = new ArrayList<>();
+                    while (rsDet.next()) {
+                        CartItem cartItem = new CartItem();
+                        Product product = dbController.productdao.getProduct(rsDet.getString(1));
+                        cartItem.setProduct(product);
+                        cartItem.setQuantity(rsDet.getInt(2));
+                        arrayList.add(cartItem);
+                    }
+                    Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8));
+                    order.setTotal(getOrderTotal(rs.getString(1)));
+                    orders.add(order);
+                    rsDet.close();
+                    pstDet.close();
+                }
+                rs.close();
+                pst.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                if (orders.isEmpty()) {
+                    dbController.disconnect();
+                    return null;
+                } else {
+                    dbController.disconnect();
+                    return orders;
+                }
+            }
+
         }
 
-                
         return null;
     }
 }
