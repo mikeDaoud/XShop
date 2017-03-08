@@ -150,15 +150,16 @@
                                                 <td><a href="EditProduct?productID=${prdct.id}" name="productID" value="${prdct.id}" class="btn btn-primary editbtn">Edit</a></td>
 
                                             </tr>
-
-
                                         </c:forEach>
-
                                     </table>
                                 </div>
                             </div>
 
                         </div>
+                        
+                        <div class="col-md-12 text-center">
+						<a href="/XShop/addProduct" class="btn btn-primary"> Add new Product</a>
+					</div>
 
                     </div>
 
