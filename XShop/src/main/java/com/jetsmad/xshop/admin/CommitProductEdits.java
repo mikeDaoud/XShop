@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,24 +37,32 @@ public class CommitProductEdits extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String productID = (String) request.getAttribute(Constants.PRODUCT_ID);
+        HttpSession session = request.getSession(false);
 
-        Product product = new Product();
+        if (session != null && session.getAttribute("admin_name") != null) {
+            String productID = (String) request.getAttribute(Constants.PRODUCT_ID);
 
-        product.setId(productID);
-        product.setName(request.getParameter("name"));
-        product.setPrice(Float.parseFloat(request.getParameter("price")));
-        product.setStock(Integer.parseInt(request.getParameter("stock")));
-        product.setCategory(request.getParameter("category"));
-        product.setDesc(request.getParameter("desc"));
-        product.setActive(Boolean.parseBoolean(request.getParameter("active")));
-        //product.setImg(request.getParameter("img"));
+            Product product = new Product();
 
-        new DBController().updateProduct(product);
+            product.setId(productID);
+            product.setName(request.getParameter("name"));
+            product.setPrice(Float.parseFloat(request.getParameter("price")));
+            product.setStock(Integer.parseInt(request.getParameter("stock")));
+            product.setCategory(request.getParameter("category"));
+            product.setDesc(request.getParameter("desc"));
+            product.setActive(Boolean.parseBoolean(request.getParameter("active")));
+            //product.setImg(request.getParameter("img"));
 
-        // forward to product Dashboard Page ...
-        RequestDispatcher rd = request.getRequestDispatcher("");
-        rd.forward(request, response);
+            new DBController().updateProduct(product);
+
+            // forward to product Dashboard Page ...
+            RequestDispatcher rd = request.getRequestDispatcher("");
+            rd.forward(request, response);
+        } else {
+            request.setAttribute("error", "Admin not logged in");
+            request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

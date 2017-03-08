@@ -7,17 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
+<c:set var="orders" value="${requestScope.userorders}"></c:set>
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lumino - Dashboard</title>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Lumino - Dashboard</title>
 
 
-        <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
+            <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/admin/css/bootstrap-table.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/admin/css/styles.css" rel="stylesheet">
         <style media="screen">
@@ -43,12 +44,12 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    
+
                     <a class="navbar-brand" href="AdminHome"><span>XShop</span>Admin</a>                    <ul class="user-menu">
-                    <ul class="user-menu">
-                        <li class="dropdown pull-right">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Admin <span></span></a>
-                    </ul>
+                        <ul class="user-menu">
+                            <li class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Admin <span></span></a>
+                        </ul>
                 </div>
 
             </div>
@@ -140,19 +141,22 @@
                         <div class="panel panel-default">
                             <div class="panel-heading" id="accordion"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg> Orders History </div>
                             <div class="panel-body">
-
-                                <div class="alert bg-primary" role="alert">
-                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) on (order date here) total $(Order total here)
-                                </div>
-
-                                <div class="alert bg-primary" role="alert">
-                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) on (order date here) total $(Order total here)
-                                </div>
-
-                                <div class="alert bg-primary" role="alert">
-                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. (order no. here) on (order date here) total $(Order total here)
-                                </div>
-
+                                <c:forEach var="order" items="${orders}">
+                                    <div class="alert bg-primary" role="alert">
+                                        <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. <b>${order.orderID}</b> on <b>${order.date}</b> total $<i>${order.total}</i>
+                                        <c:choose>
+                                            <c:when test="${order.status=='canceled'}">
+                                                <span style ="color:red">${order.status}</span>
+                                            </c:when>
+                                            <c:when test="${order.status=='pending'}">
+                                                <span style ="color:blue">${order.status}</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span style ="color:green">${order.status}</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

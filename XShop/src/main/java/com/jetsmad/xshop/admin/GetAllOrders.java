@@ -5,13 +5,17 @@
  */
 package com.jetsmad.xshop.admin;
 
+import com.jetsmad.xshop.util.beans.Order;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,14 +35,24 @@ public class GetAllOrders extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("admin_name") != null) {
+            DBController db = new DBController();
+            //get a list with all the orders in an arraylist and add it tp the request
+            ArrayList<Order> pending = db.getPendingOrders();
+            ArrayList<Order> history = db.getAllOrders();
+            request.setAttribute("pending", pending);
+            request.setAttribute("history", history);
+            RequestDispatcher rd = request.getRequestDispatcher("adminviews/orders.jsp");
+            // bug in view
+            rd.include(request, response);
+        } else {
+            request.setAttribute("error", "Admin not logged in");
+            request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
+        }
         //get pending orders and add to an arraylist and add it to the request
-        
-        //get a list with all the orders in an arraylist and add it tp the request
-        
-       RequestDispatcher rd = request.getRequestDispatcher("adminviews/orders.jsp");
-        // bug in view
-        rd.include(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

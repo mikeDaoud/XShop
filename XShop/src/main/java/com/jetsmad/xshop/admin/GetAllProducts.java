@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,15 +38,23 @@ public class GetAllProducts extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Product> products = (new DBController()).getAllProducts();
-        request.setAttribute(Constants.PRODUCTS_LIST, products);
-        for(Product product : products){
-            System.out.println(product.getName());
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("admin_name") != null) {
+            ArrayList<Product> products = (new DBController()).getAllProducts();
+            request.setAttribute(Constants.PRODUCTS_LIST, products);
+            for (Product product : products) {
+                System.out.println(product.getName());
+            }
+            //include viwe jsp
+            RequestDispatcher rd = request.getRequestDispatcher("adminviews/productsList.jsp");
+            // bug in view
+            rd.include(request, response);
+        } else {
+            request.setAttribute("error", "Admin not logged in");
+            request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
         }
-         //include viwe jsp
-        RequestDispatcher rd = request.getRequestDispatcher("adminviews/productsList.jsp");
-        // bug in view
-        rd.include(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

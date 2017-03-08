@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,9 +33,17 @@ public class AdminHome extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("adminviews/admin.jsp");
-        // bug in view
-        rd.include(request, response);
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("admin_name") != null) {
+            RequestDispatcher rd = request.getRequestDispatcher("adminviews/admin.jsp");
+            // bug in view
+            rd.include(request, response);
+        } else {
+            request.setAttribute("error", "Admin not logged in");
+            request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

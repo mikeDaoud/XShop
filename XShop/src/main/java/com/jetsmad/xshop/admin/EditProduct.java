@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,11 +37,18 @@ public class EditProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String product_id = request.getParameter(Constants.PRODUCT_ID);
-        Product product = new DBController().getProduct(product_id);
-        request.setAttribute(Constants.PRODUCT_OBJECT, product);
-        RequestDispatcher rd = request.getRequestDispatcher("adminviews/editProduct.jsp");
-        rd.forward(request, response);
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("admin_name") != null) {
+            String product_id = request.getParameter(Constants.PRODUCT_ID);
+            Product product = new DBController().getProduct(product_id);
+            request.setAttribute(Constants.PRODUCT_OBJECT, product);
+            RequestDispatcher rd = request.getRequestDispatcher("adminviews/editProduct.jsp");
+            rd.forward(request, response);
+        } else {
+            request.setAttribute("error", "Admin not logged in");
+            request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
+        }
 
     }
 

@@ -135,8 +135,8 @@ public class DBController {
     public ArrayList<Order> getAllOrders() {
         return orderdao.getAllOrders();
     }
-    
-    public ArrayList<Order> getUserOrders(String userID){
+
+    public ArrayList<Order> getUserOrders(String userID) {
         return orderdao.getUserOrders(userID);
     }
 
@@ -144,4 +144,7 @@ public class DBController {
         orderdao.updateOrderStatus(orderID, status);
     }
 
-}
+    public ArrayList<Order> getPendingOrders() {
+        return orderdao.getPendingOrders();
+    }
+    }
