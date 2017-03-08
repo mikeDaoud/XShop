@@ -350,4 +350,63 @@ public class OrderDAO {
 
         return null;
     }
+    
+    public String getTotalOfTotalOfAllOrders(){
+        dbController.connectToDB();
+
+        if (dbController.con != null) {
+            try {
+                double totalOfTotalOfAllOrders = 0;
+                String query = "select order_id from orders";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = dbController.con.prepareStatement(query);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                       totalOfTotalOfAllOrders += getOrderTotal(rs.getString(1));
+                }
+                rs.close();
+                pst.close();
+                return (totalOfTotalOfAllOrders+"");
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                dbController.disconnect();
+            }
+        }
+        return null;
+    }
+    
+    public String getCountOfPendingOrders(){
+        dbController.connectToDB();
+
+        if (dbController.con != null) {
+            try {
+                String countOfPendingOrders = null;
+                String query = "select COUNT(*) from orders WHERE status=?";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = dbController.con.prepareStatement(query);
+                pst.setString(1, "pending");
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                       countOfPendingOrders =  rs.getString(1);
+                }
+                rs.close();
+                pst.close();
+                return countOfPendingOrders;
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                dbController.disconnect();
+            }
+        }
+        return null;
+    }
 }

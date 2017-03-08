@@ -265,4 +265,33 @@ public class UserDAO {
         }
         return null;
     }
+    
+    public String getCountOfUsers(){
+        controller.connectToDB();
+
+        if (controller.con != null) {
+            try {
+                String countOfUsers = null;
+                String query = "select COUNT(*) from users";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = controller.con.prepareStatement(query);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                       countOfUsers =  rs.getString(1);
+                }
+                rs.close();
+                pst.close();
+                return countOfUsers;
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                controller.disconnect();
+            }
+        }
+        return null;
+    }
 }

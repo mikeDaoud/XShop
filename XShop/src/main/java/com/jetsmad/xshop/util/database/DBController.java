@@ -152,7 +152,8 @@ public class DBController {
             //get total no. of pending orders
             
             //put all the data in the array and return 
-            return null;
+            String[] dashboardData = {userdao.getCountOfUsers(),productdao.getCountOfProducts(),orderdao.getTotalOfTotalOfAllOrders(),orderdao.getCountOfPendingOrders()};
+            return dashboardData;
     }
 
     public ArrayList<Order> getPendingOrders() {

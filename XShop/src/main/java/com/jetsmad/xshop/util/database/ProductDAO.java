@@ -341,4 +341,33 @@ public class ProductDAO {
 
         }
     }
+    
+    public String getCountOfProducts(){
+        dbController.connectToDB();
+
+        if (dbController.con != null) {
+            try {
+                String countOfProducts = null;
+                String query = "select COUNT(*) from products";
+                PreparedStatement pst;
+                ResultSet rs;
+
+                pst = dbController.con.prepareStatement(query);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                       countOfProducts =  rs.getString(1);
+                }
+                rs.close();
+                pst.close();
+                return countOfProducts;
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            } finally {
+                dbController.disconnect();
+            }
+        }
+        return null;
+    }
 }
