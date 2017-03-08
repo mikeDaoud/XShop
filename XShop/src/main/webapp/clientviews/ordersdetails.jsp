@@ -81,7 +81,7 @@
                                                  <span class="label label-info">Pending</span>
                                                  </td>
                                         
-                                        <td><a href="cancelorder?orderid=${order.orderID}" class="text-danger">Cancel</a>
+                                        <td><a href="cancelorder?orderid=${order.orderID}&user=client&status=canceled" class="text-danger">Cancel</a>
                                         </td>
                                             </c:otherwise>
                                         </c:choose>
