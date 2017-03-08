@@ -34,7 +34,7 @@
                 </c:choose>
 
                 <p class="text-center buttons">
-                    <a href="basket.html" class="btn btn-primary <c:if test="${requestScope.productObj.stock lt 1}">disabled</c:if>" ><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                    <a href="basket.html" class="btn btn-primary cart-btn <c:if test="${requestScope.productObj.stock lt 1}">disabled</c:if>" ><i class="fa fa-shopping-cart"></i> Add to cart</a>
 
                 </p>
 

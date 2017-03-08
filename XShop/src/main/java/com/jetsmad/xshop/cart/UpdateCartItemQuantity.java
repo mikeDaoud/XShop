@@ -77,6 +77,8 @@ public class UpdateCartItemQuantity extends HttpServlet {
                             RequestDispatcher rd = request.getRequestDispatcher("clientviews/basket.jsp");
                             rd.include(request, response);
                             
+                        }else{
+                            out.write("false");
                         }
                     }
                 }

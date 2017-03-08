@@ -10,8 +10,29 @@
 <html lang="en">
 
     <jsp:include page="clientviews/head.jsp" />
+    <style>
+        .greenalert, .redalert{
+            text-align: center;
+            position: fixed;
+            display: block;
+            top: 0;
+            z-index: 1;
+            transition: 1s;
+        }
+    </style>
 
     <body>
+        <div class="greenalert container hidden"> 
+            <div class="alert alert-success">
+                <strong>Success!</strong> Product added successfully to your cart.
+            </div>
+        </div>
+
+        <div class="redalert container hidden">
+            <div class="alert alert-danger">
+                <strong>Fail!</strong> Unfortunately this product is out of stock.
+            </div>
+        </div>
         <jsp:include page="clientviews/header.jsp" />  
 
         <div id="all">
@@ -21,18 +42,18 @@
                 <div class="container">
                     <jsp:include page="clientviews/carousel.jsp" />
                     <div class="list-group col-md-3">                    
-                    <jsp:include page="GetCategories" /> 
-                    <jsp:include page="clientviews/search.jsp" />
+                        <jsp:include page="GetCategories" /> 
+                        <jsp:include page="clientviews/search.jsp" />
                     </div>
                     <div class="items col-md-9 box">
-                    <jsp:include page="productslist" />
+                        <jsp:include page="productslist" />
                     </div>
-                    
+
                 </div>
             </div>
-                    <jsp:include page="footer" />
+            <jsp:include page="footer" />
         </div>
-                    <jsp:include page="clientviews/scripts.jsp" />
+        <jsp:include page="clientviews/scripts.jsp" />
     </body>
 </html>
 
