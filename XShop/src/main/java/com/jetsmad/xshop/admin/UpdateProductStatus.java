@@ -5,27 +5,22 @@
  */
 package com.jetsmad.xshop.admin;
 
-import com.jetsmad.xshop.util.beans.Product;
-import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Vector;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author markoiti
  */
-@WebServlet(name = "GetAllProducts", urlPatterns = {"/GetAllProducts"})
-public class GetAllProducts extends HttpServlet {
+@WebServlet(name = "UpdateProductStatus", urlPatterns = {"/UpdateProductStatus"})
+public class UpdateProductStatus extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +33,14 @@ public class GetAllProducts extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-
-        if (session != null && session.getAttribute("admin_name") != null) {
-            ArrayList<Product> products = (new DBController()).getAllProducts();
-            request.setAttribute(Constants.PRODUCTS_LIST, products);
-//            for (Product product : products) {
-//                System.out.println(product.getName());
-//            }
-            //include viwe jsp
-            RequestDispatcher rd = request.getRequestDispatcher("adminviews/productsList.jsp");
-            // bug in view
-            rd.forward(request, response);
-        } else {
-            request.setAttribute("error", "Admin not logged in");
-            request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
-        }
-
+        response.setContentType("text/html;charset=UTF-8");
+        String productId = (String) request.getParameter("productId");
+        boolean status = Boolean.parseBoolean((String) request.getParameter("status"));
+//        System.out.println(productId);
+//        System.out.println(status);
+        new DBController().updateProductStatus(productId, status);
+        RequestDispatcher rd = request.getRequestDispatcher("GetAllProducts");
+        rd.include(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -141,23 +141,28 @@ public class OrderDAO {
                 pst = dbController.con.prepareStatement(query);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-//                    PreparedStatement pstDet;
-//                    ResultSet rsDet;
-//                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
-//                    pstDet = dbController.con.prepareStatement(queryDet);
-//                    pstDet.setString(1, rs.getString(1));
-//                    rsDet = pstDet.executeQuery();
-//                    ArrayList<CartItem> arrayList = new ArrayList<>();
-//                    while (rsDet.next()) {
-//                        CartItem cartItem = new CartItem();
-//                        Product product = dbController.productdao.getProduct(rsDet.getString(1));
-//                        cartItem.setProduct(product);
-//                        cartItem.setQuantity(rsDet.getInt(2));
-//                        arrayList.add(cartItem);
-//                    }
-                    orders.add(new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), new ArrayList<CartItem>(), rs.getString(8)));
-//                    rsDet.close();
-//                    pstDet.close();
+                    PreparedStatement pstDet;
+                    ResultSet rsDet;
+                    String queryDet = "SELECT products_id,quant FROM order_details WHERE order_id=?";
+                    pstDet = dbController.con.prepareStatement(queryDet);
+                    pstDet.setString(1, rs.getString(1));
+                    rsDet = pstDet.executeQuery();
+                    ArrayList<CartItem> arrayList = new ArrayList<>();
+                    while (rsDet.next()) {
+                        CartItem cartItem = new CartItem();
+                        Product product = dbController.productdao.getProduct(rsDet.getString(1));
+                        dbController.connectToDB();
+                        cartItem.setProduct(product);
+                        cartItem.setQuantity(rsDet.getInt(2));
+                        arrayList.add(cartItem);
+                    }
+                    Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), new ArrayList<CartItem>(), rs.getString(8));
+
+                    order.setTotal(getOrderTotal(rs.getString(1)));
+                    dbController.connectToDB();
+                    orders.add(order);
+                    rsDet.close();
+                    pstDet.close();
                 }
                 rs.close();
                 pst.close();
@@ -165,8 +170,8 @@ public class OrderDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                    dbController.disconnect();
-                    return orders;
+                dbController.disconnect();
+                return orders;
             }
 
         }
@@ -236,6 +241,7 @@ public class OrderDAO {
                     }
                     Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), arrayList, rs.getString(8));
                     order.setTotal(getOrderTotal(rs.getString(1)));
+                    dbController.connectToDB();
                     orders.add(order);
                     rsDet.close();
                     pstDet.close();
@@ -246,15 +252,14 @@ public class OrderDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                    dbController.disconnect();
-                    return orders;
+                dbController.disconnect();
+                return orders;
             }
 
         }
 
         return orders;
     }
-    
 
     public double getOrderTotal(String orderID) {
 
@@ -278,14 +283,14 @@ public class OrderDAO {
             pstDet.close();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             dbController.disconnect();
             return orderTotal; //to be removed
         }
     }
-    
-    public ArrayList<Order> getPendingOrders(){
-    
+
+    public ArrayList<Order> getPendingOrders() {
+
         ArrayList<Order> orders = new ArrayList<>();
         dbController.connectToDB();
         if (dbController.con != null) {
@@ -324,17 +329,17 @@ public class OrderDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                
-                    dbController.disconnect();
-                    return orders;
+
+                dbController.disconnect();
+                return orders;
             }
 
         }
 
         return orders;
     }
-    
-    public String getTotalOfTotalOfAllOrders(){
+
+    public String getTotalOfTotalOfAllOrders() {
         dbController.connectToDB();
 
         if (dbController.con != null) {
@@ -347,11 +352,11 @@ public class OrderDAO {
                 pst = dbController.con.prepareStatement(query);
                 rs = pst.executeQuery();
                 while (rs.next()) {
-                       totalOfTotalOfAllOrders += getOrderTotal(rs.getString(1));
+                    totalOfTotalOfAllOrders += getOrderTotal(rs.getString(1));
                 }
                 rs.close();
                 pst.close();
-                return (totalOfTotalOfAllOrders+"");
+                return (totalOfTotalOfAllOrders + "");
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -362,8 +367,8 @@ public class OrderDAO {
         }
         return "0";
     }
-    
-    public String getCountOfPendingOrders(){
+
+    public String getCountOfPendingOrders() {
         dbController.connectToDB();
 
         if (dbController.con != null) {
@@ -377,7 +382,7 @@ public class OrderDAO {
                 pst.setString(1, "pending");
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                       countOfPendingOrders =  rs.getString(1);
+                    countOfPendingOrders = rs.getString(1);
                 }
                 rs.close();
                 pst.close();

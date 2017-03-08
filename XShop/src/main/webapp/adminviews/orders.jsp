@@ -152,6 +152,7 @@
                                                 <th data-field="id" data-align="right">Order ID</th>
                                                 <th data-field="name">User ID</th>
                                                 <th data-field="price">Date</th>
+                                                <th data-field="total">Total</th>
                                                 <th data-field="state">Status</th>
                                             </tr>
                                         </thead>
@@ -159,7 +160,9 @@
                                             <tr>
                                             <td>${order.orderID}</td>
                                             <td>${order.userID}</td>
+                                            
                                             <td>${order.date}</td>
+                                            <td>${order.total}</td>
                                             <c:choose>
                                                 <c:when test="${order.status == 'canceled'}">
                                                     <td>  <span class="label label-danger">Canceled</span></td>

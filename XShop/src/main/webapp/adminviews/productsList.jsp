@@ -138,13 +138,13 @@
 
                                                 <c:if test="${prdct.active == true}">
                                                     <td>
-                                                        <span style="background: #4CAF50; padding: 1px 3px; color: #ecf0f1; border-radius: 2px;">Active</span>
+                                                        <a href="UpdateProductStatus?productId=${prdct.id}&status=false" style="background: #4CAF50; padding: 1px 3px; color: #ecf0f1; border-radius: 2px;">Active</a>
                                                     </td>
                                                 </c:if>
 
                                                 <c:if test="${prdct.active == false}"> 
                                                     <td>
-                                                        <span style="background: #9E9E9E; padding: 1px 3px; color: #ecf0f1; border-radius: 2px;">Inactive</span>
+                                                        <a href="UpdateProductStatus?productId=${prdct.id}&status=true" style="background: #9E9E9E; padding: 1px 3px; color: #ecf0f1; border-radius: 2px;">Inactive</a>
                                                     </td>
                                                 </c:if>
                                                 <td><a href="EditProduct?productID=${prdct.id}" name="productID" value="${prdct.id}" class="btn btn-primary editbtn">Edit</a></td>
