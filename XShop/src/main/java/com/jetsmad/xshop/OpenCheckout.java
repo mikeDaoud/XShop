@@ -36,12 +36,19 @@ public class OpenCheckout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         
-        if(session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
+        System.out.println(session);
+        
+        String s = (String) session.getAttribute(Constants.USER_EMAIL);
+        
+        System.out.println(s);
+//        System.out.println(session.getAttribute(Constants.USER_EMAIL));
+        
+        if(session.getAttribute(Constants.USER_ID) !=null){
             RequestDispatcher rd = request.getRequestDispatcher("reviewOrder.jsp");
             rd.include(request, response);
             
         }else{
-            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
     }

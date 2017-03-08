@@ -8,7 +8,6 @@ package com.jetsmad.xshop.payment;
 import com.jetsmad.xshop.util.creditcards.CreditCard;
 import com.jetsmad.xshop.util.creditcards.CreditCardDataBase;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +50,7 @@ public class ProcessPayment extends HttpServlet {
             if (creditCardDB.processPayment(creditCard.getCreditCardNumber(), totalPrice)) {
                 // completed the payment process successfully
             } else {
+                
                 //  Balance not enough
             }
         } else {

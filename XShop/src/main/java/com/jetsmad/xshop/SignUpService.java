@@ -58,9 +58,11 @@ public class SignUpService extends HttpServlet {
                     session.setAttribute(Constants.USER_ID, user.getId());
                     session.setAttribute(Constants.USER_NAME, user.getName());
                     //TODO:redirect to card page
+                    RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                    rd.include(request, response);
                 } else {
                     request.setAttribute("errorpassword", "passowords don't match");
-                    RequestDispatcher rd = request.getRequestDispatcher("clientviews/register.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
                     rd.include(request, response);
                 }
             } else {

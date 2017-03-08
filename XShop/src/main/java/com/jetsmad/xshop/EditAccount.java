@@ -29,17 +29,21 @@ public class EditAccount extends HttpServlet {
 
         HttpSession session = request.getSession(true);
 
-        if (session.getAttribute(Constants.USER_ID) != null && session.getAttribute(Constants.USER_EMAIL) != null) {
-            String userId = (String) request.getAttribute(Constants.USER_ID);
+        if (session.getAttribute(Constants.USER_ID) != null) {
+            String userId = (String) session.getAttribute(Constants.USER_ID);
+            
+            System.out.println("user registered ID on the session" + userId);
             System.out.println(userId);
             User currUser = (new DBController()).getUserById(userId);
+            
+            System.out.println("user data content? " + currUser);
             request.setAttribute(Constants.CURRENT_USER_OBJECT, currUser);
 
             RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
             rd.include(request, response);
 
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
 

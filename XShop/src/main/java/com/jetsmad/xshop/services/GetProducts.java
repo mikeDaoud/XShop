@@ -82,24 +82,14 @@ public class GetProducts extends HttpServlet {
             }
         }
 
-//        Integer pagenum = (Integer)request.getParameter("pagenum");
-//        if(pagenum == null){
-//            pagenum = 1;
-//        }
-//        if(allProducts.size() >= (pagenum*12)){
-//            for(int i = ((pagenum - 1)*12);i < (pagenum*12);i++){
-//                productsToShow.add(allProducts.get(i));
-//            }
-//        }else{
         if (allProducts != null) {
             for (int j = 0; j < allProducts.size(); j++) {
                 productsToShow.add(allProducts.get(j));
             }
         } else {
-// error not found
+
         }
-//        }
-//        
+    
 
         request.setAttribute(Constants.PRODUCTS_LIST, productsToShow);
 

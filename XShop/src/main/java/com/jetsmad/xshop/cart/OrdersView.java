@@ -39,7 +39,7 @@ public class OrdersView extends HttpServlet {
         
         HttpSession session = request.getSession(true);
         
-        if(session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
+        if(session.getAttribute(Constants.USER_ID) !=null){
            
         String userID = (String) session.getAttribute(Constants.USER_ID);
         
@@ -48,7 +48,7 @@ public class OrdersView extends HttpServlet {
         rd.include(request, response);
             
         }else{
-            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
         

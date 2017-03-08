@@ -23,13 +23,13 @@
 
                             <ul class="nav nav-pills nav-stacked">
                                 <li>
-                                    <a href="customer-orders.html"><i class="fa fa-user"></i> My account</a>
+                                    <a href=""><i class="fa fa-user"></i> My account</a>
                                 </li>
                                 <li class="active">
-                                    <a href="customer-account.html"><i class="fa fa-list"></i> My orders</a>
+                                    <a href="#"><i class="fa fa-list"></i> My orders</a>
                                 </li>
                                 <li>
-                                    <a href="index.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                    <a href="LogoutServlet"><i class="fa fa-sign-out"></i> Logout</a>
                                 </li>
                             </ul>
                         </div>

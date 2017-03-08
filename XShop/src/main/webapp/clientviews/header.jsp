@@ -60,9 +60,7 @@
                             </li>
                         </c:when>
                         <c:otherwise>
-                            <li>
-                                <a herf="#">${userName}</a>
-                            </li>
+                            <li><a href="EditAccount"><c:out value="${userName}" /></a>
                             <li><a href="LogoutServlet">Logout</a>
                             </li>
                         </c:otherwise>    

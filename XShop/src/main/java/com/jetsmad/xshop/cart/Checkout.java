@@ -46,7 +46,9 @@ public class Checkout extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         
-        if(session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
+        System.out.println(session.getAttribute(Constants.USER_ID));
+        
+        if(session.getAttribute(Constants.USER_ID) !=null){
            Order order = (Order) request.getSession().getAttribute(Constants.Order);
         new DBController().insertOrder(order);
         request.getSession().setAttribute(Constants.CART_ITEMS, null);
@@ -55,7 +57,7 @@ public class Checkout extends HttpServlet {
         rd.forward(request, response);
             
         }else{
-            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
         

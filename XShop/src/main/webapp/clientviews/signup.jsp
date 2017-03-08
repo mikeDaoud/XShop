@@ -73,7 +73,7 @@
 
         <small>* required fields</small>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary" style="border-radius: 3px;"><i class="fa fa-user-md"></i> Register</button>
+            <button type="submit" class="btn btn-primary" style="border-radius: 3px;" ><i class="fa fa-user-md"></i> Register</button>
         </div>
     </form>  
 </div>

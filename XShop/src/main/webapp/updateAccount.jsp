@@ -32,7 +32,7 @@ _________________________________________________________ -->
 
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
-                                <a href="customer-orders.html"><i class="fa fa-user"></i> My account</a>
+                                <a href="EditAccount"><i class="fa fa-user"></i> My account</a>
                             </li>
                             <li>
                                 <a href="myorders"><i class="fa fa-list"></i> My orders</a>
@@ -62,12 +62,12 @@ _________________________________________________________ -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Name *</label>
-                                        <input name="name" type="text" class="form-control" id="name" value="${userData.name}" style="padding:10px">
+                                        <input name="name" type="text" class="form-control" id="name" value="${userData.name}" style="padding:10px" required>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email *</label>
-                                    <input name="email" type="text" class="form-control" id="email" value="${userData.email}" style="padding:10px">
+                                    <input name="email" type="text" class="form-control" id="email" value="${userData.email}" style="padding:10px" required>
                                     <c:if test="${!empty requestScope.erroremail}"> 
                                         <span class="pull-right" style="color: #e74c3c">Email Already Exists</span>
                                     </c:if>
@@ -75,12 +75,12 @@ _________________________________________________________ -->
 
                                 <div class="form-group">
                                     <label for="password">Password *</label>
-                                    <input name="password" type="password" class="form-control" id="password" style="padding:10px">
+                                    <input name="password" type="password" class="form-control" id="password" style="padding:10px" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Confrim Password *</label>
-                                    <input name="repeatedPassword" type="password" class="form-control" id="password" style="padding:10px">
+                                    <input name="repeatedPassword" type="password" class="form-control" id="password" style="padding:10px" required>
                                     <c:if test="${!empty requestScope.errorpassword}"> 
                                         <span class="pull-right" style="color: #e74c3c">Passwords don't match</span>
                                     </c:if>

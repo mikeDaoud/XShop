@@ -33,7 +33,8 @@ public class UpdateUserAcct extends HttpServlet {
 //        2. Checks the database for the mail if exists -> if exists reply with "false"
 //        3. update the user data in the database
 //        4. reply with "true" or "false" string
-        String user_id = (String) request.getAttribute(Constants.USER_ID);
+          HttpSession session = request.getSession(true);
+        String user_id = (String) session.getAttribute(Constants.USER_ID);
         
         if (user_id != null) {
             
@@ -54,17 +55,17 @@ public class UpdateUserAcct extends HttpServlet {
 
                     (new DBController()).ubdateUser(user);
 
-                    HttpSession session = request.getSession(true);
-
                     session.setAttribute(Constants.USER_ID, user.getId());
                     session.setAttribute(Constants.USER_NAME, user.getName());
                     //TODO:redirect to card page
+                    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                    rd.forward(request, response);
 
                 } else {
                     request.setAttribute("errorpassword", "passowords don't match");
                     request.setAttribute(Constants.CURRENT_USER_OBJECT, user);
                     RequestDispatcher rd = request.getRequestDispatcher("updateAccount.jsp");
-                    rd.include(request, response);
+                    rd.forward(request, response);
                 }
 
             } else {

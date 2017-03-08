@@ -58,7 +58,7 @@ public class SignInService extends HttpServlet {
                 // out.println("fail login");
                 //include header 
                 request.setAttribute("error", "wrong email or password");
-                RequestDispatcher rd = request.getRequestDispatcher("clientviews/register.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
                 rd.include(request, response);
                 // include footer
             }

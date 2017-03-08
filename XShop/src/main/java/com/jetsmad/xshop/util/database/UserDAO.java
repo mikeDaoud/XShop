@@ -167,21 +167,20 @@ public class UserDAO {
                 user.setJob(rs.getString(7));
                 PreparedStatement pstInt;
                 ResultSet rsInt;
-                String queryInt = "SELECT interest FROM interests WHERE users_id=?";
-                pstInt = controller.con.prepareStatement(queryInt);
-                pstInt.setString(1, rs.getString(1));
-                rsInt = pstInt.executeQuery();
-                ArrayList<String> arrayList = new ArrayList<>();
-                while (rsInt.next()) {
-                    arrayList.add(rsInt.getString(1));
-                }
-                user.setInterests((String[]) arrayList.toArray());
+//                String queryInt = "SELECT interest FROM interests WHERE users_id=?";
+//                pstInt = controller.con.prepareStatement(queryInt);
+//                pstInt.setString(1, rs.getString(1));
+//                rsInt = pstInt.executeQuery();
+//                ArrayList<String> arrayList = new ArrayList<>();
+//                while (rsInt.next()) {
+//                    arrayList.add(rsInt.getString(1));
+//                }
+//                user.setInterests((String[]) arrayList.toArray());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             controller.disconnect();
-            System.out.println(user);
             return user;
         }
     }

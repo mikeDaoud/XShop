@@ -57,14 +57,14 @@ public class PlaceOrder extends HttpServlet {
         LocalDateTime now = LocalDateTime.now();
         Order order;
         
-        if(session != null && session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
+        if(session != null && session.getAttribute(Constants.USER_ID) !=null){
             order = new Order(UUID.randomUUID().toString().substring(20), (String) session.getAttribute(Constants.USER_ID), (String) request.getAttribute("street"), (String) request.getAttribute("city"), (String) request.getAttribute("governorate"), (String) request.getAttribute("phone"), dtf.format(now).toString(), (ArrayList<CartItem>) (session.getAttribute(Constants.CART_ITEMS)), "pending");
             session.setAttribute(Constants.Order, order);
             RequestDispatcher rd = request.getRequestDispatcher("Transaction");
             rd.forward(request, response);
             
         }else{
-            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
         

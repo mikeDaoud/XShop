@@ -15,10 +15,10 @@
         
         <div id="all">
             
-            <div id="content">
+            <div id="content container">
                 <div class="container">
                     <jsp:include page="clientviews/ordersdetails.jsp" />  
-                </div>
+                
             </div>
             
             <jsp:include page="footer" />
