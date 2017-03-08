@@ -120,8 +120,8 @@ public class ProductDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                    dbController.disconnect();
-                    return products;
+                dbController.disconnect();
+                return products;
             }
 
         }
@@ -154,8 +154,8 @@ public class ProductDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                    dbController.disconnect();
-                    return products;
+                dbController.disconnect();
+                return products;
             }
 
         }
@@ -185,8 +185,8 @@ public class ProductDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                    dbController.disconnect();
-                    return products;
+                dbController.disconnect();
+                return products;
             }
 
         }
@@ -216,8 +216,8 @@ public class ProductDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                    dbController.disconnect();
-                    return products;
+                dbController.disconnect();
+                return products;
             }
 
         }
@@ -312,7 +312,7 @@ public class ProductDAO {
             rs.close();
             pst.close();
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
 
             dbController.disconnect();
@@ -320,8 +320,8 @@ public class ProductDAO {
 
         }
     }
-    
-    public String getCountOfProducts(){
+
+    public String getCountOfProducts() {
         dbController.connectToDB();
 
         String countOfProducts = "0";
@@ -334,7 +334,7 @@ public class ProductDAO {
                 pst = dbController.con.prepareStatement(query);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                       countOfProducts =  rs.getString(1);
+                    countOfProducts = rs.getString(1);
                 }
                 rs.close();
                 pst.close();
@@ -348,4 +348,37 @@ public class ProductDAO {
         }
         return countOfProducts;
     }
+
+    public boolean updateProductStatus(String prdctId, boolean status) {
+        //Update the product in the database with the product ID in the given
+        //product object and return true if updated, false if not
+        dbController.connectToDB();
+        if (dbController.con != null) {
+            try {
+                String query = "update products set active=? where id=?";
+                PreparedStatement pst;
+                ResultSet rs;
+                pst = dbController.con.prepareStatement(query);
+//                System.out.println(prdctId);
+//                System.out.println(status);
+                pst.setByte(1, (status == true ? (byte) 1 : (byte) 0));
+                pst.setString(2, prdctId);
+                if (pst.executeUpdate() > 0) {
+                    pst.close();
+                    return true;
+                } else {
+                    pst.close();
+                    return false;
+                }
+            } catch (SQLException ex) {
+
+                return false;
+            } finally {
+                dbController.disconnect();
+            }
+
+        }
+        return false;
+    }
+
 }

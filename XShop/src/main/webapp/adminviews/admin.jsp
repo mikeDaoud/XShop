@@ -161,7 +161,7 @@
 
                             <c:forEach var="order" items="${orders}">
                                 <div class="alert bg-primary" role="alert">
-                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. <b>${order.orderID}</b> on <b>${order.date}</b>
+                                    <svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Order no. <b>${order.orderID}</b> on <b>${order.date}</b> total $<i>${order.total}</i>
                                     <c:choose>
                                         <c:when test="${order.status=='canceled'}">
                                             <span style ="color:red">${order.status}</span>

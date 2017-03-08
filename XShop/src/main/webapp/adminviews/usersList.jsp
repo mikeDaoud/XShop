@@ -95,7 +95,7 @@
                                                     <th data-field="id" data-align="center">User ID</th>
                                                     <th data-field="name">Name</th>
                                                     <th data-field="price">Email</th>
-                                                    <th data-field="stock">Spendings</th>
+                                                    
                                                     <th data-field="editbtn"></th>
                                                 </tr>
                                             </thead>
@@ -105,7 +105,7 @@
                                                 <td><c:out value="${user.id}"></c:out></td>
                                                 <td><c:out value="${user.name}"></c:out></td>
                                                 <td><c:out value="${user.email}"></c:out></td>
-                                                    <td>$ 2000</td>
+                                                    
                                                     <td><a href="GetUserDetails?userId=${user.id}" name="userId" value="${user.id}" class="btn btn-primary editbtn">View</a></td>
                                             </form>
                                             </tr>

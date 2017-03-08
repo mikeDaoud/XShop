@@ -159,4 +159,7 @@ public class DBController {
     public ArrayList<Order> getPendingOrders() {
         return orderdao.getPendingOrders();
     }
+    public boolean updateProductStatus(String prdctId , boolean status) {
+        return productdao.updateProductStatus(prdctId, status);
+    }
     }
