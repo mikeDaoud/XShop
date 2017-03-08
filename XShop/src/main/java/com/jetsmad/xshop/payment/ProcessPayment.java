@@ -5,8 +5,11 @@
  */
 package com.jetsmad.xshop.payment;
 
+import com.jetsmad.xshop.util.beans.Constants;
+import com.jetsmad.xshop.util.beans.Order;
 import com.jetsmad.xshop.util.creditcards.CreditCard;
 import com.jetsmad.xshop.util.creditcards.CreditCardDataBase;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -50,6 +54,11 @@ public class ProcessPayment extends HttpServlet {
             //3- send total price to make payment processing and update balance in DB ..
             if (creditCardDB.processPayment(creditCard.getCreditCardNumber(), totalPrice)) {
                 // completed the payment process successfully
+                
+                HttpSession session = request.getSession();
+                Order order = (Order) session.getAttribute(Constants.Order);
+                new DBController().insertOrder(order);
+                
                 request.setAttribute("success", "Successful Transaction");
                 RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
                 rd.forward(request, response);
