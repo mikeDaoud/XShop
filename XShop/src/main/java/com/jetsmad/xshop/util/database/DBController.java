@@ -143,6 +143,17 @@ public class DBController {
     public void updateOrderStatus(String orderID, String status) {
         orderdao.updateOrderStatus(orderID, status);
     }
+    
+    public String[] getDashboardData(){
+        //in order
+            //get count of users table
+            //get count of products
+            //get total of toals of all orders
+            //get total no. of pending orders
+            
+            //put all the data in the array and return 
+            return null;
+    }
 
     public ArrayList<Order> getPendingOrders() {
         return orderdao.getPendingOrders();

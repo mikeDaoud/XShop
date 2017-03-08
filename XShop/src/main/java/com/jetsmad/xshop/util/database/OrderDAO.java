@@ -309,7 +309,8 @@ public class OrderDAO {
             rs = pst.executeQuery();
             
             
-            //TODO: To Be Implemented
+            //TODO: get all orders from the database where status = pending
+            // put in arraylist and return it
             
             
         } catch (SQLException ex) {
