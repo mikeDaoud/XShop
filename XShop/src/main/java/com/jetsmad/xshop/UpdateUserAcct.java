@@ -9,7 +9,6 @@ import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
-import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +33,7 @@ public class UpdateUserAcct extends HttpServlet {
 //        2. Checks the database for the mail if exists -> if exists reply with "false"
 //        3. update the user data in the database
 //        4. reply with "true" or "false" string
-        //String user_id = (String) request.getAttribute(Constants.USER_ID);
-        String user_id = "025-418e-bc8f-26e7e6781082";
+        String user_id = (String) request.getAttribute(Constants.USER_ID);
         
         if (user_id != null) {
             

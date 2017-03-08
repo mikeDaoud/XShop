@@ -13,7 +13,7 @@
 
         <div class="box">
 
-            <form method="post" action="reviewOrder.jsp">
+            <form method="post" action="OpenCheckout">
 
                 <h1>Shopping cart</h1>
                 <p class="text-muted">You currently have 3 item(s) in your cart.</p>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="pull-right">
 
-                    <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                    <button type="submit" class="btn btn-primary <c:if test="${empty cart}">disabled</c:if>">Proceed to checkout <i class="fa fa-chevron-right"></i>
                     </button>
                 </div>
             </div>

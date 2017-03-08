@@ -36,12 +36,23 @@ public class OrdersView extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        
         HttpSession session = request.getSession(true);
+        
+        if(session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
+           
         String userID = (String) session.getAttribute(Constants.USER_ID);
         
         request.setAttribute("orders", (new DBController().getUserOrders(userID)));
         RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
         rd.include(request, response);
+            
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            rd.forward(request, response);
+        }
+        
+        
        
         // call getuserorders from data base and pass userID from session
         //add the returned arraylist on the request naming it "orders"

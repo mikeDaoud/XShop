@@ -9,8 +9,6 @@ import com.jetsmad.xshop.util.beans.CartItem;
 import com.jetsmad.xshop.util.beans.Constants;
 import com.jetsmad.xshop.util.beans.Order;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -53,18 +51,23 @@ public class PlaceOrder extends HttpServlet {
 //        7. Add teh Order object on the session
 //        8. upon success forward to the payment step in checkout (to be done later)
         // let that the names of filed the same in the bean 
+        
+        HttpSession session = request.getSession(false);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-
-        HttpSession session = request.getSession(false);
         Order order;
-        if (session != null) {
+        
+        if(session != null && session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
             order = new Order(UUID.randomUUID().toString().substring(20), (String) session.getAttribute(Constants.USER_ID), (String) request.getAttribute("street"), (String) request.getAttribute("city"), (String) request.getAttribute("governorate"), (String) request.getAttribute("phone"), dtf.format(now).toString(), (ArrayList<CartItem>) (session.getAttribute(Constants.CART_ITEMS)), "pending");
             session.setAttribute(Constants.Order, order);
-            RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Transaction");
             rd.forward(request, response);
-            // forward for what 
+            
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("signin");
+            rd.forward(request, response);
         }
+        
 
     }
 

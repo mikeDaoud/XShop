@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop.cart;
+package com.jetsmad.xshop;
 
 import com.jetsmad.xshop.util.beans.Constants;
-import com.jetsmad.xshop.util.beans.Order;
-import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author michael
  */
-@WebServlet(name = "Checkout", urlPatterns = {"/Checkout"})
-public class Checkout extends HttpServlet {
+@WebServlet(name = "Transaction", urlPatterns = {"/Transaction"})
+public class Transaction extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,32 +35,16 @@ public class Checkout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-//        Servlet that does the following:
-//        1. get the order object from session and update it 
-//        2. put the order object in the database
-//        3. clear the cart object on the session
-//        4. remove the order object from the session
-//        5. forward to the successfull transaction jsp
-
         HttpSession session = request.getSession(true);
         
         if(session.getAttribute(Constants.USER_ID) !=null && session.getAttribute(Constants.USER_EMAIL) !=null){
-           Order order = (Order) request.getSession().getAttribute(Constants.Order);
-        new DBController().insertOrder(order);
-        request.getSession().setAttribute(Constants.CART_ITEMS, null);
-        request.getSession().setAttribute(Constants.Order, null);
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("transaction.jsp");
+            rd.include(request, response);
             
         }else{
             RequestDispatcher rd = request.getRequestDispatcher("signin");
             rd.forward(request, response);
         }
-        
-        
-// what's meaning of update  order object from session 
-// forward or include 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

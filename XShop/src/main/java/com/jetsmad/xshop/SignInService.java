@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +50,8 @@ public class SignInService extends HttpServlet {
                 session.setAttribute(Constants.USER_ID, user.getId());
                 session.setAttribute(Constants.USER_NAME, user.getName());
                 //TODO:redirect to profil page
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.include(request, response);
 
             } else {
                 //TODO:redirect to signIn page with message to check email or password becouse one of them is wrong
