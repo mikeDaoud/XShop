@@ -68,6 +68,8 @@ public class AddToCart extends HttpServlet {
                 }
                 session.setAttribute(Constants.CART_ITEMS, cartItems);
                 out.write(cartItems.size() + "");
+            }else{
+                out.write("false");
             }
         } else {
             out.write("false");
