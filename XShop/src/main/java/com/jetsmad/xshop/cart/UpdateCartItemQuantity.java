@@ -68,16 +68,19 @@ public class UpdateCartItemQuantity extends HttpServlet {
                 }
             }
             if(action.equals("decrease")){
+                System.out.println("----------------------- decrease");
                 for(CartItem item:cartItems){
                     if(item.getProduct().getId().equals(productId)){
                         if(item.removeOne()){
                             newStock = product.getStock() + 1;
                             product.setStock(newStock);
+                            System.out.println("--------------------success decrease");
                             //out.write("True");
                             RequestDispatcher rd = request.getRequestDispatcher("clientviews/basket.jsp");
                             rd.include(request, response);
                             
                         }else{
+                            System.out.println("----------------------returning false");
                             out.write("false");
                         }
                     }

@@ -45,7 +45,7 @@
                         <jsp:include page="GetCategories" /> 
                         <jsp:include page="clientviews/search.jsp" />
                     </div>
-                    <div class="items col-md-9 box">
+                    <div class="items col-md-9 box" id="scrollfoo">
                         <jsp:include page="productslist" />
                     </div>
 

@@ -9,7 +9,10 @@
 $(document).on("click", ".eye-btn", function (event) {
 //    var $form = $(this);
     $.post("getProductDetails", {productId: event.target.name}, function (response) {
+        console.log(event.target.name);
         $(".items").html(response);
+        $('html,body').animate({
+        scrollTop: $("#scrollfoo").offset().top},'slow');
     });
     return false;
 });
@@ -52,7 +55,7 @@ $(document).on("click", ".qtyrightplus", function (event) {
 });
 
 $(document).on("click", ".qtyrightminus", function (event) {
-    if ($("#qty-input").val() > 1) {
+//    if ($("#qty-input").val() > 1) {
         $.post("updatecartitemquantity", {productId: event.target.name, action: "decrease"}, function (response) {
             if (response !== "false"){
                 $("#basketDiv").html(response);
@@ -61,7 +64,7 @@ $(document).on("click", ".qtyrightminus", function (event) {
             }
                 
         });
-    }
+//    }
     return false;
 });
 
@@ -84,12 +87,10 @@ $(document).on("click", ".trash-anchor", function (event) {
 //------ Markoz --------
 $(document).on("click", ".searchByCategory", function (event) {
 //    var $form = $(this);
-    $(".searchByCategory").addClass("active");
-    $(".allCategories").removeClass("active");
-
     $.post("productslist", {categoryName: event.target.name, type: "category"}, function (response) {
         $(".items").html(response);
-
+//        $(".allCategories").removeClass("active");
+        
     });
     return false;
 });

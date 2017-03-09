@@ -29,7 +29,7 @@ public class GetProducts extends HttpServlet {
 // if equals "search" check parameters "query" "min" "max" and get products with this search query
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         System.out.println("sdfdsjfdsjkfhfdsjk");
         String type = (String) request.getParameter("type");
         DBController db = new DBController();
@@ -89,9 +89,8 @@ public class GetProducts extends HttpServlet {
         } else {
 
         }
-    
 
-        request.setAttribute(Constants.PRODUCTS_LIST, productsToShow);
+        request.setAttribute("products_list", productsToShow);
 
         request.getRequestDispatcher("clientviews/products.jsp").include(request, response);
 

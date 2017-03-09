@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="productsList" value="${requestScope.products}"></c:set>
+<c:set var="productsList" value="${requestScope.products_list}"></c:set>
     
     <c:forEach var="prdct" items="${productsList}">
         <c:if test="${prdct.active==true}">

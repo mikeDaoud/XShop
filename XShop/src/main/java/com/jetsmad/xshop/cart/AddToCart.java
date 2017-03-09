@@ -49,9 +49,9 @@ public class AddToCart extends HttpServlet {
                 product.setStock(newStock);
                 dbc.updateProduct(product);
                 ArrayList<CartItem> cartItems;
-                HttpSession session = request.getSession(false);
+                HttpSession session = request.getSession(true);
                 if (session.getAttribute(Constants.CART_ITEMS) == null) {
-                    session = request.getSession(true);
+                    
                     cartItems = new ArrayList<>();
                 } else {
                     cartItems = (ArrayList<CartItem>) session.getAttribute(Constants.CART_ITEMS);
