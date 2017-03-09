@@ -10,7 +10,6 @@ import com.jetsmad.xshop.util.beans.Order;
 import com.jetsmad.xshop.util.beans.User;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,7 +43,6 @@ public class GetUserDetails extends HttpServlet {
         if (session != null && session.getAttribute("admin_name") != null) {
             DBController bController = new DBController();
             String userId = (String) request.getParameter(Constants.USER_ID);
-            System.out.println(userId);
             User currUser = bController.getUserById(userId);
             ArrayList<Order> userOrders = bController.getUserOrders(userId);
             // get the number of orders and orders and put it to reguest

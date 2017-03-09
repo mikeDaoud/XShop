@@ -110,7 +110,7 @@
                                         <c:forEach var="order" items="${pendingList}">
                                         <tr>
                                             <td>${order.orderID}</td>
-                                            <td>${order.userID}</td>
+                                            <td><a href="GetUserDetails?userId=${order.userID}"></a>${order.userID}</td>
                                             <td>${order.date}</td>
                                             <td>${order.phone}</td>
                                             <td>$<c:out value="${order.total}"></c:out></td>

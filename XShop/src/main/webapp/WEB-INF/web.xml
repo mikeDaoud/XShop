@@ -1,0 +1,12 @@
+<web-app>
+    
+    <servlet>
+    <servlet-name>adminlogin</servlet-name>
+    <jsp-file>/adminLogin.jsp</jsp-file> <!-- Your JSP. Must begin with '/' -->
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>adminlogin</servlet-name>
+    <url-pattern>/admin</url-pattern> <!-- Any URL you want here -->
+</servlet-mapping>
+</web-app>
