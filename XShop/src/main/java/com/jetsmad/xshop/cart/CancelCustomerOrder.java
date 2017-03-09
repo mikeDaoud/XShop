@@ -41,7 +41,7 @@ public class CancelCustomerOrder extends HttpServlet {
         new DBController().updateOrderStatus(order_id, status);
         // Include the JSP called "orders.jsp"
         if (request.getParameter("user").equals("client")) {
-            RequestDispatcher rd = request.getRequestDispatcher("orders.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/myorders");
             rd.include(request, response);
         } else if (request.getParameter("user").equals("admin")) {
             RequestDispatcher rd = request.getRequestDispatcher("/GetAllOrders");
