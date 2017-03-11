@@ -182,8 +182,8 @@
                 </div>
                 <!--/.col-->
 
-                <div class="col-md-4">
-
+                <div class="col-md-12 text-center">
+                    <a href="adminlogout" class="btn btn-primary">Log Out</a>
 
                 </div>
                 <!--/.col-->

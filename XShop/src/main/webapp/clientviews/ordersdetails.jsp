@@ -63,8 +63,8 @@
                                      
                                     <tr>
                                         <th><c:out value="${order.orderID}"></c:out></th>
-                                        <td><c:out value="${order.orderID}"></c:out></td>
-                                        <td>$<c:out value="${order.orderID}"></c:out> </td>
+                                        <td><c:out value="${order.date}"></c:out></td>
+                                        <td>$<c:out value="${order.total}"></c:out> </td>
                                         <td>
                                         <c:choose>
                                             <c:when test="${order.status == 'received'}">

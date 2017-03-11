@@ -40,7 +40,14 @@
                                 <tr>
                                     <td>
                                         <a href="#">
-                                            <img src="img/detailsquare.jpg" alt="White Blouse Armani"/>
+                                            <c:choose>
+                                                <c:when test="${empty item.product.img}">
+                                                    <img class="product-img img-responsive" src="${pageContext.request.contextPath}/resources/client/img/detailbig1.jpg" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img src="resources/images/${item.product.img}" alt="" class="img-responsive">
+                                                </c:otherwise>   
+                                            </c:choose>      
                                         </a>
                                     </td>
                                     <td><a href="#"><c:out value="${item.product.name}"></c:out></a>

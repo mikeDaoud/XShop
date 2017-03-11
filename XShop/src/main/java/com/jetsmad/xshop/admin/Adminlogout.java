@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jetsmad.xshop;
+package com.jetsmad.xshop.admin;
 
 import com.jetsmad.xshop.util.beans.Constants;
-import com.jetsmad.xshop.util.beans.User;
-import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author michael
  */
-@WebServlet(name = "SignUpService", urlPatterns = {"/signup"})
-public class SignUpService extends HttpServlet {
+@WebServlet(name = "adminlogout", urlPatterns = {"/adminlogout"})
+public class Adminlogout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +35,13 @@ public class SignUpService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("signup in");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            User user = new User();
-            DBController dbc = new DBController();
-            if (dbc.checkEmail(request.getParameter("email"))) {
-                if (request.getParameter("password").equals(request.getParameter("repeatedPassword"))) {
-                    user.setId(UUID.randomUUID().toString().substring(10));
-                    user.setName(request.getParameter("name"));
-                    user.setEmail(request.getParameter("email"));
-                    user.setDob(request.getParameter("dOB"));
-                    user.setPassword(request.getParameter("password"));
-                    user.setAddress(request.getParameter("address"));
-                    user.setJob(request.getParameter("job"));
-                    user.setInterests(request.getParameterValues("interest"));
-                    dbc.addUser(user);
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute(Constants.USER_ID, user.getId());
-                    session.setAttribute(Constants.USER_NAME, user.getName());
-                    //TODO:redirect to card page
-                    RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("errorpassword", "passowords don't match");
-                    RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
-                    rd.include(request, response);
-                }
-            } else {
-
-                //TODO:redirect to signup page with message to change email becouse it used before
-//                out.println("repeated email");
-                request.setAttribute("erroremail", "Email already exists");
-                RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
-                rd.include(request, response);
-            }
-            
-        }
+        HttpSession session = request.getSession(true);
+        
+        session.invalidate();
+        
+        response.sendRedirect("/XShop/admin");
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

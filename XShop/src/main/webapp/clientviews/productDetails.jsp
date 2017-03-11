@@ -12,7 +12,14 @@
     <div class="row" id="productMain">
         <div class="col-sm-6">
             <div id="mainImage">
-                <img src="${pageContext.request.contextPath}/resources/client/img/detailbig1.jpg" alt="" class="img-responsive">
+                <c:choose>
+                    <c:when test="${empty requestScope.productObj.img}">		
+                        <img src="${pageContext.request.contextPath}/resources/client/img/detailbig1.jpg" alt="" class="img-responsive">		
+                    </c:when>		
+                    <c:otherwise>		
+                        <img src="resources/images/${requestScope.productObj.img}" alt="" class="img-responsive">		
+                    </c:otherwise>   		
+                </c:choose>        
             </div>
 
         </div>
@@ -23,7 +30,7 @@
                 </p>
 
                 <p class="price">$${requestScope.productObj.price}</p>
-               
+
                 <c:choose>
                     <c:when test="${requestScope.productObj.stock gt 0}">
                         <p class="text-center" style="color: green;">IN STOCK</p>

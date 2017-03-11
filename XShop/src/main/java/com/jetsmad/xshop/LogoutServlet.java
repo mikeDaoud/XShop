@@ -5,8 +5,12 @@
  */
 package com.jetsmad.xshop;
 
+import com.jetsmad.xshop.util.beans.CartItem;
+import com.jetsmad.xshop.util.beans.Product;
+import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +39,16 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
+        DBController db = new DBController();
         HttpSession session=request.getSession();  
+        ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
+        
+        for (CartItem cartItem : cart) {
+            Product p = db.getProduct(cartItem.getProduct().getId());
+            p.setStock(p.getStock() + cartItem.getQuantity());
+            db.updateProduct(p);
+        }
+        
         session.invalidate();
         
         RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

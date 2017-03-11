@@ -5,15 +5,19 @@
  */
 package com.jetsmad.xshop.cart;
 
+import com.jetsmad.xshop.util.beans.CartItem;
+import com.jetsmad.xshop.util.beans.Product;
 import com.jetsmad.xshop.util.database.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,6 +43,15 @@ public class CancelCustomerOrder extends HttpServlet {
         String status = request.getParameter("status");
         // Calls the method in the DB to delete that order
         new DBController().updateOrderStatus(order_id, status);
+        DBController db = new DBController();
+       
+        ArrayList<CartItem> cart = new DBController().getOrder(order_id).getOrderItems();
+        
+        for (CartItem cartItem : cart) {
+            Product p = db.getProduct(cartItem.getProduct().getId());
+            p.setStock(p.getStock() + cartItem.getQuantity());
+            db.updateProduct(p);
+        }
         // Include the JSP called "orders.jsp"
         if (request.getParameter("user").equals("client")) {
             RequestDispatcher rd = request.getRequestDispatcher("/myorders");

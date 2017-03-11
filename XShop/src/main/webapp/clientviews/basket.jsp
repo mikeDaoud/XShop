@@ -33,14 +33,21 @@
                             <tr>
                                 <td>
                                     <a href="#">
-                                        <img src="img/detailsquare.jpg" alt="White Blouse Armani">
+                                        <c:choose>
+                                            <c:when test="${empty item.product.img}">
+                                                <img class="product-img img-responsive" src="${pageContext.request.contextPath}/resources/client/img/detailbig1.jpg" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="resources/images/${item.product.img}" alt="" class="img-responsive">
+                                            </c:otherwise>   
+                                        </c:choose>
                                     </a>
                                 </td>
                                 <td>
                                     <c:out value="${item.product.name}"></c:out>
-                                </td>
-                                <td>
-                                    <button class="fa fa-minus qtyrightminus" name="${item.product.id}" style="outline:none; border: none; background-color: transparent;"></button>
+                                    </td>
+                                    <td>
+                                        <button class="fa fa-minus qtyrightminus" name="${item.product.id}" style="outline:none; border: none; background-color: transparent;"></button>
                                     <input id="qty-input" disabled type="number" min="0" value="<c:out value="${item.quantity}"></c:out>">
                                     <button class="fa fa-plus qtyrightplus" name="${item.product.id}" style="outline:none; border: none; background-color: transparent;"></button>
 
